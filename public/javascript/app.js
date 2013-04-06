@@ -1,7 +1,7 @@
 $(function() {
 
-  // **************
-  // GLOBAL OPTIONS
+  // *******
+  // GLOBALS
 
   var Globals = {};
 
@@ -65,7 +65,6 @@ $(function() {
       console.log(this);
 
       var node = $("<a>");
-      node.attr('href', '#');
       node.attr('id', 'imgur-authorize');
       node.html("Authenticate");
       this.$el.html(node);
@@ -81,7 +80,13 @@ $(function() {
 
     catchToken: function() {
       console.log("--> catching token in Authenticate");
-      console.log(getQueryVariable("access_token"));
+      Globals.imgurCreds = {};
+      Globals.imgurCreds.access_token = this.getQueryVariable("access_token");
+      Globals.imgurCreds.expires_in = this.getQueryVariable("expires_in");
+      Globals.imgurCreds.token_type = this.getQueryVariable("token_type");
+      Globals.imgurCreds.refresh_token = this.getQueryVariable("refresh_token");
+      Globals.imgurCreds.account_username = this.getQueryVariable("account_username");
+      console.log(Globals.imgurCreds);
     },
 
     getQueryVariable: function(variable) {
@@ -146,7 +151,6 @@ $(function() {
       "photo/review": "reviewNewPhoto",
       "photo/edit": "editNewPhoto",
       "photo/caption": "captionNewPhoto",
-      "catchToken": "catchToken"
     },
 
     initialize: function() {
@@ -155,12 +159,15 @@ $(function() {
       console.log(Backbone.history.fragment);
       console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
+
+      if(window.location.hash !== "") {
+        var auth = new Authenticate();
+        auth.catchToken();
+      }
     },
 
-    catchToken: function() {
-      console.log("--> routed to catchToken");
-      var auth = new Authenticate();
-      auth.catchToken();
+    reviewNewPhoto: function() {
+      console.log("--> routed to reviewNewPhoto");
     }
   });
 
