@@ -40,6 +40,12 @@ a {
   bottom: 0;
   left: 0;
 
+  &:not([class]) {
+    > * {
+      display: none;
+    }
+  }
+  
   &.start-screen {
     background-image: url('../images/dummy_map.png');
   }
