@@ -81,7 +81,13 @@ $(function() {
 
     catchToken: function() {
       console.log("--> catching token in Authenticate");
-      console.log(this.getQueryVariable("access_token"));
+      Options.imgurCreds = {};
+      Options.imgurCreds.access_token = getQueryVariable("access_token");
+      Options.imgurCreds.expires_in = getQueryVariable("expires_in");
+      Options.imgurCreds.token_type = getQueryVariable("token_type");
+      Options.imgurCreds.refresh_token = getQueryVariable("refresh_token");
+      Options.imgurCreds.account_username = getQueryVariable("account_username");
+      console.log(Options.imgurCreds);
     },
 
     getQueryVariable: function(variable) {
