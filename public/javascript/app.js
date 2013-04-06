@@ -146,7 +146,7 @@ $(function() {
       "photo/review": "reviewNewPhoto",
       "photo/edit": "editNewPhoto",
       "photo/caption": "captionNewPhoto",
-      "catchtoken/:hash": "catchToken"
+      "catchToken/:hash": "catchToken"
     },
 
     initialize: function() {
