@@ -49,6 +49,9 @@ var Imgur = {
             caption: 'test caption',
             image: img
         },
+        headers: {
+          Authorize: "Bearer 40cdd9550666648c53da7c5be09873c756ff94e3"
+        },
         dataType: 'json'
     }).success(function(data) {
         w.location.href = data['upload']['links']['imgur_page'];
