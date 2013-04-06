@@ -4,7 +4,8 @@ var Imgur = {
   benTempAccessToken: "6663606e9362cb025a78a1078300e4afe24e8d23",
   setup: function() {
     //set up imgur stuff
-
+    var input = document.getElementById('picture');
+    input.addEventListener('change', this.handleFiles);
   },
   formImgurAuthUrl: function() {
     var base = "https://api.imgur.com/oauth2/authorize?"
@@ -16,6 +17,15 @@ var Imgur = {
   authorize: function() {
     window.location = this.formImgurAuthUrl();
   },
+  handleFiles: function(e) {
+    var ctx = document.getElementById('canvas').getContext('2d');
+    var img = new Image;
+    img.src = URL.createObjectURL(e.target.files[0]);
+    img.onload = function() {
+        ctx.drawImage(img, 20,20);
+        alert('the image is drawn');
+    }
+  }
   share: function() {
     try {
         var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
@@ -28,8 +38,11 @@ var Imgur = {
     // upload to imgur using jquery/CORS
     // https://developer.mozilla.org/En/HTTP_access_control
     $.ajax({
-        url: 'http://api.imgur.com/2/upload.json',
+        url: 'http://api.imgur.com/3/upload.json',
         type: 'POST',
+        headers: {
+          Authorize: "Bearer" + this.benTempAccessToken
+        },
         data: {
             type: 'base64',
             // get your key here, quick and fast http://imgur.com/register/api_anon
