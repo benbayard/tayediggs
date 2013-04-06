@@ -1,5 +1,5 @@
 var Imgur = {
-  clientId: "3811521dd0c3189",
+  clientId: "7a2fd82ffa89750",
   responseType: "token",
   benTempAccessToken: "6663606e9362cb025a78a1078300e4afe24e8d23",
   setup: function() {
