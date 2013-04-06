@@ -156,6 +156,7 @@ $(function() {
     },
 
     catchToken: function() {
+
       var auth = new Authenticate();
       auth.catchToken();
     }
@@ -163,6 +164,8 @@ $(function() {
 
   // ****
   // INIT
+
+  Backbone.history.start({pushState: true});
 
   var app = new Router;
 
