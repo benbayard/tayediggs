@@ -40,9 +40,6 @@ var Imgur = {
     $.ajax({
         url: 'https://api.imgur.com/3/image',
         type: 'POST',
-        headers: {
-          Authorize: "Bearer" + this.benTempAccessToken
-        },
         data: {
             type: 'base64',
             // get your key here, quick and fast http://imgur.com/register/api_anon
