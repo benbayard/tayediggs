@@ -82,11 +82,11 @@ $(function() {
     catchToken: function() {
       console.log("--> catching token in Authenticate");
       Globals.imgurCreds = {};
-      Globals.imgurCreds.access_token = getQueryVariable("access_token");
-      Globals.imgurCreds.expires_in = getQueryVariable("expires_in");
-      Globals.imgurCreds.token_type = getQueryVariable("token_type");
-      Globals.imgurCreds.refresh_token = getQueryVariable("refresh_token");
-      Globals.imgurCreds.account_username = getQueryVariable("account_username");
+      Globals.imgurCreds.access_token = this.getQueryVariable("access_token");
+      Globals.imgurCreds.expires_in = this.getQueryVariable("expires_in");
+      Globals.imgurCreds.token_type = this.getQueryVariable("token_type");
+      Globals.imgurCreds.refresh_token = this.getQueryVariable("refresh_token");
+      Globals.imgurCreds.account_username = this.getQueryVariable("account_username");
       console.log(Globals.imgurCreds);
     },
 
