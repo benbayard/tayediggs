@@ -81,7 +81,7 @@ $(function() {
 
     catchToken: function() {
       console.log("--> catching token in Authenticate");
-      console.log(getQueryVariable("access_token"));
+      console.log(this.getQueryVariable("access_token"));
     },
 
     getQueryVariable: function(variable) {
