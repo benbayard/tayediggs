@@ -58,6 +58,15 @@ var Imgur = {
     }).error(function() {
         alert('Could not reach api.imgur.com. Sorry :(');
         w.close();
+        console.log({
+            type: 'base64',
+            // get your key here, quick and fast http://imgur.com/register/api_anon
+            key: this.clientId,
+            name: 'neon.jpg',
+            title: 'test title',
+            caption: 'test caption',
+            image: img
+        })
     });
   }
 }
