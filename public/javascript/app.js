@@ -3,10 +3,10 @@ $(function() {
   // **************
   // GLOBAL OPTIONS
 
-  var Options = {};
+  var Globals = {};
 
-  Options.authenticated = true;
-  Options.logging = true;
+  Globals.authenticated = true;
+  Globals.logging = true;
 
   // ******
   // MODELS
@@ -114,7 +114,7 @@ $(function() {
       // TODO: fetch and add scrolling maps?
       // (or we might just use static images)
 
-      // if (Options.authenticated === false) {
+      // if (Globals.authenticated === false) {
         $("#wrapper").attr("class", "start-screen");
 
         this.bind();
@@ -152,12 +152,13 @@ $(function() {
     initialize: function() {
       // TODO: check if we're authenticated
 
-      console.log(Backbone.history.location.pathname);
-      console.log("\n");
+      console.log(Backbone.history.fragment);
+      console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
     },
 
     catchToken: function() {
+      console.log("--> routed to catchToken");
       var auth = new Authenticate();
       auth.catchToken();
     }
