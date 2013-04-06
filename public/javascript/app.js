@@ -65,7 +65,6 @@ $(function() {
       console.log(this);
 
       var node = $("<a>");
-      node.attr('href', '#');
       node.attr('id', 'imgur-authorize');
       node.html("Authenticate");
       this.$el.html(node);
