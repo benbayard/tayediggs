@@ -146,7 +146,6 @@ $(function() {
       "photo/review": "reviewNewPhoto",
       "photo/edit": "editNewPhoto",
       "photo/caption": "captionNewPhoto",
-      "catchToken": "catchToken"
     },
 
     initialize: function() {
@@ -155,12 +154,15 @@ $(function() {
       console.log(Backbone.history.fragment);
       console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
+
+      if(window.location.hash !== "") {
+        var auth = new Authenticate();
+        auth.catchToken();
+      }
     },
 
-    catchToken: function() {
-      console.log("--> routed to catchToken");
-      var auth = new Authenticate();
-      auth.catchToken();
+    reviewNewPhoto: function() {
+      console.log("--> routed to reviewNewPhoto");
     }
   });
 
