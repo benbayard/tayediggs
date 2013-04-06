@@ -28,7 +28,7 @@ var Imgur = {
   },
   fetchAlbum: function(id) {
     $.ajax({
-      url: 'https://api.imgur.com/3/album/' + id + "/images",
+      url: 'https://api.imgur.com/3/album/' + id,
       type: 'POST',
       data: {
         key: Imgur.clientId,
