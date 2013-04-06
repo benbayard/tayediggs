@@ -15,7 +15,7 @@ $(function() {
   // Start camera API and control imgur uploading
   var Camera = Backbone.View.extend({
     initialize: function() {
-      // bind events to dom elements
+
     }
   });
 
@@ -37,14 +37,39 @@ $(function() {
   var Gallery = Backbone.View.extend({
     initialize: function() {
       // fetch photos
-      // bind events to dom elements
     }
   });
 
   // Authentication and control imgur credentials
   var Authenticate = Backbone.View.extend({
+    el: $("#wrapper"),
+
     initialize: function() {
-      // 
+      console.log("--> initialized Authenticate");
+
+      // TODO: check on authentication and redirect to gallery
+
+      this.render();
+    },
+
+    render: function() {
+      console.log("--> rendered Authenticate");
+      console.log(this);
+
+      var node = $("<a>");
+      node.attr('href', '#');
+      node.attr('id', 'imgur-authorize');
+      node.html("Authenticate");
+      this.$el.html(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      $("#imgur-authorize").on('click', function() {
+        Imgur.formImgurAuthUrl();
+        Imgur.authorize();
+      });
     }
   });
 
@@ -53,9 +78,10 @@ $(function() {
 
   var AppView = Backbone.View.extend({
   	initialize: function() {
+      console.log("BURGER TRAMPOLINE!");
+
       // start up screen
-      // check if authenticated, send to authentication or gallery
-      console.log("BURGER TRAMPOLINE");
+      var authenticate = new Authenticate();
     }
   });
 
@@ -69,6 +95,10 @@ $(function() {
       "photo/edit": "editNewPhoto",
       "photo/caption": "captionNewPhoto",
       "catchtoken/:token": "catchToken"
+    },
+
+    initialize: function() {
+      var appView = new AppView();
     }
   });
 
