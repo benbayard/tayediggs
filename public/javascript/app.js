@@ -1,5 +1,13 @@
 $(function() {
 
+  // **************
+  // GLOBAL OPTIONS
+
+  var Globals = {};
+
+  Globals.authenticated = true;
+  Globals.logging = true;
+
   // ******
   // MODELS
 
@@ -50,8 +58,6 @@ $(function() {
       console.log("--> initialized Authenticate");
 
       // TODO: check on authentication and redirect to gallery
-
-      this.render();
     },
 
     render: function() {
@@ -71,7 +77,24 @@ $(function() {
       $("#imgur-authorize").on('click', function() {
         Imgur.authorize();
       });
+    },
+
+    catchToken: function() {
+      console.log("--> catching token in Authenticate");
+      console.log(getQueryVariable("access_token"));
+    },
+
+    getQueryVariable: function(variable) {
+      var query = window.location.hash.substring(1);
+      var vars = query.split('&');
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
     }
+    
   });
 
   // ********
@@ -91,9 +114,11 @@ $(function() {
       // TODO: fetch and add scrolling maps?
       // (or we might just use static images)
 
-      $("#wrapper").attr("class", "start-screen");
+      // if (Globals.authenticated === false) {
+        $("#wrapper").attr("class", "start-screen");
 
-      this.bind();
+        this.bind();
+      // }
     },
 
     bind: function() {
@@ -102,6 +127,7 @@ $(function() {
       });
       $("#start-auth").on('click', function() {
         var auth = new Authenticate();
+        auth.render();
       });
 
       // make sure you can't scroll the webapp
@@ -120,20 +146,28 @@ $(function() {
       "photo/review": "reviewNewPhoto",
       "photo/edit": "editNewPhoto",
       "photo/caption": "captionNewPhoto",
-      "catchtoken/:hash": "catchToken"
+      "catchToken": "catchToken"
     },
 
     initialize: function() {
+      // TODO: check if we're authenticated
+
+      console.log(Backbone.history.fragment);
+      console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
     },
 
     catchToken: function() {
-
+      console.log("--> routed to catchToken");
+      var auth = new Authenticate();
+      auth.catchToken();
     }
   });
 
   // ****
   // INIT
+
+  Backbone.history.start({pushState: true});
 
   var app = new Router;
 
