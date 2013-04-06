@@ -104,12 +104,16 @@ a:visited {
   bottom: 0;
   left: 0;
 }
-/* line 43, ../../sass/screen.scss */
+/* line 44, ../../sass/screen.scss */
+#wrapper:not([class]) > * {
+  display: none;
+}
+/* line 49, ../../sass/screen.scss */
 #wrapper.start-screen {
   background-image: url("../images/dummy_map.png");
 }
 
-/* line 48, ../../sass/screen.scss */
+/* line 54, ../../sass/screen.scss */
 #start-screen-controls {
   position: absolute;
   top: 50%;
