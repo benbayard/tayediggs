@@ -1,7 +1,7 @@
 var Imgur = {
   clientId: "7a2fd82ffa89750",
   responseType: "token",
-  benTempAccessToken: "6663606e9362cb025a78a1078300e4afe24e8d23",
+  benTempAccessToken: "e7084a45199424e01c2a1b307e64330fcf30379b",
   setup: function() {
     //set up imgur stuff
     var input = document.getElementById('picture');
@@ -34,7 +34,7 @@ var Imgur = {
         key: Imgur.clientId
       },
       headers: {
-        Authorization: "Bearer 5b057a203c78ff06e13c94b8cb6279329d7e2021"
+        Authorization: "Bearer " + Imgur.benTempAccessToken
       },
     dataType: 'json'
     }).success(function(data) {
@@ -65,7 +65,7 @@ var Imgur = {
           image: img
       },
       headers: {
-        Authorization: "Bearer 5b057a203c78ff06e13c94b8cb6279329d7e2021"
+        Authorization: "Bearer " + Imgur.benTempAccessToken
       },
       dataType: 'json'
     }).success(function(data) {
@@ -87,13 +87,13 @@ var Imgur = {
   },
   getAllAlbums: function() {
     $.ajax({
-      url: "https://api.imgur.com/3/account/benbayard/albums",
+      url: "https://api.imgur.com/3/account/benbayard/albums/ids",
       type: 'GET',
       data: {
         key: Imgur.clientId
       },
       headers: {
-        Authorization: "Bearer 5b057a203c78ff06e13c94b8cb6279329d7e2021"
+        Authorization: "Bearer " + Imgur.benTempAccessToken
       },
     dataType: 'json'
     }).success(function(data) {
@@ -127,7 +127,7 @@ var Imgur = {
             image: img
         },
         headers: {
-          Authorization: "Bearer 5b057a203c78ff06e13c94b8cb6279329d7e2021"
+          Authorization: "Bearer " + Imgur.benTempAccessToken
         },
         dataType: 'json'
     }).success(function(data) {
