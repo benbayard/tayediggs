@@ -68,7 +68,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 10, ../../sass/screen.scss */
-#canvas {
+#canvas, #picture {
   display: none;
 }
 
