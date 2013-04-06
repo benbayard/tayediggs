@@ -67,15 +67,54 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 10, ../../sass/screen.scss */
+/* line 11, ../../sass/screen.scss */
 #canvas, #picture {
   display: none;
 }
 
-/* line 14, ../../sass/screen.scss */
+/* line 15, ../../sass/screen.scss */
 body {
   width: 100%;
   height: 100%;
   overflow: hidden;
   background-color: #fd996b;
+  font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
+}
+
+/* line 24, ../../sass/screen.scss */
+a {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+}
+/* line 27, ../../sass/screen.scss */
+a:hover {
+  color: #fff8f8;
+}
+/* line 30, ../../sass/screen.scss */
+a:visited {
+  color: #fff8f8;
+  text-decoration: underline;
+}
+
+/* line 36, ../../sass/screen.scss */
+#wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+/* line 43, ../../sass/screen.scss */
+#wrapper.start-screen {
+  background-image: url("../images/dummy_map.png");
+}
+
+/* line 48, ../../sass/screen.scss */
+#start-screen-controls {
+  position: absolute;
+  top: 50%;
+  margin-top: -100px;
+  width: 100%;
+  height: 200px;
+  background-color: rgba(253, 153, 107, 0.75);
 }

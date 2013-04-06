@@ -69,7 +69,6 @@ $(function() {
 
     bind: function() {
       $("#imgur-authorize").on('click', function() {
-        Imgur.formImgurAuthUrl();
         Imgur.authorize();
       });
     }
@@ -89,24 +88,10 @@ $(function() {
     },
 
     render: function() {
-      var node = $("<div>"),
-          cameraLink = $("<a>"),
-          authLink = $("<a>");
+      // TODO: fetch and add scrolling maps?
+      // (or we might just use static images)
 
-      node.attr('id', 'start-screen-controls');
-
-      cameraLink.attr('href', '#');
-      cameraLink.attr('id', 'start-camera');
-      cameraLink.html('Take Picture');
-
-      authLink.attr('href', '#');
-      authLink.attr('id', 'start-auth');
-      authLink.html('Authenticate');
-
-      node.append(cameraLink);
-      node.append(authLink);
-
-      this.$el.html(node);
+      $("#wrapper").attr("class", "start-screen");
 
       this.bind();
     },
@@ -118,6 +103,11 @@ $(function() {
       $("#start-auth").on('click', function() {
         var auth = new Authenticate();
       });
+
+      // make sure you can't scroll the webapp
+      document.ontouchstart = function(e){ 
+        e.preventDefault(); 
+      }
     }
   });
 
@@ -130,11 +120,15 @@ $(function() {
       "photo/review": "reviewNewPhoto",
       "photo/edit": "editNewPhoto",
       "photo/caption": "captionNewPhoto",
-      "catchtoken/:token": "catchToken"
+      "catchtoken/:hash": "catchToken"
     },
 
     initialize: function() {
       var appView = new AppView();
+    },
+
+    catchToken: function() {
+
     }
   });
 
