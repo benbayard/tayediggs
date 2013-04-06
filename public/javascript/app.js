@@ -12,11 +12,31 @@ $(function() {
     }
   });
 
+  var PhotoView = Backbone.View.extend({
+    initiailize: function() {
+      
+    }
+  });
+
+  var Map = Backbone.View.extend({
+    initialize: function() {
+      // fetch photos
+      // plot on map
+      // bind events to dom elements
+    }
+  });
+
+  var Authenticate = Backbone.View.extend({
+    initialize: function() {
+      //
+    }
+  });
+
   var App = Backbone.View.extend({
   	initialize: function() {
       // start up screen
-      // bind events to dom elements
-    },
+      // check if authenticated, send to authentication or map
+    }
   });
 
   var app = new App;
