@@ -15,7 +15,9 @@ $(function() {
   // Start camera API and control imgur uploading
   var Camera = Backbone.View.extend({
     initialize: function() {
+      console.log("--> initialized Camera");
 
+      $("#picture").click();
     }
   });
 
@@ -77,11 +79,45 @@ $(function() {
   // APP VIEW
 
   var AppView = Backbone.View.extend({
+    el: $("#wrapper"),
+
   	initialize: function() {
       console.log("BURGER TRAMPOLINE!");
 
       // start up screen
-      var authenticate = new Authenticate();
+      this.render();
+    },
+
+    render: function() {
+      var node = $("<div>"),
+          cameraLink = $("<a>"),
+          authLink = $("<a>");
+
+      node.attr('id', 'start-screen-controls');
+
+      cameraLink.attr('href', '#');
+      cameraLink.attr('id', 'start-camera');
+      cameraLink.html('Take Picture');
+
+      authLink.attr('href', '#');
+      authLink.attr('id', 'start-auth');
+      authLink.html('Authenticate');
+
+      node.append(cameraLink);
+      node.append(authLink);
+
+      this.$el.html(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      $("#start-camera").on('click', function() {
+        var camera =  new Camera();
+      });
+      $("#start-auth").on('click', function() {
+        var auth = new Authenticate();
+      });
     }
   });
 
