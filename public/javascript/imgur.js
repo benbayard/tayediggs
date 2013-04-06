@@ -43,7 +43,7 @@ var Imgur = {
         data: {
             type: 'base64',
             // get your key here, quick and fast http://imgur.com/register/api_anon
-            key: this.clientId,
+            key: Imgur.clientId,
             name: 'neon.jpg',
             title: 'test title',
             caption: 'test caption',
