@@ -54,7 +54,8 @@ var Imgur = {
         },
         dataType: 'json'
     }).success(function(data) {
-        w.location.href = data['upload']['links']['imgur_page'];
+        console.log(data)
+        // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
         alert('Could not reach api.imgur.com. Sorry :(');
         w.close();
