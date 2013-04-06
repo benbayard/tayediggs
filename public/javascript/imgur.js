@@ -23,9 +23,9 @@ var Imgur = {
     img.src = URL.createObjectURL(e.target.files[0]);
     img.onload = function() {
         ctx.drawImage(img, 20,20);
-        alert('the image is drawn');
+        console.log('the image is drawn');
     }
-  }
+  },
   share: function() {
     try {
         var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
@@ -38,7 +38,7 @@ var Imgur = {
     // upload to imgur using jquery/CORS
     // https://developer.mozilla.org/En/HTTP_access_control
     $.ajax({
-        url: 'http://api.imgur.com/3/upload.json',
+        url: 'https://api.imgur.com/3/image',
         type: 'POST',
         headers: {
           Authorize: "Bearer" + this.benTempAccessToken
@@ -61,3 +61,7 @@ var Imgur = {
     });
   }
 }
+
+$(document).ready(function() {
+  Imgur.setup();
+});
