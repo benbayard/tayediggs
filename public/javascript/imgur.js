@@ -50,7 +50,7 @@ var Imgur = {
             image: img
         },
         headers: {
-          Authorize: "Bearer 40cdd9550666648c53da7c5be09873c756ff94e3"
+          Authorize: "Bearer 690ff1a86587a05d63bd7c5c91d95129c9595c44"
         },
         dataType: 'json'
     }).success(function(data) {
