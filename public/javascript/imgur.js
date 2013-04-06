@@ -26,6 +26,34 @@ var Imgur = {
         console.log('the image is drawn');
     }
   },
+  fetchAlbum: function(id) {
+    $.ajax({
+      url: 'https://api.imgur.com/3/album/' + id,
+      type: 'POST',
+      data: {
+        key: Imgur.clientId,
+      },
+      headers: {
+        Authorization: "Bearer 5b057a203c78ff06e13c94b8cb6279329d7e2021"
+      },
+    dataType: 'json'
+    }).success(function(data) {
+      console.log(data)
+      // w.location.href = data['upload']['links']['imgur_page'];
+    }).error(function() {
+      alert('Could not reach api.imgur.com. Sorry :(');
+      w.close();
+      console.log({
+          type: 'base64',
+          // get your key here, quick and fast http://imgur.com/register/api_anon
+          key: Imgur.clientId,
+          name: 'neon.jpg',
+          title: 'test title',
+          caption: 'test caption',
+          image: img
+      })
+    });
+  },
   share: function() {
     try {
         var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
@@ -43,25 +71,26 @@ var Imgur = {
         data: {
             type: 'base64',
             // get your key here, quick and fast http://imgur.com/register/api_anon
-            key: this.clientId,
+            key: Imgur.clientId,
             name: 'neon.jpg',
             title: 'test title',
             caption: 'test caption',
             image: img
         },
         headers: {
-          Authorize: "Bearer 40cdd9550666648c53da7c5be09873c756ff94e3"
+          Authorization: "Bearer 5b057a203c78ff06e13c94b8cb6279329d7e2021"
         },
         dataType: 'json'
     }).success(function(data) {
-        w.location.href = data['upload']['links']['imgur_page'];
+        console.log(data)
+        // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
         alert('Could not reach api.imgur.com. Sorry :(');
         w.close();
         console.log({
             type: 'base64',
             // get your key here, quick and fast http://imgur.com/register/api_anon
-            key: this.clientId,
+            key: Imgur.clientId,
             name: 'neon.jpg',
             title: 'test title',
             caption: 'test caption',

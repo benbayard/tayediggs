@@ -15,7 +15,9 @@ $(function() {
   // Start camera API and control imgur uploading
   var Camera = Backbone.View.extend({
     initialize: function() {
+      console.log("--> initialized Camera");
 
+      $("#picture").click();
     }
   });
 
@@ -67,7 +69,6 @@ $(function() {
 
     bind: function() {
       $("#imgur-authorize").on('click', function() {
-        Imgur.formImgurAuthUrl();
         Imgur.authorize();
       });
     }
@@ -77,11 +78,36 @@ $(function() {
   // APP VIEW
 
   var AppView = Backbone.View.extend({
+    el: $("#wrapper"),
+
   	initialize: function() {
       console.log("BURGER TRAMPOLINE!");
 
       // start up screen
-      var authenticate = new Authenticate();
+      this.render();
+    },
+
+    render: function() {
+      // TODO: fetch and add scrolling maps?
+      // (or we might just use static images)
+
+      $("#wrapper").attr("class", "start-screen");
+
+      this.bind();
+    },
+
+    bind: function() {
+      $("#start-camera").on('click', function() {
+        var camera =  new Camera();
+      });
+      $("#start-auth").on('click', function() {
+        var auth = new Authenticate();
+      });
+
+      // make sure you can't scroll the webapp
+      document.ontouchstart = function(e){ 
+        e.preventDefault(); 
+      }
     }
   });
 
@@ -94,11 +120,15 @@ $(function() {
       "photo/review": "reviewNewPhoto",
       "photo/edit": "editNewPhoto",
       "photo/caption": "captionNewPhoto",
-      "catchtoken/:token": "catchToken"
+      "catchtoken/:hash": "catchToken"
     },
 
     initialize: function() {
       var appView = new AppView();
+    },
+
+    catchToken: function() {
+
     }
   });
 
