@@ -146,17 +146,18 @@ $(function() {
       "photo/review": "reviewNewPhoto",
       "photo/edit": "editNewPhoto",
       "photo/caption": "captionNewPhoto",
-      "catchToken/:hash": "catchToken"
+      "catchToken": "catchToken"
     },
 
     initialize: function() {
       // TODO: check if we're authenticated
 
+      console.log(Backbone.history.location.pathname);
+      console.log("\n");
       var appView = new AppView();
     },
 
     catchToken: function() {
-
       var auth = new Authenticate();
       auth.catchToken();
     }
