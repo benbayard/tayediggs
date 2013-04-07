@@ -61,6 +61,24 @@ $(function() {
       node.html(this.template());
 
       this.$el.html(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      $(".camera-submit").on('click', function() {
+        var caption = $(".camera-caption").val();
+        var coords =  "DUMMY DATA"; // TODO: get geolocation stuff from matt
+
+        var tempData = coords + "*" + caption;
+        // Save to WebSQL
+        Imgur.anonImg(tempData);
+
+        // Authenticate!
+        // Imgur.share(caption, coords, function() {
+        //   console.log("data");
+        // });
+      })
     }
   });
 

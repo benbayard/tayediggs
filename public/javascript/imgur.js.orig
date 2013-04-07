@@ -25,18 +25,16 @@ var Imgur = {
   handleFiles: function(e) {
     var ctx = document.getElementById('canvas').getContext('2d');
     var img = new Image;
-    var pageHeight = $(window).height();
+<<<<<<< HEAD
+    img.src = window.URL.createObjectURL(e.target.files[0]);
+=======
     img.src = window.webkitURL.createObjectURL(e.target.files[0]);
+>>>>>>> 65f92d79a1433a1951a728619b3f94fc1e81befe
     img.onload = function() {
-        console.log(img.width);
-        console.log(img.height);
-        $("canvas").css("zoom", pageHeight/img.height);
-        document.getElementById('canvas').height = img.height;
-        document.getElementById('canvas').width = img.width;
-        ctx.drawImage(img, 0, 0);
-
-        // console.log(document.getElementById('canvas').height);
-        console.log('the image is drawn');
+      ctx.drawImage(img, 0, 0, img.width, img.height);
+      document.getElementById("canvas").width = img.width;
+      document.getElementById("canvas").height = img.height;
+      console.log('the image is drawn');
     }
   },
   fetchAlbum: function(id, success) {
@@ -176,40 +174,15 @@ var Imgur = {
 
     });
   },
-  anonImg: function(title) {
+  share: function() {
     try {
         var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
     } catch(e) {
         var img = canvas.toDataURL().split(',')[1];
     }
-    $.ajax({
-      url: 'https://api.imgur.com/3/image',
-      type: 'POST',
-      data: {
-          type: 'base64',
-          // get your key here, quick and fast http://imgur.com/register/api_anon.
-          title: title,
-          image: img
-      },
-      headers: {
-        Authorization: "Client-ID " + Imgur.clientId
-      },
-      dataType: 'json'
-    }).success(function(data) {
-      console.log(data.data);
-      websql.setAnonymousImageURL(data.data.id);
-      Imgur.authorize();
-      // w.location.href = data['upload']['links']['imgur_page'];
-    }).error(function() {
-      alert('Could not reach api.imgur.com. Sorry :(');
-    });
-  },
-  share: function(title, caption, success) {
-    try {
-        var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
-    } catch(e) {
-        var img = canvas.toDataURL().split(',')[1];
-    }
+    // open the popup in the click handler so it will not be blocked
+    var w = window.open();
+    w.document.write('Uploading...');
     // upload to imgur using jquery/CORS
     // https://developer.mozilla.org/En/HTTP_access_control
     $.ajax({
@@ -220,8 +193,8 @@ var Imgur = {
             // get your key here, quick and fast http://imgur.com/register/api_anon
             key: Imgur.clientId,
             name: 'neon.jpg',
-            title: title,
-            caption: caption,
+            title: 'test title',
+            caption: 'test caption',
             image: img
         },
         headers: {
@@ -229,9 +202,6 @@ var Imgur = {
         },
         dataType: 'json'
     }).success(function(data) {
-        if(success) {
-          success(data);
-        }
         console.log(data)
         // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
