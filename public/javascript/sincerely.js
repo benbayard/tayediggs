@@ -14,10 +14,16 @@ function SincerelyAdapter() {
     postdata.appkey = parent.appKey;
     postdata.photo = parent.replaceDataURLHeaders(dataURL);
     console.log("SincerelyAdapter dataURL: " + dataURL);
-    $.post(parent.postUrl, JSON.stringify(postdata), function(data) {
+    $.ajax({
+      type: 'POST',
+      url: parent.postUrl,
+      data: postdata,
+      dataType: "json"
+    })
+    .done(function() {
       console.log("$.post() success");
       console.log(data);
-    }, "json")
+    })
     .fail(function() {
       console.log("$.post() FAIL");
     })
