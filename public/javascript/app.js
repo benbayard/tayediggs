@@ -87,6 +87,9 @@ $(function() {
       var map_node = $(map_node_selector)
       MapboxPhd.setupMap(map_node_selector);
       Coordinates.setCoordinates(MapboxPhd.init, null);
+      
+      $(map_node_selector).append("<input type='hidden' id='lat-long'>")
+      $("#lat-long").val(Coordinates.lat.toString() + "," + Coordinates.lon.toString());
 
       this.bind();
     },
