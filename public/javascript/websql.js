@@ -59,8 +59,6 @@ NB. You should NEVER call websql.setCurrentAlbum()!!! Instead, use websql.select
 > websql.getAuthToken(result);
 > console.log(result);
   ["abcdefg1234567"]
-
-
 */
 var websql = {
   db: "",
