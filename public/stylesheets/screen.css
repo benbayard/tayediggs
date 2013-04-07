@@ -2,7 +2,7 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* line 17, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../.rvm/gems/ruby-1.9.3-p0@tayediggs/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,74 +24,96 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../.rvm/gems/ruby-1.9.3-p0@tayediggs/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../.rvm/gems/ruby-1.9.3-p0@tayediggs/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../.rvm/gems/ruby-1.9.3-p0@tayediggs/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../.rvm/gems/ruby-1.9.3-p0@tayediggs/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../.rvm/gems/ruby-1.9.3-p0@tayediggs/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../.rvm/gems/ruby-1.9.3-p0@tayediggs/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../.rvm/gems/ruby-1.9.3-p0@tayediggs/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../.rvm/gems/ruby-1.9.3-p0@tayediggs/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
 
+/* line 12, ../../sass/screen.scss */
+#canvas {
+  width: 100%;
+}
+
 /* line 16, ../../sass/screen.scss */
+.fullscreen, #wrapper, .camera-details-view, .photo-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* line 24, ../../sass/screen.scss */
+.noscroll {
+  overflow: hidden;
+}
+
+/* line 28, ../../sass/screen.scss */
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  background-color: #fd996b;
+  background-color: #444;
   font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
 }
+/* line 35, ../../sass/screen.scss */
+body.gallery-view {
+  background-color: #2B312F;
+}
 
-/* line 25, ../../sass/screen.scss */
+/* line 40, ../../sass/screen.scss */
 a {
   color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
 }
-/* line 28, ../../sass/screen.scss */
+/* line 43, ../../sass/screen.scss */
 a:hover {
   color: #fff8f8;
 }
-/* line 31, ../../sass/screen.scss */
+/* line 46, ../../sass/screen.scss */
 a:visited {
   color: #fff8f8;
   text-decoration: underline;
 }
 
-/* line 37, ../../sass/screen.scss */
+/* line 52, ../../sass/screen.scss */
 #start-camera {
   display: block;
   background-image: url("../images/cameraLarge.png");
@@ -103,49 +125,59 @@ a:visited {
   bottom: 0px;
   left: 0;
   width: 100%;
-  height: 68px;
+  height: 70px;
   z-index: 999;
 }
-/* line 50, ../../sass/screen.scss */
+/* line 65, ../../sass/screen.scss */
 #start-camera.hide {
   display: none;
 }
+/* line 68, ../../sass/screen.scss */
+.gallery-view #start-camera {
+  bottom: auto;
+  top: 0;
+  height: 45px;
+  background-size: 27px 17px;
+}
 
-/* line 54, ../../sass/screen.scss */
+/* line 75, ../../sass/screen.scss */
 #picture {
   display: block;
   position: absolute;
   bottom: 0px;
   left: 0;
   width: 100%;
-  height: 68px;
+  height: 70px;
   opacity: 0;
   z-index: 1000;
 }
-/* line 63, ../../sass/screen.scss */
+/* line 84, ../../sass/screen.scss */
 #picture.hide {
   display: none;
 }
-
-/* line 68, ../../sass/screen.scss */
-#wrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
+/* line 87, ../../sass/screen.scss */
+.gallery-view #picture {
+  height: 45px;
 }
-/* line 77, ../../sass/screen.scss */
+
+/* line 96, ../../sass/screen.scss */
 #wrapper:not([class]) > * {
   display: none;
 }
-/* line 82, ../../sass/screen.scss */
-#wrapper.start-screen {
-  background-image: url("../images/dummy_map.png");
+/* line 103, ../../sass/screen.scss */
+#wrapper.start-screen #map {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+}
+/* line 113, ../../sass/screen.scss */
+.gallery-view #wrapper {
+  margin-top: 55px;
 }
 
-/* line 88, ../../sass/screen.scss */
+/* line 119, ../../sass/screen.scss */
 #start-screen-controls #start-logo {
   background-image: url("../images/logo.png");
   background-repeat: no-repeat;
@@ -158,8 +190,9 @@ a:visited {
   height: 62px;
   margin-top: -68px;
   margin-left: -140px;
+  z-index: 10;
 }
-/* line 102, ../../sass/screen.scss */
+/* line 134, ../../sass/screen.scss */
 #start-screen-controls #start-gallery {
   background-image: url("../images/galleryicon.png");
   background-repeat: no-repeat;
@@ -171,17 +204,10 @@ a:visited {
   right: 5px;
   height: 47px;
   width: 47px;
+  z-index: 10;
 }
 
-/* line 116, ../../sass/screen.scss */
-.camera-details-view {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-/* line 122, ../../sass/screen.scss */
+/* line 151, ../../sass/screen.scss */
 .camera-details-view .camera-overlay {
   position: absolute;
   bottom: 0px;
@@ -196,13 +222,13 @@ a:visited {
   background-image: linear-gradient(top, rgba(0, 0, 0, 0.5), #000000);
   -webkit-transition-property: -webkit-transform;
   -webkit-transition-duration: .4s;
-  -webkit-transform: translateY(250px);
+  -webkit-transform: translateY(220px);
 }
-/* line 133, ../../sass/screen.scss */
+/* line 162, ../../sass/screen.scss */
 .camera-details-view .camera-overlay.animate {
   -webkit-transform: translateY(0px);
 }
-/* line 137, ../../sass/screen.scss */
+/* line 166, ../../sass/screen.scss */
 .camera-details-view .camera-caption {
   -webkit-appearance: none;
   box-sizing: border-box;
@@ -219,14 +245,21 @@ a:visited {
   height: 30px;
   margin-bottom: 2px;
 }
-/* line 149, ../../sass/screen.scss */
+/* line 178, ../../sass/screen.scss */
 .camera-details-view .camera-map {
-  background-color: #999;
   height: 150px;
   width: 100%;
   margin-bottom: 5px;
+  position: relative;
 }
-/* line 155, ../../sass/screen.scss */
+/* line 183, ../../sass/screen.scss */
+.camera-details-view .camera-map #map {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+/* line 190, ../../sass/screen.scss */
 .camera-details-view .camera-submit {
   display: block;
   width: 100%;
@@ -236,4 +269,78 @@ a:visited {
   color: #fff;
   background-color: #fb6363;
   text-align: center;
+}
+
+/* line 202, ../../sass/screen.scss */
+.photo-stub-view {
+  margin: 10px;
+  border: 3px solid #fff;
+  position: relative;
+  box-sizing: border-box;
+}
+/* line 207, ../../sass/screen.scss */
+.photo-stub-view .photo-description {
+  box-sizing: border-box;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), #000000);
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), #000000);
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), #000000);
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0), #000000);
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  color: #fff;
+}
+/* line 216, ../../sass/screen.scss */
+.photo-stub-view img {
+  max-width: 100%;
+}
+
+/* line 221, ../../sass/screen.scss */
+.photo-view {
+  z-index: 1001;
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 45px;
+}
+/* line 228, ../../sass/screen.scss */
+.photo-view .photo-nav {
+  height: 45px;
+  position: absolute;
+  width: 100%;
+  border-box: box-sizing;
+  background-color: #fb6363;
+}
+/* line 235, ../../sass/screen.scss */
+.photo-view .photo-back, .photo-view .photo-pin {
+  width: 45px;
+  height: 45px;
+  background-repeat: no-repeat;
+}
+/* line 240, ../../sass/screen.scss */
+.photo-view .photo-back {
+  background-image: url("../images/arrow.png");
+  background-size: 19px 19px;
+  background-position: 13px 13px;
+  float: left;
+}
+/* line 246, ../../sass/screen.scss */
+.photo-view .photo-pin {
+  background-image: url("../images/pin.png");
+  background-size: 15px 24px;
+  background-position: 15px 10px;
+  float: right;
+}
+/* line 252, ../../sass/screen.scss */
+.photo-view .photo-description {
+  position: absolute;
+  top: 45px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 20px;
 }
