@@ -101,7 +101,9 @@ $(function() {
         }
         websql.setAnonymousImageURL(img);
 
-        // Imgur.authorize();
+        setTimeout(function() {
+          Imgur.authorize();
+        }, 500); // god this is stupid
 
         // Authenticate!
         // Imgur.share(caption, coords, function() {
