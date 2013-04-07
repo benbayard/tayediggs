@@ -118,9 +118,9 @@ var Imgur = {
         ctx.drawImage(img, 0, 0);
         console.log('the image is drawn');
         try {
-            var newImg = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+            var newImg = document.getElementById('canvas').toDataURL('image/jpeg', 0.9).split(',')[1];
         } catch(e) {
-            var newImg = canvas.toDataURL().split(',')[1];
+            var newImg = document.getElementById('canvas').toDataURL().split(',')[1];
         }
         console.log(newImg);
         $.ajax({
