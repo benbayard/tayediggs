@@ -9,7 +9,7 @@ $tangerine: #FD996B;
 $grapefruit: #FB6363;
 
 #canvas, #picture {
-  display: none;
+  // display: none;
 }
 
 body {
@@ -45,7 +45,7 @@ a {
       display: none;
     }
   }
-  
+
   &.start-screen {
     background-image: url('../images/dummy_map.png');
   }
