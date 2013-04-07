@@ -176,15 +176,40 @@ var Imgur = {
 
     });
   },
+  anonImg: function(title) {
+    try {
+        var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+    } catch(e) {
+        var img = canvas.toDataURL().split(',')[1];
+    }
+    $.ajax({
+      url: 'https://api.imgur.com/3/image',
+      type: 'POST',
+      data: {
+          type: 'base64',
+          // get your key here, quick and fast http://imgur.com/register/api_anon.
+          title: title,
+          image: img
+      },
+      headers: {
+        Authorization: "Client-ID " + Imgur.clientId
+      },
+      dataType: 'json'
+    }).success(function(data) {
+      console.log(data.data);
+      websql.setAnonymousImageURL(data.data.id);
+      Imgur.authorize();
+      // w.location.href = data['upload']['links']['imgur_page'];
+    }).error(function() {
+      alert('Could not reach api.imgur.com. Sorry :(');
+    });
+  },
   share: function(title, caption, success) {
     try {
         var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
     } catch(e) {
         var img = canvas.toDataURL().split(',')[1];
     }
-    // open the popup in the click handler so it will not be blocked
-    var w = window.open();
-    w.document.write('Uploading...');
     // upload to imgur using jquery/CORS
     // https://developer.mozilla.org/En/HTTP_access_control
     $.ajax({
