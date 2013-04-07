@@ -3,7 +3,7 @@
  *
  * Usage:
  * ------
- * websql.createNewAlbum("foo", "bar");
+ * albums.createNewAlbum("foo", "bar");
  * 
  */
 var albums = {
@@ -169,5 +169,5 @@ var albums = {
 }
 
 $(document).ready(function() {
-  websql.initialize();
+  albums.initialize();
 });
