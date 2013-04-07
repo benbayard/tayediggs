@@ -25,6 +25,11 @@ $(function() {
     }
   });
 
+  var Venue = Backbone.Model.extend({
+    initialize: function() {
+    }
+  });
+
   // ***********
   // COLLECTIONS
 
@@ -40,6 +45,24 @@ $(function() {
 
       Imgur.findAlbum();
       this.set(Imgur.currentAlbum.images);
+
+      console.log(this);
+
+      this.view.addAll();
+    }
+  });
+
+  var Locations = Backbone.Collection.extend({
+    model: Venue,
+
+    initialize: function() {
+
+    },
+
+    fetch: function() {
+      console.log("setting location collection");
+
+      this.set(Foursquare.venueResponse.venues);
 
       console.log(this);
 
@@ -77,6 +100,7 @@ $(function() {
 
       this.$el.html(node);
 
+
       // animate overlay up);
       setTimeout(function() {
         $(".camera-overlay").addClass('animate');
@@ -101,6 +125,8 @@ $(function() {
         var caption = $(".camera-caption").val();
         var coords =  "DUMMY DATA"; // TODO: get geolocation stuff from matt
 
+        $.cookie("image_title", caption);
+
         var tempData = coords + "*" + caption;
         // Save to WebSQL
         // Imgur.anonImg(tempData);
@@ -119,7 +145,61 @@ $(function() {
         // Imgur.share(caption, coords, function() {
         //   console.log("data");
         // });
-      })
+      });
+      $(".camera-foursquare").on('click', function() {
+        var locations = new Locations();
+        var fslocations = new FSLocations({collection: locations});
+      });
+    }
+  });
+
+  // Pick a foursquare location in an attempt to alleviate your neverending pain
+  var FSLocation = Backbone.View.extend({
+    template: _.template($("#location-template").html()),
+
+    tagName: "article",
+
+    className: "foursquare-location",
+
+    render: function() {
+      console.log("add FSLocation view");
+
+      this.$el.html(this.template(this.model.attributes));
+      this.$el.attr('id', this.model.get('id'));
+      return this.$el;
+    }
+  });
+
+  var FSLocations = Backbone.View.extend({
+    initialize: function() {
+      // fetch venues
+      this.collection.view = this;
+      this.collection.fetch();
+    },
+
+    addAll: function() {
+      console.log("FSLocations view add venues");
+
+      var node = $("<div>");
+      node.attr('class', 'location-list');
+
+      this.collection.models.forEach(function(item) {
+        var itemView = new FSLocation({model: item});
+        node.append(itemView.render());
+      });
+
+      // this.$el.addClass("gallery-view"); // set wrapper visible
+      $("#wrapper").after(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      var that = this;
+    },
+
+    close: function() {
+      $(".location-list").remove();
     }
   });
 
@@ -258,6 +338,8 @@ $(function() {
       Imgur.currentUser = Globals.imgurCreds.account_username;
       Imgur.accessToken = Globals.imgurCreds.access_token;
 
+      var imageCookie = $.cookie("image_title");
+
       console.log(Globals.imgurCreds)
       Imgur.findAlbum(function() {
         var checkAlbums = [];
@@ -267,7 +349,7 @@ $(function() {
         }
         websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
           console.log(urlArray);
-          Imgur.addImageToAlbumFromCanvas(urlArray[0], "", "", function() {
+          Imgur.addImageToAlbumFromCanvas(urlArray[0], "", imageCookie, function() {
             var photos = new Photos();
             var gallery = new Gallery({collection: photos});
           });

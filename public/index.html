@@ -9,12 +9,15 @@
     <link rel="apple-touch-icon-precomposed" href="../images/elephotoAppIcon.png" />
     <link rel="stylesheet" href="stylesheets/screen.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="javascript/jquery.cookie.js"></script>
     <script src="javascript/imgur.js"></script>
     <script src="javascript/underscore.js"></script>
     <script src="javascript/backbone.js"></script>
     <script src="javascript/websql.js"></script>
     <script src="javascript/app.js"></script>
     <script src="javascript/sincerely.js"></script>
+    <script src="javascript/geoPosition.js"></script>
+    <script src="javascript/foursquare.js"></script>
     <script src="javascript/tumblr.js"></script>
     <script src='javascript/geoPosition.js'></script>
     <script src='javascript/foursquare.js'></script>
@@ -34,11 +37,16 @@
       </div>
     </div>
     <!-- TEMPLATES -->
+    <script type="text/template" id="location-template">
+
+    </script>
     <script type="text/template" id="camera-details-template">
       <div class="camera-details-view">
         <div class="camera-overlay">
           <textarea class="camera-caption" placeholder="Caption" rows="2"></textarea>
-          <div class="camera-map"></div>
+          <div class="camera-map">
+            <a class="camera-foursquare"></a>
+          </div>
           <a class="camera-submit">Continue</a>
         </div>
       </div>

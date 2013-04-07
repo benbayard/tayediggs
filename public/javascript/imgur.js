@@ -61,7 +61,7 @@ var Imgur = {
     });
   },
   addImageToAlbumFromCanvas: function(id, description, title, success) {
-    title = "BLAH DE BLAH";
+    //title = "BLAH DE BLAH";
     description = "THIS DESCRIBES ME";
     // console.log(id);
     $.ajax({
