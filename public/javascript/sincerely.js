@@ -10,14 +10,20 @@ function SincerelyAdapter() {
    */
   this.upload = function(dataURL) {
     var parent = this;
-    var data = {};
-    data.appkey = parent.appKey;
-    data.photo = parent.replaceDataURLHeaders(dataURL);
-    console.log(data);
-    $.post(parent.postUrl, data, function(response) {
-      console.log("$.post() success callback");
-      console.log(response);
-    }, "json");
+    var postdata = {};
+    postdata.appkey = parent.appKey;
+    postdata.photo = parent.replaceDataURLHeaders(dataURL);
+    console.log("SincerelyAdapter dataURL: " + dataURL);
+    $.post(parent.postUrl, postdata, function(data) {
+      console.log("$.post() success");
+      console.log(data);
+    }, "json")
+    .fail(function() {
+      console.log("$.post() FAIL");
+    })
+    .always(function() {
+      console.log("$.post() always");
+    });
   };
   // Credit for this function goes to http://stackoverflow.com/questions/934012/get-image-data-in-javascript
   this.getBase64Image = function(img) {
