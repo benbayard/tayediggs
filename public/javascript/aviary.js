@@ -1,5 +1,5 @@
 var featherEditor = new Aviary.Feather({
-  apiKey: '1234567',
+  apiKey: 'S7yq6lbq6EGx4BMJSVu_UA',
   apiVersion: 2,
   tools: ['enhance', 'focus', 'brightness', 'warmth'],
   minimumStyling: false,
