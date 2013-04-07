@@ -103,7 +103,7 @@ $(function() {
 
         setTimeout(function() {
           Imgur.authorize();
-        }, 500); // god this is stupid
+        }, 1000); // god this is stupid
 
         // Authenticate!
         // Imgur.share(caption, coords, function() {
@@ -248,18 +248,13 @@ $(function() {
       Imgur.currentUser = Globals.imgurCreds.account_username;
       Imgur.accessToken = Globals.imgurCreds.access_token;
 
-      console.log(Globals.imgurCreds);
-
+      console.log(Globals.imgurCreds)
       Imgur.findAlbum(function() {
         var checkAlbums = [];
         websql.getAlbums(checkAlbums);
         if (checkAlbums.length === 0) {
           websql.createNewAlbum("elephoto", Imgur.accessToken);
         }
-        // websql.selectAlbum("elephoto");
-
-        Imgur.accessToken = Globals.imgurCreds.access_token;
-
         websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
           console.log(urlArray);
           Imgur.addImageToAlbumFromCanvas(urlArray[0], "", "", function() {
