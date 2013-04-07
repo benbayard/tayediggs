@@ -8,7 +8,7 @@ $(function() {
   Globals.authenticated = false;
   Globals.logging = true;
 
-  Globals.tempPhoto = "";
+  Globals.tempPhoto = [];
 
   Globals.hideStartScreen = function() {
     $("#start-camera").addClass("hide");
@@ -64,6 +64,11 @@ $(function() {
       node.html(this.template());
 
       this.$el.html(node);
+
+      // animate overlay up);
+      setTimeout(function() {
+        $(".camera-overlay").addClass('animate');
+      }, 1500);
 
       this.bind();
     },
@@ -157,10 +162,6 @@ $(function() {
 
       console.log(Globals.imgurCreds);
 
-      var tempArray = [];
-      Globals.tempPhoto = websql.getAnonymousImageURL(tempArray);
-      console.log(tempPhoto);
-
       Imgur.findAlbum(function() {
         var checkAlbums = [];
         websql.getAlbums(checkAlbums);
@@ -170,6 +171,11 @@ $(function() {
         websql.selectAlbum("elephoto");
 
         Imgur.setAccessToken(Globals.imgurCreds.access_token);
+
+        websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
+          console.log(urlArray);
+          Imgur.addImageToAlbumFromCanvas(urlArray[0]);
+        });
       });
     },
 

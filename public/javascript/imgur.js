@@ -147,7 +147,6 @@ var Imgur = {
 
       // console.log(document.getElementById('canvas').height);
       console.log('the image is drawn');
-    }
     });
   },
   fetchAlbums: function(success) {
@@ -257,8 +256,7 @@ var Imgur = {
     }).success(function(data) {
       console.log(data.data);
       websql.setAnonymousImageURL(data.data.id);
-      Imgur.authorize();
-      w.location.href = data['upload']['links']['imgur_page'];
+
     }).error(function() {
       alert('Could not reach api.imgur.com. Sorry :(');
     });
