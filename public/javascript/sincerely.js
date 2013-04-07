@@ -10,25 +10,22 @@ function SincerelyAdapter() {
    */
   this.upload = function(dataURL) {
     var parent = this;
-    var postdata = {};
-    postdata.appkey = parent.appKey;
-    postdata.photo = parent.replaceDataURLHeaders(dataURL);
-    console.log("SincerelyAdapter dataURL: " + dataURL);
+    var postURL = parent.postUrl + "?appkey="+parent.appKey+"&photo="+dataURL;
+    console.log("SincerelyAdapter postURL: " + postURL);
     $.ajax({
       type: 'POST',
-      url: parent.postUrl,
-      data: postdata,
+      url: postURL,
       dataType: "json"
     })
-    .done(function() {
-      console.log("$.post() success");
+    .done(function(data) {
+      console.log("$.ajax() success");
       console.log(data);
     })
-    .fail(function() {
-      console.log("$.post() FAIL");
+    .fail(function(data) {
+      console.log("$.ajax() FAIL");
     })
-    .always(function() {
-      console.log("$.post() always");
+    .always(function(data) {
+      console.log("$.ajax() always");
     });
   };
   // Credit for this function goes to http://stackoverflow.com/questions/934012/get-image-data-in-javascript
@@ -59,7 +56,7 @@ function SincerelyAdapter() {
 }
 
 $(document).ready(function() {
-  z_s = new SincerelyAdapter();
-  z_canvas = document.getElementById("canvas");
-  z_dataURL = z_canvas.toDataURL();
+  s = new SincerelyAdapter();
+  canvas = document.getElementById("canvas");
+  dataURL = canvas.toDataURL();
 }); 
