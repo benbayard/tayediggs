@@ -20,7 +20,7 @@ $(function() {
 
   var Photo = Backbone.Model.extend({
     initialize: function() {
-      // set attributes if necessary
+      console.log("init photo");
     }
   });
 
@@ -32,6 +32,19 @@ $(function() {
 
     initialize: function() {
 
+    },
+
+    fetch: function() {
+      // dummy data
+      var photos = [];
+      for(var i = 0; i < 8; i++) {
+        var photo = {};
+        photo.id = i;
+        photo.dummy_attribute = "yes";
+        this.add(photo);
+      }
+
+      this.view.addAll();
     }
   });
 
@@ -80,7 +93,15 @@ $(function() {
 
         var tempData = coords + "*" + caption;
         // Save to WebSQL
-        Imgur.anonImg(tempData);
+        // Imgur.anonImg(tempData);
+        try {
+          var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+        } catch(e) {
+          var img = canvas.toDataURL().split(',')[1];
+        }
+        websql.setAnonymousImageURL(img);
+
+        // Imgur.authorize();
 
         // Authenticate!
         // Imgur.share(caption, coords, function() {
@@ -104,6 +125,10 @@ $(function() {
     template: _.template($('#photo-stub-template').html()),
 
     intitialize: function() {
+      console.log(this.model);
+    },
+
+    render: function() {
 
     }
   });
@@ -114,6 +139,15 @@ $(function() {
 
     initialize: function() {
       // fetch photos
+      this.collection.view = this;
+      this.collection.fetch();
+    },
+
+    addAll: function() {
+      this.collection.models.forEach(function(item) {
+        console.log("iterating?");
+        var itemView = new PhotoStubView({model: item});
+      });
     }
   });
 
@@ -220,9 +254,9 @@ $(function() {
       $("#start-camera").on('click', function() {
         var camera =  new Camera();
       });
-      $("#start-auth").on('click', function() {
-        var auth = new Authenticate();
-        auth.render();
+      $("#start-gallery").on('click', function() {
+        var photos = new Photos();
+        var gallery = new Gallery({collection: photos});
       });
 
       // make sure you can't scroll the webapp

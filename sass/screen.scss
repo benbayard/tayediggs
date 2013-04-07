@@ -98,6 +98,19 @@ a {
     margin-top: -68px;
     margin-left: -140px;
   }
+
+  #start-gallery {
+    background-image: url('../images/galleryicon.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 27px 27px;
+    background-color: $grapefruit;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 47px;
+    width: 47px;
+  }
 }
 
 .camera-details-view {

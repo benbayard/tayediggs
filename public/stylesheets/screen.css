@@ -159,8 +159,21 @@ a:visited {
   margin-top: -68px;
   margin-left: -140px;
 }
+/* line 102, ../../sass/screen.scss */
+#start-screen-controls #start-gallery {
+  background-image: url("../images/galleryicon.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 27px 27px;
+  background-color: #fb6363;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 47px;
+  width: 47px;
+}
 
-/* line 103, ../../sass/screen.scss */
+/* line 116, ../../sass/screen.scss */
 .camera-details-view {
   position: absolute;
   top: 0;
@@ -168,7 +181,7 @@ a:visited {
   bottom: 0;
   left: 0;
 }
-/* line 109, ../../sass/screen.scss */
+/* line 122, ../../sass/screen.scss */
 .camera-details-view .camera-overlay {
   position: absolute;
   bottom: 0px;
@@ -185,11 +198,11 @@ a:visited {
   -webkit-transition-duration: .4s;
   -webkit-transform: translateY(250px);
 }
-/* line 120, ../../sass/screen.scss */
+/* line 133, ../../sass/screen.scss */
 .camera-details-view .camera-overlay.animate {
   -webkit-transform: translateY(0px);
 }
-/* line 124, ../../sass/screen.scss */
+/* line 137, ../../sass/screen.scss */
 .camera-details-view .camera-caption {
   -webkit-appearance: none;
   box-sizing: border-box;
@@ -206,14 +219,14 @@ a:visited {
   height: 30px;
   margin-bottom: 2px;
 }
-/* line 136, ../../sass/screen.scss */
+/* line 149, ../../sass/screen.scss */
 .camera-details-view .camera-map {
   background-color: #999;
   height: 150px;
   width: 100%;
   margin-bottom: 5px;
 }
-/* line 142, ../../sass/screen.scss */
+/* line 155, ../../sass/screen.scss */
 .camera-details-view .camera-submit {
   display: block;
   width: 100%;
