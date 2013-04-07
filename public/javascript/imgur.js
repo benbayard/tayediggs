@@ -149,7 +149,8 @@ var Imgur = {
             album = specs;
           }
           if (specs.id == albums[albums.length - 1]) {
-            if (album.id) {
+            console.log(album);
+            if (album.title == "elephoto") {
               console.log("AN ALBUM EXISTS!");
               // return album;
               that.currentAlbum = album;
@@ -159,7 +160,7 @@ var Imgur = {
               // websql.setAlbumId(album.id);
             } else {
               console.log("AN ALBUM DOES NOT EXIST");
-              // return that.createAlbum(success);
+              return that.createAlbum(success);
             }
           }
         });

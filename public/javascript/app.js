@@ -115,6 +115,7 @@ $(function() {
 
       websql.setUsername(Globals.imgurCreds.account_username);
       Imgur.currentUser = Globals.imgurCreds.account_username;
+      Imgur.accessToken = Globals.imgurCreds.access_token;
 
       console.log(Globals.imgurCreds);
 
