@@ -1,0 +1,131 @@
+// custom override for mobile
+$editor_height_offset: 50px;
+body {
+  #avpw_controls {
+    min-width: 0 !important;
+    width: 300px !important;
+    position: absolute;
+    top: $editor_height_offset !important;
+    left: 50% !important;
+    margin-left: -150px;
+  }
+  #avpw_canvas_embed {
+    position: absolute;
+    left: 0 !important;
+  }
+  #avpw_canvas_embed canvas {
+    -webkit-transform: none !important;
+  }
+  #avpw_zoom_container {
+    // hide zoom
+    display: none !important;
+  }
+  .avpw_slider_container {
+    // sliders
+    width: 300px !important;
+    margin-left: 86px !important;
+  }
+  #avpw_control_main_scroll_panel {
+    // scroll container for main filters
+    overflow: visible !important;
+    width: 100px !important;
+  }
+  #avpw_tools_pager {
+    // hide carousel dots
+    display: none !important;
+  }
+  .avpw_info {
+    // hide extra aviary info
+    display: none !important;
+  }
+  #avpw_control_main_scrolling_region {
+    // top level filters (4 filters)
+    margin-left: -40px !important;
+  }
+  #avpw_tool_main_container .avpw_mode_action_right {
+    // save button
+    position: absolute;
+    top: -$editor_height_offset;
+    right: 0;
+    width: 90px;
+    height: 40px;
+    &:before, &:after {
+      // remove border
+      border: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+    }
+  }
+  #avpw_controls {
+    // show negative position absolute btns
+    overflow: visible !important;
+  }
+  #avpw_lftArrow {
+    display: none !important;
+  }
+  #avpw_rghtArrow {
+    // right arrow
+    right: 0 !important;
+    display: none !important;
+  }
+  #avpw_controlpanel_enhance {
+    .avpw_tool_cutout_centered_enhance, .avpw_inset_button_group {
+      // enhance btns (night, backlit, balance)
+      width: 246px !important;
+      .avpw_inset_button {
+        // filter btns
+        width: 60px !important;
+      }
+    }
+    .avpw_inset_button_group {
+      // enhance toolbar
+      margin-left: 77px !important;
+    }
+    .avpw_inset_button_label {
+      width: 63px !important;
+    }
+    .avpw_inset_group .avpw_inset_button_label:first-child {
+      margin-left: 75px !important;
+    }
+  }
+  .avpw_tool_cutout_inner {
+    //enhance middle bar - remove background
+    background: none !important;
+    background-color: none !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+  }
+  .avpw_canvas_controls {
+    // focus bubble thingy on where to focus
+    margin-left: -125px !important;
+    left: 0;
+    > div {
+      left: 0;
+      margin-left: -125px !important;
+    }
+  }
+  #avpw_tool_options_container {
+    // apply or cancel buttons
+    .avpw_mode_action_left {
+      position: absolute;
+      top: -$editor_height_offset;
+      left: 0;
+      width: 90px;
+      height: 40px;
+    }
+    .avpw_mode_action_right {
+      position: absolute;
+      top: -$editor_height_offset;
+      right: 0;
+      width: 90px;
+      height: 40px;
+    }
+    .avpw_mode_action:before, .avpw_mode_action:after {
+      // remove border
+      border: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+    }
+  }
+}
