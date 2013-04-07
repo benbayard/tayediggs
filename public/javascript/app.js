@@ -65,6 +65,11 @@ $(function() {
 
       this.$el.html(node);
 
+      // animate overlay up);
+      setTimeout(function() {
+        $(".camera-overlay").addClass('animate');
+      }, 1500);
+
       this.bind();
     },
 
