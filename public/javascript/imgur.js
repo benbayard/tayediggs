@@ -120,7 +120,7 @@ var Imgur = {
         try {
             var newImg = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
         } catch(e) {
-            // var newImg = canvas.toDataURL().split(',')[1];
+            var newImg = canvas.toDataURL().split(',')[1];
         }
         console.log(newImg);
         $.ajax({
