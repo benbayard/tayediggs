@@ -25,12 +25,18 @@ var Imgur = {
   handleFiles: function(e) {
     var ctx = document.getElementById('canvas').getContext('2d');
     var img = new Image;
+    var pageHeight = $(window).height();
     img.src = window.webkitURL.createObjectURL(e.target.files[0]);
     img.onload = function() {
-      ctx.drawImage(img, 0, 0, img.width, img.height);
-      document.getElementById("canvas").width = img.width;
-      document.getElementById("canvas").height = img.height;
-      console.log('the image is drawn');
+        console.log(img.width);
+        console.log(img.height);
+        $("canvas").css("zoom", pageHeight/img.height);
+        document.getElementById('canvas').height = img.height;
+        document.getElementById('canvas').width = img.width;
+        ctx.drawImage(img, 0, 0);
+
+        // console.log(document.getElementById('canvas').height);
+        console.log('the image is drawn');
     }
   },
   fetchAlbum: function(id, success) {
