@@ -7,7 +7,8 @@ var MapboxPhd = {
     console.log("Inserted div#map inside of " + selector);
   },
   
-  init: function(param) {
+  init: function(param, callback) {
+    console.log("MapboxPhd.init called")
     var lat = param.lat;
     var lon = param.lon;
     var map = mapbox.map('map');

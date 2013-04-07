@@ -13,6 +13,7 @@ var Foursquare = {
   },
   
   setVenueResponse: function(coords, callback) {
+    console.log("setVenueResponse called")
     var mattTempAccessToken = "XL5FDDKXVEM2PXJH2GJ2LG0J00M4I50FXB55RRZGHYMHNCU5";
     var oauthversion = "20130406";
     var latitude = coords.lat;
