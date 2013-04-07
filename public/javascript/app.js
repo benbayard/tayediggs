@@ -7,6 +7,9 @@ $(function() {
 
   Globals.authenticated = false;
   Globals.logging = true;
+
+  Globals.tempPhoto = [];
+
   Globals.hideStartScreen = function() {
     $("#start-camera").addClass("hide");
     $("#wrapper").attr('class', '');
@@ -61,6 +64,11 @@ $(function() {
       node.html(this.template());
 
       this.$el.html(node);
+
+      // animate overlay up);
+      setTimeout(function() {
+        $(".camera-overlay").addClass('animate');
+      }, 1500);
 
       this.bind();
     },
@@ -163,6 +171,11 @@ $(function() {
         websql.selectAlbum("elephoto");
 
         Imgur.setAccessToken(Globals.imgurCreds.access_token);
+
+        websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
+          console.log(urlArray);
+          Imgur.addImageToAlbumFromCanvas(urlArray[0]);
+        });
       });
     },
 

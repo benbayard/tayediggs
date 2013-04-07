@@ -1,11 +1,6 @@
-function venue(name, address) {
+function Venue(name, address) {
   this.name = name;
   this.address = address;
-}
-
-function coordinates(latitude, longitude) {
-  this.lat = latitude;
-  this.lon = longitude;
 }
 
 var Foursquare = {
@@ -53,7 +48,7 @@ var Foursquare = {
       var venues = [];
       var i = 0;
       Foursquare.venueResponse.venues.forEach( function(el) {
-        venues[i] = new venue(el.name, el.location);
+        venues[i] = new Venue(el.name, el.location);
       });
     }
   }
@@ -62,7 +57,6 @@ var Foursquare = {
 
 $(document).ready(function() {
   // test_coords = [latitude, longitude];
-  var test_coords = new coordinates(37.756144, -122.432568);
-  Foursquare.setVenueResponse(test_coords.lat, test_coords.lon);
+  Coordinates.setCoordinates(Foursquare.setVenueResponse);
   Foursquare.getVenues();
 });

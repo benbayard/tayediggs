@@ -60,24 +60,14 @@ var Imgur = {
       alert('Could not reach api.imgur.com. Sorry :(');
     });
   },
-  addImageToAlbumFromCanvas: function(title, description) {
+  addImageToAlbumFromCanvas: function(id) {
     //Get the canvas image.
-    try {
-        var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
-    } catch(e) {
-        var img = canvas.toDataURL().split(',')[1];
-    }
     $.ajax({
       url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
       type: 'POST',
       data: {
-          type: 'base64',
-          // get your key here, quick and fast http://imgur.com/register/api_anon
-          key: Imgur.clientId,
-          name: title + '.jpg',
-          title: title,
-          caption: description,
-          image: img
+        key: Imgur.clientId,
+        ids: id
       },
       headers: {
         Authorization: "Bearer " + Imgur.accessToken
@@ -85,7 +75,7 @@ var Imgur = {
       dataType: 'json'
     }).success(function(data) {
         console.log(data);
-        return data.data;
+        return data;
         // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
         alert('Could not reach api.imgur.com. Sorry :(');
@@ -198,8 +188,7 @@ var Imgur = {
     }).success(function(data) {
       console.log(data.data);
       websql.setAnonymousImageURL(data.data.id);
-      Imgur.authorize();
-      // w.location.href = data['upload']['links']['imgur_page'];
+
     }).error(function() {
       alert('Could not reach api.imgur.com. Sorry :(');
     });

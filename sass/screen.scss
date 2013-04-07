@@ -12,10 +12,6 @@ $grapefruit: #FB6363;
 #canvas, #picture {
   // display: none;
 }
-#canvas {
-  width: 100%;
-  height: auto;
-}
 
 body {
   width: 100%;
@@ -75,6 +71,7 @@ a {
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
 
   &:not([class]) {
     > * {
@@ -117,6 +114,12 @@ a {
     padding: 5px;
     box-sizing: border-box;
     @include background-image(linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)));
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: .4s;
+    -webkit-transform: translateY(250px);
+    &.animate {
+      -webkit-transform: translateY(0px);
+    }
   }
   .camera-caption {
     -webkit-appearance: none;
