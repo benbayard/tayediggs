@@ -5,7 +5,7 @@ $(function() {
 
   var Globals = {};
 
-  Globals.authenticated = true;
+  Globals.authenticated = false;
   Globals.logging = true;
 
   // ******
@@ -81,6 +81,7 @@ $(function() {
     catchToken: function() {
       console.log("--> catching token in Authenticate");
       Globals.imgurCreds = {};
+      // store all of the things (where things are imgur creds)
       Globals.imgurCreds.access_token = this.getQueryVariable("access_token");
       Globals.imgurCreds.expires_in = this.getQueryVariable("expires_in");
       Globals.imgurCreds.token_type = this.getQueryVariable("token_type");
@@ -119,11 +120,11 @@ $(function() {
       // TODO: fetch and add scrolling maps?
       // (or we might just use static images)
 
-      // if (Globals.authenticated === false) {
+      if (Globals.authenticated === false) {
         $("#wrapper").attr("class", "start-screen");
 
         this.bind();
-      // }
+      }
     },
 
     bind: function() {
@@ -154,16 +155,18 @@ $(function() {
     },
 
     initialize: function() {
-      // TODO: check if we're authenticated
+      // if there's a hash, then it's an Imgur callback
+      if(window.location.hash !== "") {
+        Globals.authenticated = true;
+        var auth = new Authenticate();
+        auth.catchToken();
+      }
+
+      // TODO: check for prior authentication
 
       console.log(Backbone.history.fragment);
       console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
-
-      if(window.location.hash !== "") {
-        var auth = new Authenticate();
-        auth.catchToken();
-      }
     },
 
     reviewNewPhoto: function() {
