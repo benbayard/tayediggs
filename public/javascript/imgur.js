@@ -66,15 +66,15 @@ var Imgur = {
       url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
       type: 'POST',
       data: {
-          key: Imgur.clientId,
-          ids: id
+        key: Imgur.clientId,
+        ids: [id]
       },
       headers: {
         Authorization: "Bearer " + Imgur.accessToken
       },
       dataType: 'json'
     }).success(function(data) {
-        console.log(data);
+        console.log(id);
         return data.data;
         // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
