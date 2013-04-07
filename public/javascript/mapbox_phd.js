@@ -4,6 +4,7 @@ var MapboxPhd = {
   // callback is a function
   setupMap: function(selector) {
     $(selector).append("<div id='map'></div>");
+    console.log("Inserted div#map inside of " + selector);
   },
   
   init: function(param) {

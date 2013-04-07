@@ -38,7 +38,7 @@ $(function() {
     model: Photo,
 
     initialize: function() {
-
+      
     },
 
     fetch: function() {
@@ -105,6 +105,13 @@ $(function() {
       }, 1500);
 
       // MAP DETAILS .camera-map
+      var map_node_selector = ".camera-map"
+      var map_node = $(map_node_selector)
+      MapboxPhd.setupMap(map_node_selector);
+      Coordinates.setCoordinates(MapboxPhd.init, null);
+      
+      $(map_node_selector).append("<input type='hidden' id='lat-long'>")
+      $("#lat-long").val(Coordinates.lat.toString() + "," + Coordinates.lon.toString());
 
       this.bind();
     },
@@ -381,6 +388,10 @@ $(function() {
       $("body").addClass('noscroll');
 
       // MAP VIEW
+      var map_node_selector = ".start-screen"
+      var map_node = $(map_node_selector)
+      MapboxPhd.setupMap(map_node_selector);
+      Coordinates.setCoordinates(MapboxPhd.init, null);
     },
 
     bind: function() {
