@@ -78,11 +78,14 @@ a {
   bottom: 0px;
   left: 0;
   width: 100%;
-  height: 45px;
+  height: 70px;
   opacity: 0;
   z-index: 1000;
   &.hide {
     display: none;
+  }
+  .gallery-view & {
+    height: 45px;
   }
 }
 
