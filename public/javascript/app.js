@@ -99,6 +99,7 @@ $(function() {
 
       this.$el.html(node);
 
+
       // animate overlay up);
       setTimeout(function() {
         $(".camera-overlay").addClass('animate');
@@ -120,6 +121,8 @@ $(function() {
       $(".camera-submit").on('click', function() {
         var caption = $(".camera-caption").val();
         var coords =  "DUMMY DATA"; // TODO: get geolocation stuff from matt
+
+        $.cookie("image_title", caption);
 
         var tempData = coords + "*" + caption;
         // Save to WebSQL
@@ -341,7 +344,7 @@ $(function() {
         }
         websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
           console.log(urlArray);
-          Imgur.addImageToAlbumFromCanvas(urlArray[0], "", "", function() {
+          Imgur.addImageToAlbumFromCanvas(urlArray[0], "", $.cookie("image_title"), function() {
             var photos = new Photos();
             var gallery = new Gallery({collection: photos});
           });
