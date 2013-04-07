@@ -151,7 +151,7 @@ var Imgur = {
               console.log("AN ALBUM EXISTS!");
               // return album;
               that.currentAlbum = album;
-              websql.setAlbumId(album.id);
+              // websql.setAlbumId(album.id);
             } else {
               console.log("AN ALBUM DOES NOT EXIST");
               // return that.createAlbum(success);
