@@ -74,8 +74,8 @@ var Imgur = {
       },
       dataType: 'json'
     }).success(function(data) {
-        console.log(id);
-        return data.data;
+        console.log(data);
+        return data;
         // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
         alert('Could not reach api.imgur.com. Sorry :(');
@@ -188,7 +188,7 @@ var Imgur = {
     }).success(function(data) {
       console.log(data.data);
       websql.setAnonymousImageURL(data.data.id);
-      Imgur.authorize();
+      // Imgur.authorize();
       w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
       alert('Could not reach api.imgur.com. Sorry :(');
