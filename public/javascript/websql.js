@@ -288,7 +288,7 @@ var websql = {
   * result; // => ["foo"]
   * ---------------------------
   */
-  getUsername: function(usernameArray) {
+  getUsername: function(usernameArray, success, error) {
     var that = this;
     that.db.transaction(function(tx) {
       tx.executeSql('SELECT value FROM map WHERE key = "username"', [], function(tx, results) {
@@ -296,8 +296,14 @@ var websql = {
         for (var i = 0; i < results.rows.length; i++) {
           usernameArray[i] = results.rows.item(i).value;
         }
+        if(success) {
+          success(usernameArray);
+        }
       }, function(tx) {
         console.error("websql: getUsername() FAILURE");
+        if(error) {
+          error(usernameArray);
+        }
       });
     });
   },
