@@ -67,6 +67,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+/* line 12, ../../sass/screen.scss */
+#canvas {
+  width: 100%;
+}
+
 /* line 16, ../../sass/screen.scss */
 .fullscreen, #wrapper, .camera-details-view, .photo-view {
   position: absolute;
@@ -85,7 +90,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body {
   width: 100%;
   height: 100%;
-  background-color: #fd996b;
+  background-color: #444;
   font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
 }
 /* line 35, ../../sass/screen.scss */
@@ -205,7 +210,7 @@ a:visited {
   background-image: linear-gradient(top, rgba(0, 0, 0, 0.5), #000000);
   -webkit-transition-property: -webkit-transform;
   -webkit-transition-duration: .4s;
-  -webkit-transform: translateY(250px);
+  -webkit-transform: translateY(220px);
 }
 /* line 146, ../../sass/screen.scss */
 .camera-details-view .camera-overlay.animate {
