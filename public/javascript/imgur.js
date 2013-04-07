@@ -63,6 +63,7 @@ var Imgur = {
   addImageToAlbumFromCanvas: function(id, description, title) {
     title = "BLAH DE BLAH";
     description = "THIS DESCRIBES ME";
+    console.log(id);
     $.ajax({
       url: "https://api.imgur.com/3/image",
       type: 'POST',
