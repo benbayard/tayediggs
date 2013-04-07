@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Taye Diggs</title>
+    <title>Elephoto</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="viewport" content="user-scalable=0, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-title" content="Taye Diggs">
+    <meta name="apple-mobile-web-app-title" content="Elephoto">
     <link rel="apple-touch-icon-precomposed" href="../images/elephotoAppIcon.png" />
     <link rel="stylesheet" href="stylesheets/screen.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -14,6 +14,15 @@
     <script src="javascript/backbone.js"></script>
     <script src="javascript/websql.js"></script>
     <script src="javascript/app.js"></script>
+    <script src="javascript/sincerely.js"></script>
+    <script src="javascript/tumblr.js"></script>
+    <style>
+      @-webkit-keyframes drawer-up {
+        0% { -webkit-transform: translate(0 250px); }
+        80% { -webkit-transform: translate(0 250px); }
+        100% { -webkit-transform: translate(0 0); }
+      }
+    </style>
   </head>
   <body>
     <canvas id="canvas"></canvas>
@@ -23,38 +32,39 @@
     <div id="wrapper">
       <div id="start-screen-controls">
         <div id="start-logo"></div>
-        <a id="start-auth">Continue</a>
+        <a id="start-gallery"></a>
       </div>
     </div>
-
     <!-- TEMPLATES -->
     <script type="text/template" id="camera-details-template">
       <div class="camera-details-view">
         <div class="camera-overlay">
-          <textarea class="camera-description" rows="2"></textarea>
+          <textarea class="camera-caption" placeholder="Caption" rows="2"></textarea>
           <div class="camera-map"></div>
           <a class="camera-submit">Continue</a>
         </div>
       </div>
     </script>
     <script type="text/template" id="photo-template">
-      <div class="photo-view">
-        <img src="" alt="" />
-        <div class="photo-description">
-        </div>
-        <div class="photo-address">
-        </div>
-        <div class="photo-fs-location">
-        </div>
-        <div class="photo-map">
-        </div>
+      <div class="photo-nav">
+        <a class="photo-back" />
+        <a class="photo-map-button" />
+      </div>
+      <div class="photo-description">
+        <%= title %>
+      </div>
+      <div class="photo-address">
+        <%= description %>
+      </div>
+      <div class="photo-fs-location">
+      </div>
+      <div class="photo-map">
       </div>
     </script>
     <script type="text/template" id="photo-stub-template">
-      <div class="photo-stub-view">
-        <img src="" alt="" />
-        <div class="photo-description">
-        </div>
+      <img src="<%= link %>" alt="" />
+      <div class="photo-description">
+        <%= title %>
       </div>
     </script>
   </body>

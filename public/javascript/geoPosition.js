@@ -261,3 +261,37 @@ var geoPosition=function() {
         }
         return pub;
 }();
+
+var Coordinates = {
+  lat: null,
+  lon: null,
+  
+  setup: function() {
+    
+  },
+  
+  geoError: function() {
+    console.log("geoPosition.js: Could not find you!");
+  },
+  
+  // This callback expects two arguments, latitude and longitude
+  setCoordinates: function(callback, callback_of_callback) {
+    if (geoPosition.init()) {
+      geoPosition.getCurrentPosition(function(data) {
+        Coordinates.lat = data.coords.latitude;
+        Coordinates.lon = data.coords.longitude;
+        
+        if (callback != null & callback_of_callback != null) {
+          callback({lat: Coordinates.lat, lon: Coordinates.lon}, callback_of_callback);
+        } else if (callback != null) {
+          callback({lat: Coordinates.lat, lon: Coordinates.lon});
+        }
+      }, Coordinates.geoError);
+    }
+  },
+  
+  init: function(latitude, longitude) {
+    Coordinates.lat = latitude;
+    Coordinates.lon = longitude;
+  }
+}
