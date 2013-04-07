@@ -35,8 +35,6 @@ $(function() {
   var Camera = Backbone.View.extend({
     initialize: function() {
       console.log("--> initialized Camera");
-
-      $("#picture").click();
     }
   });
 
