@@ -133,6 +133,7 @@ var Imgur = {
               name: title + '.jpg',
               title: title,
               caption: description,
+              album: Imgur.currentAlbum.id,
               image: newImg
           },
           headers: {
@@ -142,20 +143,6 @@ var Imgur = {
         }).success(function(data) {
             console.log(data);
             var the_id = data.data.id;
-            $.ajax({
-              url: "https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add",
-              type: "POST",
-              data: {
-                key: Imgur.clientId,
-                ids: [the_id]
-              },
-              headers: {
-                Authorization: "Bearer " + Imgur.accessToken
-              },
-              dataType: 'json'
-            }).success(function(data) {
-              console.log(data);
-            });
             return data.data;
             // w.location.href = data['upload']['links']['imgur_page'];
         }).error(function() {
