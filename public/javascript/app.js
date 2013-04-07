@@ -101,7 +101,7 @@ $(function() {
         }
         websql.setAnonymousImageURL(img);
 
-        Imgur.authorize();
+        // Imgur.authorize();
 
         // Authenticate!
         // Imgur.share(caption, coords, function() {
