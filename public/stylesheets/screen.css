@@ -263,7 +263,7 @@ a:visited {
 /* line 191, ../../sass/screen.scss */
 .camera-details-view .camera-foursquare {
   position: absolute;
-  z-index: 2;
+  z-index: 1000;
   top: 0;
   right: 0;
   width: 40px;
