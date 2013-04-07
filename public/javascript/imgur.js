@@ -60,25 +60,94 @@ var Imgur = {
       alert('Could not reach api.imgur.com. Sorry :(');
     });
   },
-  addImageToAlbumFromCanvas: function(id) {
+  addImageToAlbumFromCanvas: function(id, description, title) {
     //Get the canvas image.
+    // $.ajax({
+    //   url: "https://api.imgur.com/3/image/" + id,
+    //   type: "GET",
+    //   data: {
+    //     key: Imgur.clientId
+    //   },
+    //   headers: {
+    //     Authorization: "Client-ID " + Imgur.clientId
+    //   }
+    // }).success(function(data){
+    //   console.log(data);
+    // });
+    // $.ajax({
+    //   url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
+    //   type: 'POST',
+    //   data: {
+    //       key: Imgur.clientId,
+    //       ids: [id]
+    //   },
+    //   headers: {
+    //     Authorization: "Bearer " + Imgur.accessToken
+    //   },
+    //   dataType: 'json'
+    // }).success(function(data) {
+    //     console.log(data);
+    //     return data.data;
+    //     // w.location.href = data['upload']['links']['imgur_page'];
+    // }).error(function() {
+    //     alert('Could not reach api.imgur.com. Sorry :(');
+    // });
+    title = "BLAH DE BLAH";
+    description = "THIS DESCRIBES ME";
     $.ajax({
-      url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
-      type: 'POST',
+      url: "https://api.imgur.com/3/image/" + id,
+      type: "GET",
       data: {
-          key: Imgur.clientId,
-          ids: [id]
+        key: Imgur.clientId
       },
       headers: {
-        Authorization: "Bearer " + Imgur.accessToken
-      },
-      dataType: 'json'
-    }).success(function(data) {
-        console.log(data);
-        return data.data;
-        // w.location.href = data['upload']['links']['imgur_page'];
-    }).error(function() {
-        alert('Could not reach api.imgur.com. Sorry :(');
+        Authorization: "Client-ID " + Imgur.clientId
+      }
+    }).success(function(data){
+      console.log(data);
+      var img = new Image();
+      img.src = data.data.link
+      var ctx = document.getElementById('canvas').getContext('2d');
+      var pageHeight = $(window).height();
+      img.onload = function() {
+      console.log(img.width);
+      console.log(img.height);
+      $("canvas").css("zoom", pageHeight/img.height);
+      document.getElementById('canvas').height = img.height;
+      document.getElementById('canvas').width = img.width;
+      ctx.drawImage(img, 0, 0);
+      try {
+        var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+      } catch(e) {
+          var img = canvas.toDataURL().split(',')[1];
+      }
+      $.ajax({
+        url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
+        type: 'POST',
+        data: {
+            type: 'base64',
+            // get your key here, quick and fast http://imgur.com/register/api_anon
+            key: Imgur.clientId,
+            name: title + '.jpg',
+            title: title,
+            caption: description,
+            image: img
+        },
+        headers: {
+          Authorization: "Bearer " + Imgur.accessToken
+        },
+        dataType: 'json'
+      }).success(function(data) {
+          console.log(data);
+          return data.data;
+          // w.location.href = data['upload']['links']['imgur_page'];
+      }).error(function() {
+          alert('Could not reach api.imgur.com. Sorry :(');
+      });
+
+      // console.log(document.getElementById('canvas').height);
+      console.log('the image is drawn');
+    }
     });
   },
   fetchAlbums: function(success) {
