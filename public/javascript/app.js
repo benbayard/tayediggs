@@ -49,13 +49,17 @@ $(function() {
 
   // View single photo details + share?
   var PhotoView = Backbone.View.extend({
-    initiailize: function() {
+    template: _.template($('#photo-template').html()),
+
+    initialize: function() {
       
     }
   });
 
   // View single photo stub within gallery
   var PhotoStubView = Backbone.View.extend({
+    template: _.template($('#photo-stub-template').html()),
+
     intitialize: function() {
 
     }
@@ -64,7 +68,7 @@ $(function() {
   // View gallery of photos (this is a collection view!)
   var Gallery = Backbone.View.extend({
     el: $("wrapper"),
-    
+
     initialize: function() {
       // fetch photos
     }
@@ -110,14 +114,16 @@ $(function() {
       Globals.imgurCreds.account_username = this.getQueryVariable("account_username");
       console.log(Globals.imgurCreds);
 
-      var checkAlbums = [];
-      websql.getAlbums(checkAlbums);
-      if (checkAlbums.length === 0) {
-        websql.createNewAlbum("elephoto", Globals.imgurCreds.access_token);
-      }
-      websql.selectAlbum("elephoto");
+      Imgur.findAlbum(function() {
+        var checkAlbums = [];
+        websql.getAlbums(checkAlbums);
+        if (checkAlbums.length === 0) {
+          websql.createNewAlbum("elephoto", Globals.imgurCreds.access_token);
+        }
+        websql.selectAlbum("elephoto");
 
-      Imgur.setAccessToken(Globals.imgurCreds.access_token);
+        Imgur.setAccessToken(Globals.imgurCreds.access_token);
+      });
     },
 
     getQueryVariable: function(variable) {

@@ -141,7 +141,7 @@ var Imgur = {
         var album = albums[i];
         // console.log(album);
         that.fetchAlbum(album, function(specs) {
-          console.log(JSON.stringify(specs));
+          console.log(specs);
           if(specs.title === "elephoto") {
             // console.log("THIS IS THE IMGUR ALBUM YALL" + specs.id);
             album = specs;
