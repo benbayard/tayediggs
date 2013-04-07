@@ -1,12 +1,12 @@
 $(function() {
 
-  // **************
-  // GLOBAL OPTIONS
+  // *******
+  // GLOBALS
 
-  var Options = {};
+  var Globals = {};
 
-  Options.authenticated = true;
-  Options.logging = true;
+  Globals.authenticated = false;
+  Globals.logging = true;
 
   // ******
   // MODELS
@@ -65,7 +65,6 @@ $(function() {
       console.log(this);
 
       var node = $("<a>");
-      node.attr('href', '#');
       node.attr('id', 'imgur-authorize');
       node.html("Authenticate");
       this.$el.html(node);
@@ -81,7 +80,14 @@ $(function() {
 
     catchToken: function() {
       console.log("--> catching token in Authenticate");
-      console.log(getQueryVariable("access_token"));
+      Globals.imgurCreds = {};
+      // store all of the things (where things are imgur creds)
+      Globals.imgurCreds.access_token = this.getQueryVariable("access_token");
+      Globals.imgurCreds.expires_in = this.getQueryVariable("expires_in");
+      Globals.imgurCreds.token_type = this.getQueryVariable("token_type");
+      Globals.imgurCreds.refresh_token = this.getQueryVariable("refresh_token");
+      Globals.imgurCreds.account_username = this.getQueryVariable("account_username");
+      console.log(Globals.imgurCreds);
     },
 
     getQueryVariable: function(variable) {
@@ -114,11 +120,11 @@ $(function() {
       // TODO: fetch and add scrolling maps?
       // (or we might just use static images)
 
-      // if (Options.authenticated === false) {
+      if (Globals.authenticated === false) {
         $("#wrapper").attr("class", "start-screen");
 
         this.bind();
-      // }
+      }
     },
 
     bind: function() {
@@ -146,23 +152,32 @@ $(function() {
       "photo/review": "reviewNewPhoto",
       "photo/edit": "editNewPhoto",
       "photo/caption": "captionNewPhoto",
-      "catchtoken/:hash": "catchToken"
     },
 
     initialize: function() {
-      // TODO: check if we're authenticated
+      // if there's a hash, then it's an Imgur callback
+      if(window.location.hash !== "") {
+        Globals.authenticated = true;
+        var auth = new Authenticate();
+        auth.catchToken();
+      }
 
+      // TODO: check for prior authentication
+
+      console.log(Backbone.history.fragment);
+      console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
     },
 
-    catchToken: function() {
-      var auth = new Authenticate();
-      auth.catchToken();
+    reviewNewPhoto: function() {
+      console.log("--> routed to reviewNewPhoto");
     }
   });
 
   // ****
   // INIT
+
+  Backbone.history.start({pushState: true});
 
   var app = new Router;
 
