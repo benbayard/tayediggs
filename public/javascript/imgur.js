@@ -123,7 +123,6 @@ var Imgur = {
             // var newImg = canvas.toDataURL().split(',')[1];
         }
         $.ajax({
-          // url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
           url: "https://api.imgur.com/3/image",
           type: 'POST',
           data: {
