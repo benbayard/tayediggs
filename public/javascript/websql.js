@@ -317,7 +317,7 @@ var websql = {
   * result; // => ["foo"]
   * ------------------------------------
   */
-  getAnonymousImageURL: function(urlArray, success=function()) {
+  getAnonymousImageURL: function(urlArray, success) {
     var that = this;
     that.db.transaction(function(tx) {
       tx.executeSql('SELECT value FROM map WHERE key = "anonymousImageURL"', [], function(tx, results) {
