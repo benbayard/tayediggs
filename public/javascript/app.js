@@ -112,6 +112,10 @@ $(function() {
       Globals.imgurCreds.token_type = this.getQueryVariable("token_type");
       Globals.imgurCreds.refresh_token = this.getQueryVariable("refresh_token");
       Globals.imgurCreds.account_username = this.getQueryVariable("account_username");
+
+      websql.setUsername(Globals.imgurCreds.account_username);
+      Imgur.currentUser = Globals.imgurCreds.account_username;
+
       console.log(Globals.imgurCreds);
 
       Imgur.findAlbum(function() {

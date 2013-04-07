@@ -3,6 +3,7 @@ var Imgur = {
   responseType: "token",
   currentAlbum: {},
   accessToken: "",
+  currentUser: "",
   setup: function() {
     //set up imgur stuff
     var input = document.getElementById('picture');
@@ -84,7 +85,7 @@ var Imgur = {
   },
   fetchAlbums: function(success) {
     $.ajax({
-      url: "https://api.imgur.com/3/account/benbayard/albums/ids",
+      url: "https://api.imgur.com/3/account/" + Imgur.currentUser + "/albums/ids",
       type: 'GET',
       data: {
         key: Imgur.clientId
