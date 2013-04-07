@@ -20,25 +20,6 @@ var websql = {
       });
     });
   },
-  getAlbums: function(albums) {
-    var that = this;
-    if (typeof(albums) !== "undefined" && typeof(albums) === "object") {
-      that.db.transaction(function(tx) {
-        tx.executeSql('SELECT albumId FROM albums', [], function(tx, results) {
-          console.log("websql: getAlbums() success");
-          console.log(albums);
-          for (var i = 0; i < results.rows.length; i++) {
-            albums[i] = results.rows.item(i).albumId;
-          }
-          console.log(albums);
-        }, function(tx) {
-          console.log("websql: getAlbums() FAILURE");
-        });
-      });
-    } else {
-      console.error("websql: you called getAlbums() without passing in a valid argument! getAlbums() requires an array.");
-    }
-  },
   selectAlbum: function(albumId) {
     var that = this;
     that.db.transaction(function(tx) {
@@ -96,22 +77,38 @@ var websql = {
       console.error("websql: setAuthToken() - No currentAlbumId has been set.");
     }
   },
-  getAuthToken: function(token) {
+  getAlbums: function(albums) {
+    var that = this;
+    if (typeof(albums) !== "undefined" && typeof(albums) === "object") {
+      that.db.transaction(function(tx) {
+        tx.executeSql('SELECT albumId FROM albums', [], function(tx, results) {
+          console.log("websql: getAlbums() success");
+          console.log(albums);
+          for (var i = 0; i < results.rows.length; i++) {
+            albums[i] = results.rows.item(i).albumId;
+          }
+          console.log(albums);
+        }, function(tx) {
+          console.log("websql: getAlbums() FAILURE");
+        });
+      });
+    } else {
+      console.error("websql: you called getAlbums() without passing in a valid argument! getAlbums() requires an array.");
+    }
+  },
+  getAuthToken: function(tokenArray) {
     var that = this;
     if (that.currentAlbumId.length > 0) {
       that.db.transaction(function(tx) {
         tx.executeSql('SELECT authToken FROM albums WHERE albumId = "' + that.currentAlbumId + '"', [], function(tx, results) {
           console.log("websql: getAuthToken() success");
-          var authTokens = []
           for (var i = 0; i < results.rows.length; i++) {
-            authTokens[i] = results.rows.item(i).authToken;
+            tokenArray[i] = results.rows.item(i).authToken;
           }
-          if (authTokens.length > 0) {
-            console.log(authTokens);
-            token = authTokens[0]; //There should only be one result
-            console.log("websql: getAuthToken() - Found authToken " + token + " for albumId " + that.currentAlbumId);
+          if (tokenArray.length > 0) {
+            console.log("websql: getAuthToken() - Found authToken " + tokenArray[0] + " for albumId " + that.currentAlbumId);
           } else {
-            console.error("websql: getAuthToken() - No authTokens were found!")
+            console.error("websql: getAuthToken() - No authTokens were found!");
           }
         }, function(tx) {
           console.log("websql: getAuthToken() FAILURE");
