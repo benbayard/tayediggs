@@ -137,16 +137,17 @@ var Imgur = {
           Authorization: "Bearer " + Imgur.accessToken
         },
         dataType: 'json'
-      }).success(function(data) {
+        }).success(function(data) {
           console.log(data);
           return data.data;
           // w.location.href = data['upload']['links']['imgur_page'];
-      }).error(function() {
+        }).error(function() {
           alert('Could not reach api.imgur.com. Sorry :(');
-      });
+        });
 
-      // console.log(document.getElementById('canvas').height);
-      console.log('the image is drawn');
+        // console.log(document.getElementById('canvas').height);
+        console.log('the image is drawn');
+      }
     });
   },
   fetchAlbums: function(success) {
