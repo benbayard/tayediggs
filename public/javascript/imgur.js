@@ -53,7 +53,7 @@ var Imgur = {
       alert('Could not reach api.imgur.com. Sorry :(');
     });
   },
-  addImageToAlbumFromCanvas: function(albumId) {
+  addImageToAlbumFromCanvas: function(title, description) {
     //Get the canvas image.
     try {
         var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
@@ -68,9 +68,9 @@ var Imgur = {
           type: 'base64',
           // get your key here, quick and fast http://imgur.com/register/api_anon
           key: Imgur.clientId,
-          name: 'neon.jpg',
-          title: 'test title',
-          caption: 'test caption',
+          name: title + '.jpg',
+          title: title,
+          caption: description,
           image: img
       },
       headers: {
