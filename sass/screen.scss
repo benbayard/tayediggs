@@ -142,7 +142,7 @@ a {
     @include background-image(linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)));
     -webkit-transition-property: -webkit-transform;
     -webkit-transition-duration: .4s;
-    -webkit-transform: translateY(250px);
+    -webkit-transform: translateY(220px);
     &.animate {
       -webkit-transform: translateY(0px);
     }
