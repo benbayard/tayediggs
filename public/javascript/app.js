@@ -150,6 +150,9 @@ $(function() {
         var locations = new Locations();
         var fslocations = new FSLocations({collection: locations});
       });
+      $(".camera-pencil").on('click', function() {
+        
+      });
     }
   });
 

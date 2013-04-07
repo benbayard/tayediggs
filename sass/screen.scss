@@ -164,6 +164,19 @@ a {
       -webkit-transform: translateY(0px);
     }
   }
+  .camera-edit {
+    background-image: url('../images/pencil.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 27px 27px;
+    background-color: $grapefruit;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 47px;
+    width: 47px;
+    z-index: 10;
+  }
   .camera-caption {
     -webkit-appearance: none;
     box-sizing: border-box;
