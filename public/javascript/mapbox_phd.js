@@ -1,9 +1,4 @@
-function coordinates(latitude, longitude) {
-  this.lat = latitude;
-  this.lon = longitude;
-}
-
-var mapBox = {
+var MapboxPhd = {
   
   setup: function(lat, lon) {
     var map = mapbox.map('map');
@@ -44,8 +39,18 @@ var mapBox = {
   }
 }
 
+function geoSuccess(p) {
+  alert("Found you at latitude " + p.coords.latitude +
+        ", longitude " + p.coords.longitude);
+}
+
+function geoError() {
+  alert("Could not find you!");
+}
+
 $(document).ready(function() {
-  // test_coords = [latitude, longitude];
-  var test_coords = new coordinates(37.756144, -122.432568);
-  mapBox.setup(test_coords.lat, test_coords.lon);
+  
+  Coordinates.setCoordinates(MapboxPhd.setup);
+  
+  // MapboxPhd.setup(coordinates.lat, coordinates.lon);
 });
