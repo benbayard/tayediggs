@@ -93,7 +93,15 @@ $(function() {
 
         var tempData = coords + "*" + caption;
         // Save to WebSQL
-        Imgur.anonImg(tempData);
+        // Imgur.anonImg(tempData);
+        try {
+          var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+        } catch(e) {
+          var img = canvas.toDataURL().split(',')[1];
+        }
+        websql.setAnonymousImageURL(img);
+
+        Imgur.authorize();
 
         // Authenticate!
         // Imgur.share(caption, coords, function() {
