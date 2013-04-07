@@ -33,12 +33,16 @@
     <div id="wrapper">
       <div id="start-screen-controls">
         <div id="start-logo"></div>
-        <a id="start-gallery"></a>
       </div>
     </div>
     <!-- TEMPLATES -->
+    <script type="text/template" id="location-chrome">
+      <div class="location-nav">
+        <a class="location-back" />
+      </div>
+    </script>
     <script type="text/template" id="location-template">
-
+      <span class="location-name"><%= name %></span><span class="location-distance"><%= location.distance %> meters</span>
     </script>
     <script type="text/template" id="camera-details-template">
       <div class="camera-details-view">

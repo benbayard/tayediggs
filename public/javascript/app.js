@@ -107,12 +107,12 @@ $(function() {
       }, 1500);
 
       // MAP DETAILS .camera-map
-      var map_node_selector = ".camera-map"
-      var map_node = $(map_node_selector)
+      var map_node_selector = ".camera-map";
+      var map_node = $(map_node_selector);
       MapboxPhd.setupMap(map_node_selector);
       Coordinates.setCoordinates(MapboxPhd.init, null);
       
-      $(map_node_selector).append("<input type='hidden' id='lat-long'>")
+      $(map_node_selector).append("<input type='hidden' id='lat-long'>");
       $("#lat-long").val(Coordinates.lat.toString() + "," + Coordinates.lon.toString());
 
       this.bind();
@@ -155,7 +155,7 @@ $(function() {
   var FSLocation = Backbone.View.extend({
     template: _.template($("#location-template").html()),
 
-    tagName: "article",
+    tagName: "a",
 
     className: "foursquare-location",
 
@@ -181,12 +181,15 @@ $(function() {
       var node = $("<div>");
       node.attr('class', 'location-list');
 
+      node.append($("#location-chrome").html());
+
       this.collection.models.forEach(function(item) {
         var itemView = new FSLocation({model: item});
         node.append(itemView.render());
       });
 
-      // this.$el.addClass("gallery-view"); // set wrapper visible
+      $("body").addClass("noscroll");
+      $("#wrapper").addClass("noscroll");
       $("#wrapper").after(node);
 
       this.bind();
@@ -194,9 +197,14 @@ $(function() {
 
     bind: function() {
       var that = this;
+
+      $(".foursquare-location").on('click', function() { that.close() });
+      $(".location-back").on('click', function() { that.close() });
     },
 
     close: function() {
+      $("body").removeClass("noscroll");
+      $("#wrapper").removeClass("noscroll");
       $(".location-list").remove();
     }
   });
@@ -348,8 +356,10 @@ $(function() {
         websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
           console.log(urlArray);
           Imgur.addImageToAlbumFromCanvas(urlArray[0], "", imageCookie, function() {
-            var photos = new Photos();
-            var gallery = new Gallery({collection: photos});
+            Imgur.findAlbum(function() {
+              var photos = new Photos();
+              var gallery = new Gallery({collection: photos});
+            })
           });
         });
       });
