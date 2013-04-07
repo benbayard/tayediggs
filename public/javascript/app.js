@@ -158,8 +158,8 @@ $(function() {
       console.log(Globals.imgurCreds);
 
       var tempArray = [];
-      Globals.tempPhoto = websql.getAnonymousImageURL(tempArray);
-      console.log(Globals.tempPhoto);
+      websql.getAnonymousImageURL(tempArray);
+      console.log(tempArray);
 
       Imgur.findAlbum(function() {
         var checkAlbums = [];
