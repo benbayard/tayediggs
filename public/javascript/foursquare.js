@@ -3,6 +3,11 @@ function venue(name, address) {
   this.address = address;
 }
 
+function coordinates(latitude, longitude) {
+  this.lat = latitude;
+  this.lon = longitude;
+}
+
 var Foursquare = {
   // Venue Response
   
@@ -12,17 +17,17 @@ var Foursquare = {
     
   },
   
-  setVenueResponse: function(coords) {
+  setVenueResponse: function(latitude, longitude) {
     var mattTempAccessToken = "XL5FDDKXVEM2PXJH2GJ2LG0J00M4I50FXB55RRZGHYMHNCU5";
     var oauthversion = "20130406";
     $.ajax({
-      url: "https://api.foursquare.com/v2/venues/search?ll=" + coords 
+      url: "https://api.foursquare.com/v2/venues/search?ll=" + latitude + "," + longitude
       + "&oauth_token=" + mattTempAccessToken 
       + "&v=" + oauthversion,
       type: "GET",
       dataType: 'json'
     }).success(function(data) {
-      console.log("https://api.foursquare.com/v2/venues/search?ll=" + coords 
+      console.log("https://api.foursquare.com/v2/venues/search?ll=" + latitude + "," + longitude
       + "&oauth_token=" + mattTempAccessToken 
       + "&v=" + oauthversion)
       Foursquare.venueResponse = data.response;
@@ -56,7 +61,8 @@ var Foursquare = {
 }
 
 $(document).ready(function() {
-  var test_coords = "51.505,-0.09";
-  Foursquare.setVenueResponse(test_coords);
-  Foursquare.getAddresses();
+  // test_coords = [latitude, longitude];
+  var test_coords = new coordinates(37.756144, -122.432568);
+  Foursquare.setVenueResponse(test_coords.lat, test_coords.lon);
+  Foursquare.getVenues();
 });
