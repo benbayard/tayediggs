@@ -188,8 +188,7 @@ var Imgur = {
     }).success(function(data) {
       console.log(data.data);
       websql.setAnonymousImageURL(data.data.id);
-      // Imgur.authorize();
-      w.location.href = data['upload']['links']['imgur_page'];
+
     }).error(function() {
       alert('Could not reach api.imgur.com. Sorry :(');
     });
