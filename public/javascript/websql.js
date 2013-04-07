@@ -1,16 +1,67 @@
 /*
- * The websql variable is already initialized for the entire document (see bottom of file).
- *
- * Usage:
- * ------
- * websql.createNewAlbum("foo", "bar");
- *
- * var result = []; // I strongly recommend instantiating a result array to store the return values of accessor functions.
- * websql.getUsername(result); // result: ["frou frou"]
- * 
- *
- * 
- */
+The websql variable is already initialized for the entire document (see bottom of file).
+
+========================================================================
+1. Begin by creating a new album.
+========================================================================
+You'll need the Imgur album's albumId and the authToken.
+Creating a new album also automatically selects it as the current album.
+
+Example:
+----------------
+> websql.createNewAlbum("albumId", "authToken");
+
+========================================================================
+2. Use session data.
+========================================================================
+When websql was instantiated, it automatically created
+placeholder key-value pairs for session metadata. You can access and store:
+
+  currentAlbumId - the currently selected album. You probably never need to know that you can switch to other albums.
+  username - the Imgur username of the current user
+  anonymousImageURL - the image URL of the initially-anonymous photograph taken from the phone's camera
+
+Setting and Getting the username:
+------------------------------------------------
+// I strongly recommend instantiating a result array to store the return values of accessor functions.
+// This is because Javascript callbacks can't return any values reliably.
+> var result = []; 
+
+> websql.setUsername("diklein");
+> websql.getUsername(result);
+> console.log(result);
+  ["diklein"]
+
+Setting and Getting the anonymousImageURL:
+------------------------------------------------
+> websql.setAnonymousImageURL("http://example.com");
+> websql.getAnonymousImageURL(result);
+> console.log(result);
+  ["http://example.com"]
+  
+Setting and Getting the currentAlbum:
+------------------------------------------------
+> websql.selectAlbum("my_pictures");
+> websql.getCurrentAlbum(result);
+> console.log(result);
+  ["my_pictures"]
+  
+NB. You should NEVER call websql.setCurrentAlbum()!!! Instead, use websql.selectAlbum()
+
+========================================================================
+3. Other useful functions
+========================================================================
+
+> websql.getAlbums(result); //populates a passed-in array with all available albumIds
+> console.log(result);
+  ["album1", "album2", "album3"]
+> websql.setAuthToken("abcdefg1234567");
+> websql.getAuthToken(result);
+> console.log(result);
+  ["abcdefg1234567"]
+
+
+*/
 var websql = {
   db: "",
   currentAlbumId: "",
