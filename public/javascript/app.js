@@ -17,6 +17,17 @@ $(function() {
     }
   });
 
+  // ***********
+  // COLLECTIONS
+
+  var Photos = Backbone.Collection.extend({
+    model: Photo,
+
+    initialize: function() {
+
+    }
+  });
+
   // *****
   // VIEWS
 
@@ -43,7 +54,7 @@ $(function() {
     }
   });
 
-  // View gallery of photos
+  // View gallery of photos (this is a collection view!)
   var Gallery = Backbone.View.extend({
     initialize: function() {
       // fetch photos
