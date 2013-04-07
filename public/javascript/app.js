@@ -176,9 +176,9 @@ $(function() {
       });
 
       // make sure you can't scroll the webapp
-      $("#wrapper").on('touchstart', function(e) { 
-        e.preventDefault(); 
-      });
+      // $("#wrapper").on('touchstart', function(e) { 
+      //   e.preventDefault(); 
+      // });
     }
   });
 
