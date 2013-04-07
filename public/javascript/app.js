@@ -7,6 +7,10 @@ $(function() {
 
   Globals.authenticated = false;
   Globals.logging = true;
+  Globals.hideStartScreen = function() {
+    $("#start-camera").addClass("hide");
+    $("#wrapper").attr('class', '');
+  }
 
   // ******
   // MODELS
@@ -34,16 +38,29 @@ $(function() {
   // Start camera API and control imgur uploading
   var Camera = Backbone.View.extend({
     initialize: function() {
-      console.log("--> initialized Camera");
-
-      $("#picture").click();
-    }
+      $("#picture").on('change', function() {
+        var details = new CameraDetails();
+        Globals.hideStartScreen();
+      });
+    },
   });
 
   // Edit new photo details
   var CameraDetails = Backbone.View.extend({
-    initialize: function() {
+    el: $("#wrapper"),
 
+    template: _.template($('#camera-details-template').html()),
+
+    initialize: function() {
+      this.render();
+    },
+
+    render: function() {
+      var node = $("<div>");
+
+      node.html(this.template());
+
+      this.$el.html(node);
     }
   });
 
@@ -178,9 +195,9 @@ $(function() {
       });
 
       // make sure you can't scroll the webapp
-      document.ontouchstart = function(e){ 
-        e.preventDefault(); 
-      }
+      // $("#wrapper").on('touchstart', function(e) { 
+      //   e.preventDefault(); 
+      // });
     }
   });
 
@@ -188,13 +205,6 @@ $(function() {
   // ROUTER
 
   var Router = Backbone.Router.extend({
-    routes: {
-      "": "index",
-      "photo/review": "reviewNewPhoto",
-      "photo/edit": "editNewPhoto",
-      "photo/caption": "captionNewPhoto",
-    },
-
     initialize: function() {
       // if there's a hash, then it's an Imgur callback
       if(window.location.hash !== "") {
@@ -205,13 +215,7 @@ $(function() {
 
       // TODO: check for prior authentication
 
-      console.log(Backbone.history.fragment);
-      console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
-    },
-
-    reviewNewPhoto: function() {
-      console.log("--> routed to reviewNewPhoto");
     }
   });
 

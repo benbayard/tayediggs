@@ -6,38 +6,29 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="viewport" content="user-scalable=0, initial-scale=1.0">
     <meta name="apple-mobile-web-app-title" content="Taye Diggs">
-    <link rel="apple-touch-icon" href="../images/elephotoAppIcon.png" />
     <link rel="stylesheet" href="stylesheets/screen.css" />
+    <link rel="stylesheet" href="stylesheets/aviary.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="javascript/imgur.js"></script>
     <script src="javascript/underscore.js"></script>
     <script src="javascript/backbone.js"></script>
     <script src="javascript/websql.js"></script>
     <script src="javascript/app.js"></script>
+		<script src="http://feather.aviary.com/js/feather.js"></script>
+		<script src="javascript/aviary.js"></script>
   </head>
   <body>
-    <canvas id="canvas"></canvas>
-    <label id="start-camera">
-      <input id="picture" type="file" name="file" capture="camera" />
-    </label>
-    <div id="wrapper">
+   <input id="picture" type="file" capture="camera" />
+
+   
+ <!--    <div id="wrapper">
       <div id="start-screen-controls">
         <div id="start-logo"></div>
-        <a id="start-auth">Continue</a>
+        <a id="start-auth"></a>
       </div>
-    </div>
+    </div> -->
 
     <!-- TEMPLATES -->
-    <script type="text/template" id="camera-details-template">
-      <div class="camera-details-view">
-        <img src="" alt="" />
-        <div class="camera-overlay">
-          <textarea class="camera-description"></textarea>
-          <div class="camera-map"></div>
-          <a class="camera-submit"></a>
-        </div>
-      </div>
-    </script>
     <script type="text/template" id="photo-template">
       <div class="photo-view">
         <img src="" alt="" />
@@ -58,5 +49,8 @@
         </div>
       </div>
     </script>
+		<!-- <img id="tayetaye" src="http://ia.media-imdb.com/images/M/MV5BMTQ0MjQwOTQzNV5BMl5BanBnXkFtZTYwMzE5Njc4._V1._SX214_CR0,0,214,314_.jpg"> -->
+		<img id="tayetaye" src="http://imgur.com/uw5KVt2.jpg">
+		<a href="#" onclick="return launchEditor('tayetaye','http://imgur.com/uw5KVt2.jpg');" style='color:black;'>Edit!</a>
   </body>
 </html>

@@ -63,7 +63,7 @@ When you try to deploy by pushing to Github, you might run into an error that wi
 This is most likely because you have multiple Heroku accounts and your computer doesn't know which ssh-key to use to authenticate
 with Heroku, and it's using the wrong one.
 
-To fix this, open your computer's SSH config with a text editor (following example using TextMate):
+To fix this, open your computer's SSH config with a text editor (following example using TextMate): 
 
     $ mate ~/.ssh/config
 
