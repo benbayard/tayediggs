@@ -3,7 +3,6 @@ var Imgur = {
   responseType: "token",
   currentAlbum: {},
   accessToken: "",
-  benTempAccessToken: "26ec92f50f44ed9d9c6d82200085025902fa0441",
   setup: function() {
     //set up imgur stuff
     var input = document.getElementById('picture');
@@ -17,7 +16,6 @@ var Imgur = {
 
   },
   setAccessToken: function(token) {
-    websql.setAuthToken(token);
     this.accessToken = token;
   },
   authorize: function() {
@@ -40,7 +38,7 @@ var Imgur = {
         key: Imgur.clientId
       },
       headers: {
-        Authorization: "Bearer " + Imgur.benTempAccessToken
+        Authorization: "Bearer " + Imgur.accessToken
       },
     dataType: 'json'
     }).success(function(data) {
@@ -74,7 +72,7 @@ var Imgur = {
           image: img
       },
       headers: {
-        Authorization: "Bearer " + Imgur.benTempAccessToken
+        Authorization: "Bearer " + Imgur.accessToken
       },
       dataType: 'json'
     }).success(function(data) {
@@ -102,7 +100,7 @@ var Imgur = {
         key: Imgur.clientId
       },
       headers: {
-        Authorization: "Bearer " + Imgur.benTempAccessToken
+        Authorization: "Bearer " + Imgur.accessToken
       },
     dataType: 'json'
     }).success(function(data) {
@@ -130,7 +128,7 @@ var Imgur = {
             description: 'test caption',
         },
         headers: {
-          Authorization: "Bearer " + Imgur.benTempAccessToken
+          Authorization: "Bearer " + Imgur.accessToken
         },
         dataType: 'json'
     }).success(function(data) {
@@ -198,7 +196,7 @@ var Imgur = {
             image: img
         },
         headers: {
-          Authorization: "Bearer " + Imgur.benTempAccessToken
+          Authorization: "Bearer " + Imgur.accessToken
         },
         dataType: 'json'
     }).success(function(data) {
