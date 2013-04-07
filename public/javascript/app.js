@@ -27,7 +27,6 @@ $(function() {
 
   var Venue = Backbone.Model.extend({
     initialize: function() {
-      console.log(this.attributes);
     }
   });
 
@@ -63,9 +62,11 @@ $(function() {
     fetch: function() {
       console.log("setting location collection");
 
-      this.set(Foursquare.venueResponse);
+      this.set(Foursquare.venueResponse.venues);
 
       console.log(this);
+
+      this.view.addAll();
     }
   });
 
@@ -145,7 +146,7 @@ $(function() {
       });
       $(".camera-foursquare").on('click', function() {
         var locations = new Locations();
-        locations.fetch();
+        var fslocations = new FSLocations({collection: locations});
       });
     }
   });
@@ -159,6 +160,8 @@ $(function() {
     className: "foursquare-location",
 
     render: function() {
+      console.log("add FSLocation view");
+
       this.$el.html(this.template(this.model.attributes));
       this.$el.attr('id', this.model.get('id'));
       return this.$el;
@@ -167,36 +170,34 @@ $(function() {
 
   var FSLocations = Backbone.View.extend({
     initialize: function() {
-      // fetch locations
+      // fetch venues
       this.collection.view = this;
       this.collection.fetch();
     },
 
     addAll: function() {
+      console.log("FSLocations view add venues");
+
       var node = $("<div>");
+      node.attr('class', 'location-list');
 
       this.collection.models.forEach(function(item) {
         var itemView = new FSLocation({model: item});
         node.append(itemView.render());
       });
 
-      console.log(this.$el);
-
-      this.$el.html(node);
+      // this.$el.addClass("gallery-view"); // set wrapper visible
+      $("#wrapper").after(node);
 
       this.bind();
     },
 
     bind: function() {
       var that = this;
+    },
 
-      // $(".photo-stub-view").on('click', function() {
-      //   var photoId = $(this).attr('id');
-      //   var model = that.collection.where({id: photoId});
-      //   console.log(model);
-
-      //   var photoView = new PhotoView({model: model});
-      // });
+    close: function() {
+      $(".location-list").remove();
     }
   });
 
@@ -335,6 +336,8 @@ $(function() {
       Imgur.currentUser = Globals.imgurCreds.account_username;
       Imgur.accessToken = Globals.imgurCreds.access_token;
 
+      var imageCookie = $.cookie("image_title");
+
       console.log(Globals.imgurCreds)
       Imgur.findAlbum(function() {
         var checkAlbums = [];
@@ -344,7 +347,7 @@ $(function() {
         }
         websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
           console.log(urlArray);
-          Imgur.addImageToAlbumFromCanvas(urlArray[0], "", $.cookie("image_title"), function() {
+          Imgur.addImageToAlbumFromCanvas(urlArray[0], "", imageCookie, function() {
             var photos = new Photos();
             var gallery = new Gallery({collection: photos});
           });
