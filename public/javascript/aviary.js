@@ -13,10 +13,17 @@ var featherEditor = new Aviary.Feather({
 
 function launchEditor(id, src) {
   window.scrollTo(0,1);
+  if (!src) {
+    featherEditor.launch({
+      image: id
+        });
+    
+  } else {
   featherEditor.launch({
     image: id,
     url: src
   });
+  }
   return false;
 }
 

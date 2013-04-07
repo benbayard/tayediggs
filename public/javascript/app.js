@@ -151,8 +151,15 @@ $(function() {
         var fslocations = new FSLocations({collection: locations});
       });
       $(".camera-edit").on('click', function() {
-        var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
-        launchEditor("canvas", img);
+        //var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+          var dataUrl = canvas.toDataURL();
+/*
+        featherEditor.getImagerData(function(data){
+          //data
+        })*/
+        debugger;
+        document.getElementById('test').src = dataUrl;
+        launchEditor("test", null);
       });
     }
   });
