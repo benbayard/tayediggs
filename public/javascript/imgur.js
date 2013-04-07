@@ -123,7 +123,8 @@ var Imgur = {
             // var newImg = canvas.toDataURL().split(',')[1];
         }
         $.ajax({
-          url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
+          // url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
+          url: "https://api.imgur.com/3/image",
           type: 'POST',
           data: {
               type: 'base64',
@@ -140,6 +141,21 @@ var Imgur = {
           dataType: 'json'
         }).success(function(data) {
             console.log(data);
+            var the_id = data.data.id;
+            $.ajax({
+              url: "https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add",
+              type: "POST",
+              data: {
+                key: Imgur.clientId,
+                ids: [the_id]
+              },
+              headers: {
+                Authorization: "Bearer " + Imgur.accessToken
+              },
+              dataType: 'json'
+            }).success(function(data) {
+              console.log(data);
+            });
             return data.data;
             // w.location.href = data['upload']['links']['imgur_page'];
         }).error(function() {
