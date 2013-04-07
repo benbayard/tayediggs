@@ -118,20 +118,21 @@ a {
     box-sizing: border-box;
     @include background-image(linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)));
   }
-  .camera-description {
+  .camera-caption {
     -webkit-appearance: none;
     box-sizing: border-box;
+    @include border-radius(0);
     background-color: #fff;
     border: 0;
     width: 100%;
     font-size: 14px;
     line-height: 26px;
-    height: 60px;
+    height: 30px;
     margin-bottom: 2px;
   }
   .camera-map {
     background-color: #999;
-    height: 120px;
+    height: 150px;
     width: 100%;
     margin-bottom: 5px;
   }

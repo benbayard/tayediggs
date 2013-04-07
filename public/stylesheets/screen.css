@@ -188,25 +188,30 @@ a:visited {
   background-image: linear-gradient(top, rgba(0, 0, 0, 0.5), #000000);
 }
 /* line 121, ../../sass/screen.scss */
-.camera-details-view .camera-description {
+.camera-details-view .camera-caption {
   -webkit-appearance: none;
   box-sizing: border-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
   background-color: #fff;
   border: 0;
   width: 100%;
   font-size: 14px;
   line-height: 26px;
-  height: 60px;
+  height: 30px;
   margin-bottom: 2px;
 }
-/* line 132, ../../sass/screen.scss */
+/* line 133, ../../sass/screen.scss */
 .camera-details-view .camera-map {
   background-color: #999;
-  height: 120px;
+  height: 150px;
   width: 100%;
   margin-bottom: 5px;
 }
-/* line 138, ../../sass/screen.scss */
+/* line 139, ../../sass/screen.scss */
 .camera-details-view .camera-submit {
   display: block;
   width: 100%;
