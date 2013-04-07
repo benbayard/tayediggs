@@ -130,7 +130,22 @@ $(function() {
       node.attr('style', 'background-image: url("' + photoBg + '")');
 
       $("body").addClass("noscroll");
+      $("#wrapper").addClass("noscroll");
       $("#wrapper").after(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      var that = this;
+
+      $(".photo-back").on('click', that.close);
+    },
+
+    close: function() {
+      $("body").removeClass("noscroll");
+      $("#wrapper").removeClass("noscroll");
+      $(".photo-view").remove();
     }
   });
 
