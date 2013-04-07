@@ -323,14 +323,19 @@ a:visited {
 /* line 242, ../../sass/screen.scss */
 .photo-stub-view img {
   max-width: 100%;
+  min-width: 100%;
+}
+/* line 246, ../../sass/screen.scss */
+.photo-stub-view:last-of-type {
+  margin-bottom: 10px;
 }
 
-/* line 247, ../../sass/screen.scss */
+/* line 251, ../../sass/screen.scss */
 .location-list {
   z-index: 1001;
   background-color: #2B312F;
 }
-/* line 251, ../../sass/screen.scss */
+/* line 255, ../../sass/screen.scss */
 .location-list .location-nav {
   height: 45px;
   position: absolute;
@@ -338,7 +343,7 @@ a:visited {
   border-box: box-sizing;
   background-color: #fb6363;
 }
-/* line 258, ../../sass/screen.scss */
+/* line 262, ../../sass/screen.scss */
 .location-list .location-back {
   width: 45px;
   height: 45px;
@@ -348,7 +353,7 @@ a:visited {
   background-position: 13px 13px;
   float: left;
 }
-/* line 267, ../../sass/screen.scss */
+/* line 271, ../../sass/screen.scss */
 .location-list .location-powered {
   width: 208px;
   height: 45px;
@@ -359,7 +364,7 @@ a:visited {
   background-image: url("../images/powered.png");
   float: right;
 }
-/* line 277, ../../sass/screen.scss */
+/* line 281, ../../sass/screen.scss */
 .location-list .foursquare-location {
   display: block;
   background-color: #fff;
@@ -368,22 +373,22 @@ a:visited {
   font-size: 12px;
   color: #222;
 }
-/* line 284, ../../sass/screen.scss */
+/* line 288, ../../sass/screen.scss */
 .location-list .foursquare-location:first-of-type {
   margin-top: 55px;
 }
-/* line 287, ../../sass/screen.scss */
+/* line 291, ../../sass/screen.scss */
 .location-list .foursquare-location:active {
   background-color: #baf0fc;
 }
-/* line 290, ../../sass/screen.scss */
+/* line 294, ../../sass/screen.scss */
 .location-list .foursquare-location .location-distance {
   display: inline-block;
   float: right;
   color: #999;
 }
 
-/* line 298, ../../sass/screen.scss */
+/* line 302, ../../sass/screen.scss */
 .photo-view {
   z-index: 1001;
   background-color: #000;
@@ -391,7 +396,7 @@ a:visited {
   background-size: cover;
   background-position: center 45px;
 }
-/* line 305, ../../sass/screen.scss */
+/* line 309, ../../sass/screen.scss */
 .photo-view .photo-nav {
   height: 45px;
   position: absolute;
@@ -399,27 +404,27 @@ a:visited {
   border-box: box-sizing;
   background-color: #fb6363;
 }
-/* line 312, ../../sass/screen.scss */
+/* line 316, ../../sass/screen.scss */
 .photo-view .photo-back, .photo-view .photo-pin {
   width: 45px;
   height: 45px;
   background-repeat: no-repeat;
 }
-/* line 317, ../../sass/screen.scss */
+/* line 321, ../../sass/screen.scss */
 .photo-view .photo-back {
   background-image: url("../images/arrow.png");
   background-size: 19px 19px;
   background-position: 13px 13px;
   float: left;
 }
-/* line 323, ../../sass/screen.scss */
+/* line 327, ../../sass/screen.scss */
 .photo-view .photo-pin {
   background-image: url("../images/pin.png");
   background-size: 15px 24px;
   background-position: 15px 10px;
   float: right;
 }
-/* line 329, ../../sass/screen.scss */
+/* line 333, ../../sass/screen.scss */
 .photo-view .photo-description {
   position: absolute;
   top: 45px;
