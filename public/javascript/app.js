@@ -6,6 +6,7 @@ $(function() {
   var Globals = {};
 
   Globals.authenticated = false;
+  Globals.imgurResponse = false;
   Globals.logging = true;
 
   Globals.tempPhoto = [];
@@ -300,11 +301,13 @@ $(function() {
       // TODO: fetch and add scrolling maps?
       // (or we might just use static images)
 
-      if (Globals.authenticated === false) {
+      if (Globals.imgurResponse === false) {
         $("#wrapper").attr("class", "start-screen");
 
         this.bind();
       }
+
+      $("body").addClass('noscroll');
 
       // MAP VIEW
     },
@@ -317,11 +320,6 @@ $(function() {
         var photos = new Photos();
         var gallery = new Gallery({collection: photos});
       });
-
-      // make sure you can't scroll the webapp
-      // $("#wrapper").on('touchstart', function(e) { 
-      //   e.preventDefault(); 
-      // });
     }
   });
 
@@ -330,16 +328,28 @@ $(function() {
 
   var Router = Backbone.Router.extend({
     initialize: function() {
-      // if there's a hash, then it's an Imgur callback
-      if(window.location.hash !== "") {
-        $("body").addClass("gallery-view");
+      websql.getUsername(function(un) {
+        console.log(un);
+        if(un.length > 0) {
+          console.log("There is a Username in the DB");
+          Globals.authenticated = true;
+        }
 
-        Globals.authenticated = true;
-        var auth = new Authenticate();
-        auth.catchToken();
-      }
+        // if there's a hash, then it's an Imgur callback
+        if(window.location.hash !== "") {
+          $("body").addClass("gallery-view");
 
-      // TODO: check for prior authentication
+          Globals.authenticated = true;
+          Globals.imgurResponse = true;
+          var auth = new Authenticate();
+          auth.catchToken();
+        }
+      }, function(un) {
+        console.log("can't even get websql connecting");
+      });
+
+      console.log("authenticated: " + Globals.authenticated);
+      console.log("imgur response: " + Globals.imgurResponse);
 
       var appView = new AppView();
     }

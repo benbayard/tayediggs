@@ -67,6 +67,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+/* line 12, ../../sass/screen.scss */
+#canvas {
+  width: 100%;
+}
+
 /* line 16, ../../sass/screen.scss */
 .fullscreen, #wrapper, .camera-details-view, .photo-view {
   position: absolute;
@@ -85,7 +90,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body {
   width: 100%;
   height: 100%;
-  background-color: #fd996b;
+  background-color: #444;
   font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
 }
 /* line 35, ../../sass/screen.scss */
