@@ -276,6 +276,7 @@ var Coordinates = {
   
   // This callback expects two arguments, latitude and longitude
   setCoordinates: function(callback, callback_of_callback) {
+    console.log("setCoordinates called")
     if (geoPosition.init()) {
       geoPosition.getCurrentPosition(function(data) {
         Coordinates.lat = data.coords.latitude;
@@ -284,7 +285,7 @@ var Coordinates = {
         if (callback != null & callback_of_callback != null) {
           callback({lat: Coordinates.lat, lon: Coordinates.lon}, callback_of_callback);
         } else if (callback != null) {
-          callback({lat: Coordinates.lat, lon: Coordinates.lon});
+          callback({lat: Coordinates.lat, lon: Coordinates.lon}, null);
         }
       }, Coordinates.geoError);
     }
