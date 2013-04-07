@@ -32,7 +32,7 @@ $(function() {
     model: Photo,
 
     initialize: function() {
-
+      
     },
 
     fetch: function() {
@@ -83,6 +83,10 @@ $(function() {
       }, 1500);
 
       // MAP DETAILS .camera-map
+      var map_node_selector = ".camera-map"
+      var map_node = $(map_node_selector)
+      MapboxPhd.setupMap(map_node_selector);
+      Coordinates.setCoordinates(MapboxPhd.init, null);
 
       this.bind();
     },

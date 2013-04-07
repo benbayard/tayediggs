@@ -160,10 +160,16 @@ a {
     margin-bottom: 2px;
   }
   .camera-map {
-    background-color: #999;
     height: 150px;
     width: 100%;
     margin-bottom: 5px;
+    position: relative;
+    #map {
+      width:100%;
+      position:absolute;
+      top:0;
+      bottom:0;
+    }
   }
   .camera-submit {
     display: block;
