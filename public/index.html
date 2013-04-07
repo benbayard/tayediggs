@@ -11,16 +11,40 @@
     <script src="javascript/imgur.js"></script>
     <script src="javascript/underscore.js"></script>
     <script src="javascript/backbone.js"></script>
+    <script src="javascript/websql.js"></script>
     <script src="javascript/app.js"></script>
   </head>
   <body>
+   <input id="picture" type="file" capture="camera" />
     <canvas id="canvas"></canvas>
-    <input id="picture" type="file" />
-    <div id="wrapper">
+   
+ <!--    <div id="wrapper">
       <div id="start-screen-controls">
-        <a id="start-camera">Take Picture</a>
-        <a id="start-auth">Authenticate</a>
+        <div id="start-logo"></div>
+        <a id="start-auth"></a>
       </div>
-    </div>
+    </div> -->
+
+    <!-- TEMPLATES -->
+    <script type="text/template" id="photo-template">
+      <div class="photo-view">
+        <img src="" alt="" />
+        <div class="photo-description">
+        </div>
+        <div class="photo-address">
+        </div>
+        <div class="photo-fs-location">
+        </div>
+        <div class="photo-map">
+        </div>
+      </div>
+    </script>
+    <script type="text/template" id="photo-stub-template">
+      <div class="photo-stub-view">
+        <img src="" alt="" />
+        <div class="photo-description">
+        </div>
+      </div>
+    </script>
   </body>
 </html>

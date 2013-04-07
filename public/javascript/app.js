@@ -5,7 +5,7 @@ $(function() {
 
   var Globals = {};
 
-  Globals.authenticated = true;
+  Globals.authenticated = false;
   Globals.logging = true;
 
   // ******
@@ -17,6 +17,17 @@ $(function() {
     }
   });
 
+  // ***********
+  // COLLECTIONS
+
+  var Photos = Backbone.Collection.extend({
+    model: Photo,
+
+    initialize: function() {
+
+    }
+  });
+
   // *****
   // VIEWS
 
@@ -24,8 +35,6 @@ $(function() {
   var Camera = Backbone.View.extend({
     initialize: function() {
       console.log("--> initialized Camera");
-
-      $("#picture").click();
     }
   });
 
@@ -38,13 +47,26 @@ $(function() {
 
   // View single photo details + share?
   var PhotoView = Backbone.View.extend({
-    initiailize: function() {
+    template: _.template($('#photo-template').html()),
+
+    initialize: function() {
       
     }
   });
 
-  // View gallery of photos
+  // View single photo stub within gallery
+  var PhotoStubView = Backbone.View.extend({
+    template: _.template($('#photo-stub-template').html()),
+
+    intitialize: function() {
+
+    }
+  });
+
+  // View gallery of photos (this is a collection view!)
   var Gallery = Backbone.View.extend({
+    el: $("wrapper"),
+
     initialize: function() {
       // fetch photos
     }
@@ -81,12 +103,30 @@ $(function() {
     catchToken: function() {
       console.log("--> catching token in Authenticate");
       Globals.imgurCreds = {};
+
+      // store all of the things (where things are imgur creds)
       Globals.imgurCreds.access_token = this.getQueryVariable("access_token");
       Globals.imgurCreds.expires_in = this.getQueryVariable("expires_in");
       Globals.imgurCreds.token_type = this.getQueryVariable("token_type");
       Globals.imgurCreds.refresh_token = this.getQueryVariable("refresh_token");
       Globals.imgurCreds.account_username = this.getQueryVariable("account_username");
+
+      websql.setUsername(Globals.imgurCreds.account_username);
+      Imgur.currentUser = Globals.imgurCreds.account_username;
+      Imgur.accessToken = Globals.imgurCreds.access_token;
+
       console.log(Globals.imgurCreds);
+
+      Imgur.findAlbum(function() {
+        var checkAlbums = [];
+        websql.getAlbums(checkAlbums);
+        if (checkAlbums.length === 0) {
+          websql.createNewAlbum("elephoto", Globals.imgurCreds.access_token);
+        }
+        websql.selectAlbum("elephoto");
+
+        Imgur.setAccessToken(Globals.imgurCreds.access_token);
+      });
     },
 
     getQueryVariable: function(variable) {
@@ -119,11 +159,11 @@ $(function() {
       // TODO: fetch and add scrolling maps?
       // (or we might just use static images)
 
-      // if (Globals.authenticated === false) {
+      if (Globals.authenticated === false) {
         $("#wrapper").attr("class", "start-screen");
 
         this.bind();
-      // }
+      }
     },
 
     bind: function() {
@@ -154,16 +194,18 @@ $(function() {
     },
 
     initialize: function() {
-      // TODO: check if we're authenticated
+      // if there's a hash, then it's an Imgur callback
+      if(window.location.hash !== "") {
+        Globals.authenticated = true;
+        var auth = new Authenticate();
+        auth.catchToken();
+      }
+
+      // TODO: check for prior authentication
 
       console.log(Backbone.history.fragment);
       console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
-
-      if(window.location.hash !== "") {
-        var auth = new Authenticate();
-        auth.catchToken();
-      }
     },
 
     reviewNewPhoto: function() {

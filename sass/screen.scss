@@ -9,14 +9,14 @@ $tangerine: #FD996B;
 $grapefruit: #FB6363;
 
 #canvas, #picture {
-  display: none;
+  // display: none;
 }
 
 body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: $tangerine;
+  // width: 100%;
+  // height: 100%;
+  // overflow: hidden;
+  // background-color: $tangerine;
 
   font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
 }
@@ -45,19 +45,25 @@ a {
       display: none;
     }
   }
-  
+
   &.start-screen {
     background-image: url('../images/dummy_map.png');
   }
 }
 
 #start-screen-controls {
-  position: absolute;
-  top: 50%;
-  margin-top: -100px;
+  #start-logo {
+    background-image: url('../images/logo.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 279px;
+    height: 62px;
+    margin-top: 3px;
+    margin-left: -140px;
+  }
 
-  width: 100%;
-  height: 200px;
-
-  background-color: transparentize($tangerine, 0.25);
 }
