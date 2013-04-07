@@ -68,6 +68,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 15, ../../sass/screen.scss */
+#canvas {
+  width: 100%;
+  height: auto;
+}
+
+/* line 20, ../../sass/screen.scss */
 body {
   width: 100%;
   height: 100%;
@@ -76,22 +82,22 @@ body {
   font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
 }
 
-/* line 24, ../../sass/screen.scss */
+/* line 29, ../../sass/screen.scss */
 a {
   color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
 }
-/* line 27, ../../sass/screen.scss */
+/* line 32, ../../sass/screen.scss */
 a:hover {
   color: #fff8f8;
 }
-/* line 30, ../../sass/screen.scss */
+/* line 35, ../../sass/screen.scss */
 a:visited {
   color: #fff8f8;
   text-decoration: underline;
 }
 
-/* line 36, ../../sass/screen.scss */
+/* line 41, ../../sass/screen.scss */
 #start-camera {
   display: block;
   background-image: url("../images/cameraLarge.png");
@@ -106,12 +112,12 @@ a:visited {
   height: 68px;
   z-index: 999;
 }
-/* line 49, ../../sass/screen.scss */
+/* line 54, ../../sass/screen.scss */
 #start-camera.hide {
   display: none;
 }
 
-/* line 53, ../../sass/screen.scss */
+/* line 58, ../../sass/screen.scss */
 #picture {
   display: block;
   position: absolute;
@@ -122,12 +128,12 @@ a:visited {
   opacity: 0;
   z-index: 1000;
 }
-/* line 62, ../../sass/screen.scss */
+/* line 67, ../../sass/screen.scss */
 #picture.hide {
   display: none;
 }
 
-/* line 67, ../../sass/screen.scss */
+/* line 72, ../../sass/screen.scss */
 #wrapper {
   position: absolute;
   top: 0;
@@ -135,16 +141,16 @@ a:visited {
   bottom: 0;
   left: 0;
 }
-/* line 75, ../../sass/screen.scss */
+/* line 80, ../../sass/screen.scss */
 #wrapper:not([class]) > * {
   display: none;
 }
-/* line 80, ../../sass/screen.scss */
+/* line 85, ../../sass/screen.scss */
 #wrapper.start-screen {
   background-image: url("../images/dummy_map.png");
 }
 
-/* line 86, ../../sass/screen.scss */
+/* line 91, ../../sass/screen.scss */
 #start-screen-controls #start-logo {
   background-image: url("../images/logo.png");
   background-repeat: no-repeat;
@@ -157,4 +163,62 @@ a:visited {
   height: 62px;
   margin-top: -68px;
   margin-left: -140px;
+}
+
+/* line 106, ../../sass/screen.scss */
+.camera-details-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+/* line 112, ../../sass/screen.scss */
+.camera-details-view .camera-overlay {
+  position: absolute;
+  bottom: 0px;
+  height: 250px;
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.5)), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), #000000);
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), #000000);
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.5), #000000);
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0.5), #000000);
+}
+/* line 121, ../../sass/screen.scss */
+.camera-details-view .camera-caption {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  background-color: #fff;
+  border: 0;
+  width: 100%;
+  font-size: 14px;
+  line-height: 26px;
+  height: 30px;
+  margin-bottom: 2px;
+}
+/* line 133, ../../sass/screen.scss */
+.camera-details-view .camera-map {
+  background-color: #999;
+  height: 150px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+/* line 139, ../../sass/screen.scss */
+.camera-details-view .camera-submit {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 15px 0;
+  color: #fff;
+  background-color: #fb6363;
+  text-align: center;
 }
