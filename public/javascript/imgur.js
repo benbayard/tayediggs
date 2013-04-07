@@ -1,7 +1,9 @@
 var Imgur = {
   clientId: "7a2fd82ffa89750",
   responseType: "token",
-  benTempAccessToken: "450d514735127363b60d32edebc61ff9948337b1",
+  currentAlbum: {},
+  accessToken: "",
+  benTempAccessToken: "26ec92f50f44ed9d9c6d82200085025902fa0441",
   setup: function() {
     //set up imgur stuff
     var input = document.getElementById('picture');
@@ -13,6 +15,9 @@ var Imgur = {
             "client_id=" + this.clientId + "&" +
             "response_type=" + this.responseType
 
+  },
+  setAccessToken: function(token) {
+    this.accessToken = token;
   },
   authorize: function() {
     window.location = this.formImgurAuthUrl();
@@ -154,11 +159,12 @@ var Imgur = {
           }
           if (specs.id == albums[albums.length - 1]) {
             if (album.id) {
-              console.log("AN ALBUM EXISTS!")
-              return album;
+              console.log("AN ALBUM EXISTS!");
+              // return album;
+              that.currentAlbum = album;
             } else {
-              console.log("AN ALBUM DOES NOT EXIST")
-              return that.createAlbum(success);
+              console.log("AN ALBUM DOES NOT EXIST");
+              // return that.createAlbum(success);
             }
           }
         });
