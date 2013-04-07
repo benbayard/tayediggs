@@ -323,25 +323,25 @@ $(function() {
 
   var Router = Backbone.Router.extend({
     initialize: function() {
-      websql.getUsername(function(un) {
-        console.log(un);
-        if(un.length > 0) {
-          console.log("There is a Username in the DB");
-          Globals.authenticated = true;
-        }
+      // websql.getUsername(function(un) {
+      //   console.log(un);
+      //   if(un.length > 0) {
+      //     console.log("There is a Username in the DB");
+      //     Globals.authenticated = true;
+      //   }
 
-        // if there's a hash, then it's an Imgur callback
-        if(window.location.hash !== "") {
-          $("body").addClass("gallery-view");
+      // if there's a hash, then it's an Imgur callback
+      if(window.location.hash !== "") {
+        $("body").addClass("gallery-view");
 
-          Globals.authenticated = true;
-          Globals.imgurResponse = true;
-          var auth = new Authenticate();
-          auth.catchToken();
-        }
-      }, function(un) {
-        console.log("can't even get websql connecting");
-      });
+        Globals.authenticated = true;
+        Globals.imgurResponse = true;
+        var auth = new Authenticate();
+        auth.catchToken();
+      }
+      // }, function(un) {
+      //   console.log("can't even get websql connecting");
+      // });
 
       console.log("authenticated: " + Globals.authenticated);
       console.log("imgur response: " + Globals.imgurResponse);
