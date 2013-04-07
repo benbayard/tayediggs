@@ -176,9 +176,9 @@ $(function() {
       });
 
       // make sure you can't scroll the webapp
-      $("#wrapper").ontouchstart = function(e){ 
+      $("#wrapper").on('touchstart', function(e) { 
         e.preventDefault(); 
-      }
+      });
     }
   });
 
@@ -186,13 +186,6 @@ $(function() {
   // ROUTER
 
   var Router = Backbone.Router.extend({
-    routes: {
-      "": "index",
-      "photo/review": "reviewNewPhoto",
-      "photo/edit": "editNewPhoto",
-      "photo/caption": "captionNewPhoto",
-    },
-
     initialize: function() {
       // if there's a hash, then it's an Imgur callback
       if(window.location.hash !== "") {
@@ -203,13 +196,7 @@ $(function() {
 
       // TODO: check for prior authentication
 
-      console.log(Backbone.history.fragment);
-      console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
-    },
-
-    reviewNewPhoto: function() {
-      console.log("--> routed to reviewNewPhoto");
     }
   });
 
