@@ -35,14 +35,7 @@ $(function() {
     },
 
     fetch: function() {
-      // dummy data
-      var photos = [];
-      for(var i = 0; i < 8; i++) {
-        var photo = {};
-        photo.id = i;
-        photo.dummy_attribute = "yes";
-        this.add(photo);
-      }
+      console.log("setting collection");
 
       Imgur.findAlbum();
       this.set(Imgur.currentAlbum.images);
@@ -87,6 +80,8 @@ $(function() {
       setTimeout(function() {
         $(".camera-overlay").addClass('animate');
       }, 1500);
+
+      // MAP DETAILS .camera-map
 
       this.bind();
     },
@@ -210,11 +205,11 @@ $(function() {
 
         websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
           console.log(urlArray);
-          Imgur.addImageToAlbumFromCanvas(urlArray[0]);
+          Imgur.addImageToAlbumFromCanvas(urlArray[0], "", "", function() {
+            var photos = new Photos();
+            var gallery = new Gallery({collection: photos});
+          });
         });
-
-        var photos = new Photos();
-        var gallery = new Gallery({collection: photos});
       });
     },
 
@@ -253,6 +248,8 @@ $(function() {
 
         this.bind();
       }
+
+      // MAP VIEW
     },
 
     bind: function() {

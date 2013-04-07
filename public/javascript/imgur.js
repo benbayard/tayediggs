@@ -60,7 +60,7 @@ var Imgur = {
       alert('Could not reach api.imgur.com. Sorry :(');
     });
   },
-  addImageToAlbumFromCanvas: function(id, description, title) {
+  addImageToAlbumFromCanvas: function(id, description, title, success) {
     title = "BLAH DE BLAH";
     description = "THIS DESCRIBES ME";
     console.log(id);
@@ -83,6 +83,9 @@ var Imgur = {
     }).success(function(data) {
         console.log(data);
         var the_id = data.data.id;
+        if(success) {
+          success()
+        }
         return data.data;
         // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
