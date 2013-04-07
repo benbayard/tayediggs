@@ -44,6 +44,11 @@ $(function() {
         this.add(photo);
       }
 
+      Imgur.findAlbum();
+      this.set(Imgur.currentAlbum.images);
+
+      console.log(this);
+
       this.view.addAll();
     }
   });
@@ -124,10 +129,6 @@ $(function() {
   var PhotoStubView = Backbone.View.extend({
     template: _.template($('#photo-stub-template').html()),
 
-    intitialize: function() {
-      console.log(this.model);
-    },
-
     render: function() {
 
     }
@@ -147,6 +148,7 @@ $(function() {
       this.collection.models.forEach(function(item) {
         console.log("iterating?");
         var itemView = new PhotoStubView({model: item});
+        console.log(itemView);
       });
     }
   });
@@ -210,6 +212,9 @@ $(function() {
           console.log(urlArray);
           Imgur.addImageToAlbumFromCanvas(urlArray[0]);
         });
+
+        var photos = new Photos();
+        var gallery = new Gallery({collection: photos});
       });
     },
 
