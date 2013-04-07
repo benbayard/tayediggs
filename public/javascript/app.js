@@ -54,8 +54,17 @@ $(function() {
     }
   });
 
+  // View single photo stub within gallery
+  var PhotoStubView = Backbone.View.extend({
+    intitialize: function() {
+
+    }
+  });
+
   // View gallery of photos (this is a collection view!)
   var Gallery = Backbone.View.extend({
+    el: $("wrapper"),
+    
     initialize: function() {
       // fetch photos
     }
