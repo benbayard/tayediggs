@@ -1,3 +1,30 @@
+function TumblrAdapter() {
+  this.oauth_consumer_key = "m5ullCnVK24E87WPwaLRZz6jRJ8gd1T2wMaOpP2zlP2ofBodJw";
+  this.oauth_consumer_secret = "xrA3XIwrBg9tetaWaW1fBP3Ookmtf3rXVAZo8oIx5EAqPaOvJA";
+  this.requestToken = function(imageURL) {
+    var parent = this;
+    $.ajax({
+      type: 'GET',
+      url: "/oauth/request",
+      headers: {
+        Authorization: "OAuth oauth_consumer_key='"+parent.oauth_consumer_key+"', oauth_consumer_secret='"+parent.oauth_consumer_secret+"'"
+      },
+      data: {
+        image_url: imageURL
+      },
+      dataType: "json"
+    })
+    .done(function() {
+      console.log("requestToken success");
+    })
+    .fail(function() {
+      console.log("requestToken fail");
+    });
+  };
+}
+$(document).ready(function() {
+  ta = new TumblrAdapter();
+});
 /*
 Usage
 =====
