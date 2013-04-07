@@ -21,9 +21,10 @@ var Foursquare = {
     });
   }
   
-  
 }
+
 $(document).ready(function() {
   var test_coords = "51.505,-0.09"
+  Foursquare.setVenueResponse(test_coords);
   // Foursquare.setup();
 });

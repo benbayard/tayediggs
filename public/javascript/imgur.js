@@ -3,6 +3,7 @@ var Imgur = {
   responseType: "token",
   currentAlbum: {},
   accessToken: "",
+  currentUser: "",
   setup: function() {
     //set up imgur stuff
     var input = document.getElementById('picture');
@@ -84,7 +85,7 @@ var Imgur = {
   },
   fetchAlbums: function(success) {
     $.ajax({
-      url: "https://api.imgur.com/3/account/benbayard/albums/ids",
+      url: "https://api.imgur.com/3/account/" + Imgur.currentUser + "/albums/ids",
       type: 'GET',
       data: {
         key: Imgur.clientId
@@ -102,6 +103,7 @@ var Imgur = {
       }
       // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
+      console.log("Bearer " + Imgur.accessToken);
       alert('Could not reach api.imgur.com. Sorry :(');
     });
   },
@@ -151,6 +153,9 @@ var Imgur = {
               console.log("AN ALBUM EXISTS!");
               // return album;
               that.currentAlbum = album;
+              if (success) {
+                success(album);
+              }
               // websql.setAlbumId(album.id);
             } else {
               console.log("AN ALBUM DOES NOT EXIST");
