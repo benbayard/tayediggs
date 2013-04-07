@@ -141,7 +141,7 @@ var Imgur = {
         var album = albums[i];
         // console.log(album);
         that.fetchAlbum(album, function(specs) {
-          console.log(specs);
+          console.log(JSON.stringify(specs));
           if(specs.title === "elephoto") {
             // console.log("THIS IS THE IMGUR ALBUM YALL" + specs.id);
             album = specs;
@@ -151,6 +151,9 @@ var Imgur = {
               console.log("AN ALBUM EXISTS!");
               // return album;
               that.currentAlbum = album;
+              if (success) {
+                success(album);
+              }
               // websql.setAlbumId(album.id);
             } else {
               console.log("AN ALBUM DOES NOT EXIST");
