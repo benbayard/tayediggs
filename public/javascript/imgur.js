@@ -118,9 +118,9 @@ var Imgur = {
         ctx.drawImage(img, 0, 0);
         console.log('the image is drawn');
         try {
-            var new_img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+            var newImg = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
         } catch(e) {
-            var new_img = canvas.toDataURL().split(',')[1];
+            // var newImg = canvas.toDataURL().split(',')[1];
         }
         $.ajax({
           url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
@@ -132,7 +132,7 @@ var Imgur = {
               name: title + '.jpg',
               title: title,
               caption: description,
-              image: new_img
+              image: newImg
           },
           headers: {
             Authorization: "Bearer " + Imgur.accessToken
