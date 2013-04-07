@@ -224,9 +224,9 @@ var Imgur = {
   },
   anonImg: function(title) {
     try {
-        var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+      var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
     } catch(e) {
-        var img = canvas.toDataURL().split(',')[1];
+      var img = canvas.toDataURL().split(',')[1];
     }
     $.ajax({
       url: 'https://api.imgur.com/3/image',
@@ -245,9 +245,9 @@ var Imgur = {
       // console.log(data.data);
       websql.setAnonymousImageURL(data.data.id);
 
-    }).error(function() {
-      alert('Could not reach api.imgur.com. Sorry :(');
-    });
+    // }).error(function() {
+    //   alert('Could not reach api.imgur.com. Sorry :(');
+    // });
   },
   share: function(title, caption, success) {
     try {

@@ -255,11 +255,11 @@ $(function() {
         var checkAlbums = [];
         websql.getAlbums(checkAlbums);
         if (checkAlbums.length === 0) {
-          websql.createNewAlbum("elephoto", Globals.imgurCreds.access_token);
+          websql.createNewAlbum("elephoto", Imgur.accessToken);
         }
-        websql.selectAlbum("elephoto");
+        // websql.selectAlbum("elephoto");
 
-        Imgur.setAccessToken(Globals.imgurCreds.access_token);
+        Imgur.accessToken = Globals.imgurCreds.access_token;
 
         websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
           console.log(urlArray);
@@ -281,7 +281,7 @@ $(function() {
         }
       }
     }
-    
+
   });
 
   // ********
