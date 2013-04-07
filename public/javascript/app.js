@@ -20,7 +20,7 @@ $(function() {
 
   var Photo = Backbone.Model.extend({
     initialize: function() {
-      console.log("init photo");
+      console.log(this.attributes);
     }
   });
 
@@ -35,14 +35,12 @@ $(function() {
     },
 
     fetch: function() {
-      // dummy data
-      var photos = [];
-      for(var i = 0; i < 8; i++) {
-        var photo = {};
-        photo.id = i;
-        photo.dummy_attribute = "yes";
-        this.add(photo);
-      }
+      console.log("setting collection");
+
+      Imgur.findAlbum();
+      this.set(Imgur.currentAlbum.images);
+
+      console.log(this);
 
       this.view.addAll();
     }
@@ -83,6 +81,8 @@ $(function() {
         $(".camera-overlay").addClass('animate');
       }, 1500);
 
+      // MAP DETAILS .camera-map
+
       this.bind();
     },
 
@@ -101,7 +101,9 @@ $(function() {
         }
         websql.setAnonymousImageURL(img);
 
-        // Imgur.authorize();
+        setTimeout(function() {
+          Imgur.authorize();
+        }, 500); // god this is stupid
 
         // Authenticate!
         // Imgur.share(caption, coords, function() {
@@ -116,7 +118,36 @@ $(function() {
     template: _.template($('#photo-template').html()),
 
     initialize: function() {
-      
+      console.log(this.model);
+
+      this.render();
+    },
+
+    render: function() {
+      var node = $("<div>");
+      var photoBg = this.model[0].get("link");
+
+      node.attr('class', 'photo-view');
+      node.html(this.template(this.model[0].attributes));
+      node.attr('style', 'background-image: url("' + photoBg + '")');
+
+      $("body").addClass("noscroll");
+      $("#wrapper").addClass("noscroll");
+      $("#wrapper").after(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      var that = this;
+
+      $(".photo-back").on('click', that.close);
+    },
+
+    close: function() {
+      $("body").removeClass("noscroll");
+      $("#wrapper").removeClass("noscroll");
+      $(".photo-view").remove();
     }
   });
 
@@ -124,18 +155,20 @@ $(function() {
   var PhotoStubView = Backbone.View.extend({
     template: _.template($('#photo-stub-template').html()),
 
-    intitialize: function() {
-      console.log(this.model);
-    },
+    tagName: "article",
+
+    className: "photo-stub-view",
 
     render: function() {
-
+      this.$el.html(this.template(this.model.attributes));
+      this.$el.attr('id', this.model.get('id'));
+      return this.$el;
     }
   });
 
   // View gallery of photos (this is a collection view!)
   var Gallery = Backbone.View.extend({
-    el: $("wrapper"),
+    el: $("#wrapper"),
 
     initialize: function() {
       // fetch photos
@@ -144,9 +177,30 @@ $(function() {
     },
 
     addAll: function() {
+      var node = $("<div>");
+
       this.collection.models.forEach(function(item) {
-        console.log("iterating?");
         var itemView = new PhotoStubView({model: item});
+        node.append(itemView.render());
+      });
+
+      console.log(this.$el);
+
+      this.$el.addClass("gallery-view"); // set wrapper visible
+      this.$el.html(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      var that = this;
+
+      $(".photo-stub-view").on('click', function() {
+        var photoId = $(this).attr('id');
+        var model = that.collection.where({id: photoId});
+        console.log(model);
+
+        var photoView = new PhotoView({model: model});
       });
     }
   });
@@ -200,15 +254,18 @@ $(function() {
         var checkAlbums = [];
         websql.getAlbums(checkAlbums);
         if (checkAlbums.length === 0) {
-          websql.createNewAlbum("elephoto", Globals.imgurCreds.access_token);
+          websql.createNewAlbum("elephoto", Imgur.accessToken);
         }
-        websql.selectAlbum("elephoto");
+        // websql.selectAlbum("elephoto");
 
-        Imgur.setAccessToken(Globals.imgurCreds.access_token);
+        Imgur.accessToken = Globals.imgurCreds.access_token;
 
         websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
           console.log(urlArray);
-          Imgur.addImageToAlbumFromCanvas(urlArray[0]);
+          Imgur.addImageToAlbumFromCanvas(urlArray[0], "", "", function() {
+            var photos = new Photos();
+            var gallery = new Gallery({collection: photos});
+          });
         });
       });
     },
@@ -223,7 +280,7 @@ $(function() {
         }
       }
     }
-    
+
   });
 
   // ********
@@ -248,6 +305,8 @@ $(function() {
 
         this.bind();
       }
+
+      // MAP VIEW
     },
 
     bind: function() {
@@ -260,8 +319,8 @@ $(function() {
       });
 
       // make sure you can't scroll the webapp
-      // $("#wrapper").on('touchstart', function(e) { 
-      //   e.preventDefault(); 
+      // $("#wrapper").on('touchstart', function(e) {
+      //   e.preventDefault();
       // });
     }
   });
@@ -273,6 +332,8 @@ $(function() {
     initialize: function() {
       // if there's a hash, then it's an Imgur callback
       if(window.location.hash !== "") {
+        $("body").addClass("gallery-view");
+
         Globals.authenticated = true;
         var auth = new Authenticate();
         auth.catchToken();

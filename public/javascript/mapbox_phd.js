@@ -1,6 +1,14 @@
 var MapboxPhd = {
   
-  setup: function(lat, lon) {
+  // selector is a string
+  // callback is a function
+  setupMap: function(selector) {
+    $(selector).append("<div id='map'></div>");
+  },
+  
+  init: function(param) {
+    var lat = param.lat;
+    var lon = param.lon;
     var map = mapbox.map('map');
     
     var retina = window.devicePixelRatio >= 2;
@@ -49,8 +57,8 @@ function geoError() {
 }
 
 $(document).ready(function() {
-  
-  Coordinates.setCoordinates(MapboxPhd.setup);
+  MapboxPhd.setupMap("body");
+  Coordinates.setCoordinates(MapboxPhd.init, null);
   
   // MapboxPhd.setup(coordinates.lat, coordinates.lon);
 });

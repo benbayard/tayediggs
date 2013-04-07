@@ -68,84 +68,101 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 16, ../../sass/screen.scss */
+.fullscreen, #wrapper, .camera-details-view, .photo-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* line 24, ../../sass/screen.scss */
+.noscroll {
+  overflow: hidden;
+}
+
+/* line 28, ../../sass/screen.scss */
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background-color: #fd996b;
   font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
 }
+/* line 35, ../../sass/screen.scss */
+body.gallery-view {
+  background-color: #2B312F;
+}
 
-/* line 25, ../../sass/screen.scss */
+/* line 40, ../../sass/screen.scss */
 a {
   color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
 }
-/* line 28, ../../sass/screen.scss */
+/* line 43, ../../sass/screen.scss */
 a:hover {
   color: #fff8f8;
 }
-/* line 31, ../../sass/screen.scss */
+/* line 46, ../../sass/screen.scss */
 a:visited {
   color: #fff8f8;
   text-decoration: underline;
 }
 
-/* line 37, ../../sass/screen.scss */
+/* line 52, ../../sass/screen.scss */
 #start-camera {
   display: block;
   background-image: url("../images/cameraLarge.png");
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 54px 34px;
+  background-size: 27px 17px;
   background-color: #fb6363;
   position: absolute;
   bottom: 0px;
   left: 0;
   width: 100%;
-  height: 68px;
+  height: 45px;
   z-index: 999;
 }
-/* line 50, ../../sass/screen.scss */
+/* line 65, ../../sass/screen.scss */
 #start-camera.hide {
   display: none;
 }
+/* line 68, ../../sass/screen.scss */
+.gallery-view #start-camera {
+  bottom: auto;
+  top: 0;
+}
 
-/* line 54, ../../sass/screen.scss */
+/* line 73, ../../sass/screen.scss */
 #picture {
   display: block;
   position: absolute;
   bottom: 0px;
   left: 0;
   width: 100%;
-  height: 68px;
+  height: 45px;
   opacity: 0;
   z-index: 1000;
 }
-/* line 63, ../../sass/screen.scss */
+/* line 82, ../../sass/screen.scss */
 #picture.hide {
   display: none;
 }
 
-/* line 68, ../../sass/screen.scss */
-#wrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-}
-/* line 77, ../../sass/screen.scss */
+/* line 91, ../../sass/screen.scss */
 #wrapper:not([class]) > * {
   display: none;
 }
-/* line 82, ../../sass/screen.scss */
+/* line 96, ../../sass/screen.scss */
 #wrapper.start-screen {
   background-image: url("../images/dummy_map.png");
 }
+/* line 99, ../../sass/screen.scss */
+.gallery-view #wrapper {
+  margin-top: 55px;
+}
 
-/* line 88, ../../sass/screen.scss */
+/* line 105, ../../sass/screen.scss */
 #start-screen-controls #start-logo {
   background-image: url("../images/logo.png");
   background-repeat: no-repeat;
@@ -156,10 +173,10 @@ a:visited {
   left: 50%;
   width: 279px;
   height: 62px;
-  margin-top: -68px;
+  margin-top: -34px;
   margin-left: -140px;
 }
-/* line 102, ../../sass/screen.scss */
+/* line 119, ../../sass/screen.scss */
 #start-screen-controls #start-gallery {
   background-image: url("../images/galleryicon.png");
   background-repeat: no-repeat;
@@ -173,15 +190,7 @@ a:visited {
   width: 47px;
 }
 
-/* line 116, ../../sass/screen.scss */
-.camera-details-view {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-/* line 122, ../../sass/screen.scss */
+/* line 135, ../../sass/screen.scss */
 .camera-details-view .camera-overlay {
   position: absolute;
   bottom: 0px;
@@ -198,11 +207,11 @@ a:visited {
   -webkit-transition-duration: .4s;
   -webkit-transform: translateY(250px);
 }
-/* line 133, ../../sass/screen.scss */
+/* line 146, ../../sass/screen.scss */
 .camera-details-view .camera-overlay.animate {
   -webkit-transform: translateY(0px);
 }
-/* line 137, ../../sass/screen.scss */
+/* line 150, ../../sass/screen.scss */
 .camera-details-view .camera-caption {
   -webkit-appearance: none;
   box-sizing: border-box;
@@ -219,14 +228,14 @@ a:visited {
   height: 30px;
   margin-bottom: 2px;
 }
-/* line 149, ../../sass/screen.scss */
+/* line 162, ../../sass/screen.scss */
 .camera-details-view .camera-map {
   background-color: #999;
   height: 150px;
   width: 100%;
   margin-bottom: 5px;
 }
-/* line 155, ../../sass/screen.scss */
+/* line 168, ../../sass/screen.scss */
 .camera-details-view .camera-submit {
   display: block;
   width: 100%;
@@ -236,4 +245,78 @@ a:visited {
   color: #fff;
   background-color: #fb6363;
   text-align: center;
+}
+
+/* line 180, ../../sass/screen.scss */
+.photo-stub-view {
+  margin: 10px;
+  border: 3px solid #fff;
+  position: relative;
+  box-sizing: border-box;
+}
+/* line 185, ../../sass/screen.scss */
+.photo-stub-view .photo-description {
+  box-sizing: border-box;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), #000000);
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), #000000);
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), #000000);
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0), #000000);
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  color: #fff;
+}
+/* line 194, ../../sass/screen.scss */
+.photo-stub-view img {
+  max-width: 100%;
+}
+
+/* line 199, ../../sass/screen.scss */
+.photo-view {
+  z-index: 1001;
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 45px;
+}
+/* line 206, ../../sass/screen.scss */
+.photo-view .photo-nav {
+  height: 45px;
+  position: absolute;
+  width: 100%;
+  border-box: box-sizing;
+  background-color: #fb6363;
+}
+/* line 213, ../../sass/screen.scss */
+.photo-view .photo-back, .photo-view .photo-pin {
+  width: 45px;
+  height: 45px;
+  background-repeat: no-repeat;
+}
+/* line 218, ../../sass/screen.scss */
+.photo-view .photo-back {
+  background-image: url("../images/arrow.png");
+  background-size: 19px 19px;
+  background-position: 13px 13px;
+  float: left;
+}
+/* line 224, ../../sass/screen.scss */
+.photo-view .photo-pin {
+  background-image: url("../images/pin.png");
+  background-size: 15px 24px;
+  background-position: 15px 10px;
+  float: right;
+}
+/* line 230, ../../sass/screen.scss */
+.photo-view .photo-description {
+  position: absolute;
+  top: 45px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 20px;
 }

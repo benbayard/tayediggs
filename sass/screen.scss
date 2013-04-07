@@ -13,13 +13,28 @@ $grapefruit: #FB6363;
   // display: none;
 }
 
+.fullscreen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.noscroll {
+  overflow: hidden;
+}
+
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background-color: $tangerine;
 
   font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
+
+  &.gallery-view {
+    background-color: #2B312F;
+  }
 }
 
 a {
@@ -39,16 +54,20 @@ a {
   background-image: url('../images/cameraLarge.png');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 54px 34px;
+  background-size: 27px 17px;
   background-color: $grapefruit;
   position: absolute;
   bottom: 0px;
   left: 0;
   width: 100%;
-  height: 68px;
+  height: 45px;
   z-index: 999;
   &.hide {
     display: none;
+  }
+  .gallery-view & {
+    bottom: auto;
+    top: 0;
   }
 }
 #picture {
@@ -57,7 +76,7 @@ a {
   bottom: 0px;
   left: 0;
   width: 100%;
-  height: 68px;
+  height: 45px;
   opacity: 0;
   z-index: 1000;
   &.hide {
@@ -66,12 +85,7 @@ a {
 }
 
 #wrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
+  @extend .fullscreen;
 
   &:not([class]) {
     > * {
@@ -81,6 +95,9 @@ a {
 
   &.start-screen {
     background-image: url('../images/dummy_map.png');
+  }
+  .gallery-view & {
+    margin-top: 55px;
   }
 }
 
@@ -95,7 +112,7 @@ a {
     left: 50%;
     width: 279px;
     height: 62px;
-    margin-top: -68px;
+    margin-top: -34px;
     margin-left: -140px;
   }
 
@@ -114,11 +131,7 @@ a {
 }
 
 .camera-details-view {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  @extend .fullscreen;
   .camera-overlay {
     position: absolute;
     bottom: 0px;
@@ -161,5 +174,67 @@ a {
     color: #fff;
     background-color: $grapefruit;
     text-align: center;
+  }
+}
+
+.photo-stub-view {
+  margin: 10px;
+  border: 3px solid #fff;
+  position: relative;
+  box-sizing: border-box;
+  .photo-description {
+    box-sizing: border-box;
+    @include background-image(linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)));
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    color: #fff;
+  }
+  img {
+    max-width: 100%;
+  }
+}
+
+.photo-view {
+  @extend .fullscreen;
+  z-index: 1001; // above everything, almost a modal. the gallery never unloads
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 45px;
+  .photo-nav {
+    height: 45px;
+    position: absolute;
+    width: 100%;
+    border-box: box-sizing;
+    background-color: $grapefruit;
+  }
+  .photo-back, .photo-pin {
+    width: 45px;
+    height: 45px;
+    background-repeat: no-repeat;
+  }
+  .photo-back {
+    background-image: url('../images/arrow.png');
+    background-size: 19px 19px;
+    background-position: 13px 13px;
+    float: left;
+  }
+  .photo-pin {
+    background-image: url('../images/pin.png');
+    background-size: 15px 24px;
+    background-position: 15px 10px;
+    float: right;
+  }
+  .photo-description {
+    position: absolute;
+    top: 45px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 20px;
   }
 }

@@ -60,10 +60,10 @@ var Imgur = {
       alert('Could not reach api.imgur.com. Sorry :(');
     });
   },
-  addImageToAlbumFromCanvas: function(id, description, title) {
+  addImageToAlbumFromCanvas: function(id, description, title, success) {
     title = "BLAH DE BLAH";
     description = "THIS DESCRIBES ME";
-    console.log(id);
+    // console.log(id);
     $.ajax({
       url: "https://api.imgur.com/3/image",
       type: 'POST',
@@ -81,8 +81,11 @@ var Imgur = {
       },
       dataType: 'json'
     }).success(function(data) {
-        console.log(data);
+        // console.log(data);
         var the_id = data.data.id;
+        if(success) {
+          success()
+        }
         return data.data;
         // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
@@ -146,7 +149,7 @@ var Imgur = {
       },
     dataType: 'json'
     }).success(function(data) {
-      console.log(data.data);
+      // console.log(data.data);
       //return the list of ids
       // return data.data;
       if (success) {
@@ -175,7 +178,7 @@ var Imgur = {
         },
         dataType: 'json'
     }).success(function(data) {
-        console.log(data);
+        // console.log(data);
         if(success) {
           success(data);
         }
@@ -194,13 +197,13 @@ var Imgur = {
         var album = albums[i];
         // console.log(album);
         that.fetchAlbum(album, function(specs) {
-          console.log(specs);
+          // console.log(specs);
           if(specs.title === "elephoto") {
             // console.log("THIS IS THE IMGUR ALBUM YALL" + specs.id);
             album = specs;
           }
           if (specs.id == albums[albums.length - 1]) {
-            console.log(album);
+            // console.log(album);
             if (album.title == "elephoto") {
               console.log("AN ALBUM EXISTS!");
               // return album;
@@ -225,22 +228,22 @@ var Imgur = {
     } catch(e) {
       var img = canvas.toDataURL().split(',')[1];
     }
-    // $.ajax({
-    //   url: 'https://api.imgur.com/3/image',
-    //   type: 'POST',
-    //   data: {
-    //       type: 'base64',
-    //       // get your key here, quick and fast http://imgur.com/register/api_anon.
-    //       title: title,
-    //       image: img
-    //   },
-    //   headers: {
-    //     Authorization: "Client-ID " + Imgur.clientId
-    //   },
-    //   dataType: 'json'
-    // }).success(function(data) {
-    //   console.log(data.data);
-    //   websql.setAnonymousImageURL(data.data.id);
+    $.ajax({
+      url: 'https://api.imgur.com/3/image',
+      type: 'POST',
+      data: {
+          type: 'base64',
+          // get your key here, quick and fast http://imgur.com/register/api_anon.
+          title: title,
+          image: img
+      },
+      headers: {
+        Authorization: "Client-ID " + Imgur.clientId
+      },
+      dataType: 'json'
+    }).success(function(data) {
+      // console.log(data.data);
+      websql.setAnonymousImageURL(data.data.id);
 
     // }).error(function() {
     //   alert('Could not reach api.imgur.com. Sorry :(');

@@ -275,12 +275,17 @@ var Coordinates = {
   },
   
   // This callback expects two arguments, latitude and longitude
-  setCoordinates: function(callback) {
+  setCoordinates: function(callback, callback_of_callback) {
     if (geoPosition.init()) {
       geoPosition.getCurrentPosition(function(data) {
         Coordinates.lat = data.coords.latitude;
         Coordinates.lon = data.coords.longitude;
-        callback(Coordinates.lat, Coordinates.lon);
+        
+        if (callback != null & callback_of_callback != null) {
+          callback({lat: Coordinates.lat, lon: Coordinates.lon}, callback_of_callback);
+        } else if (callback != null) {
+          callback({lat: Coordinates.lat, lon: Coordinates.lon});
+        }
       }, Coordinates.geoError);
     }
   },

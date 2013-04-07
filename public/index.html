@@ -16,13 +16,6 @@
     <script src="javascript/app.js"></script>
     <script src="javascript/sincerely.js"></script>
     <script src="javascript/tumblr.js"></script>
-    <style>
-      @-webkit-keyframes drawer-up {
-        0% { -webkit-transform: translate(0 250px); }
-        80% { -webkit-transform: translate(0 250px); }
-        100% { -webkit-transform: translate(0 0); }
-      }
-    </style>
   </head>
   <body>
     <canvas id="canvas"></canvas>
@@ -46,23 +39,25 @@
       </div>
     </script>
     <script type="text/template" id="photo-template">
-      <div class="photo-view">
-        <img src="" alt="" />
-        <div class="photo-description">
-        </div>
-        <div class="photo-address">
-        </div>
-        <div class="photo-fs-location">
-        </div>
-        <div class="photo-map">
-        </div>
+      <div class="photo-nav">
+        <a class="photo-back" />
+        <a class="photo-pin" />
+      </div>
+      <div class="photo-description">
+        <%= title %>
+      </div>
+      <div class="photo-address">
+        <%= description %>
+      </div>
+      <div class="photo-fs-location">
+      </div>
+      <div class="photo-map">
       </div>
     </script>
     <script type="text/template" id="photo-stub-template">
-      <div class="photo-stub-view">
-        <img src="" alt="" />
-        <div class="photo-description">
-        </div>
+      <img src="<%= link %>" alt="" />
+      <div class="photo-description">
+        <%= title %>
       </div>
     </script>
   </body>
