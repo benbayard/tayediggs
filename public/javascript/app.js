@@ -25,6 +25,12 @@ $(function() {
     }
   });
 
+  var Venue = Backbone.Model.extend({
+    initialize: function() {
+      console.log(this.attributes);
+    }
+  });
+
   // ***********
   // COLLECTIONS
 
@@ -44,6 +50,22 @@ $(function() {
       console.log(this);
 
       this.view.addAll();
+    }
+  });
+
+  var Locations = Backbone.Collection.extend({
+    model: Venue,
+
+    initialize: function() {
+
+    },
+
+    fetch: function() {
+      console.log("setting location collection");
+
+      this.set(Foursquare.venueResponse);
+
+      console.log(this);
     }
   });
 
@@ -110,7 +132,61 @@ $(function() {
         // Imgur.share(caption, coords, function() {
         //   console.log("data");
         // });
-      })
+      });
+      $(".camera-foursquare").on('click', function() {
+        var locations = new Locations();
+        locations.fetch();
+      });
+    }
+  });
+
+  // Pick a foursquare location in an attempt to alleviate your neverending pain
+  var FSLocation = Backbone.View.extend({
+    template: _.template($("#location-template").html()),
+
+    tagName: "article",
+
+    className: "foursquare-location",
+
+    render: function() {
+      this.$el.html(this.template(this.model.attributes));
+      this.$el.attr('id', this.model.get('id'));
+      return this.$el;
+    }
+  });
+
+  var FSLocations = Backbone.View.extend({
+    initialize: function() {
+      // fetch locations
+      this.collection.view = this;
+      this.collection.fetch();
+    },
+
+    addAll: function() {
+      var node = $("<div>");
+
+      this.collection.models.forEach(function(item) {
+        var itemView = new FSLocation({model: item});
+        node.append(itemView.render());
+      });
+
+      console.log(this.$el);
+
+      this.$el.html(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      var that = this;
+
+      // $(".photo-stub-view").on('click', function() {
+      //   var photoId = $(this).attr('id');
+      //   var model = that.collection.where({id: photoId});
+      //   console.log(model);
+
+      //   var photoView = new PhotoView({model: model});
+      // });
     }
   });
 
