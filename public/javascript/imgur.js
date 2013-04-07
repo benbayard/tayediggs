@@ -67,7 +67,7 @@ var Imgur = {
       type: 'POST',
       data: {
           key: Imgur.clientId,
-          ids: [id]
+          ids: id
       },
       headers: {
         Authorization: "Bearer " + Imgur.accessToken
