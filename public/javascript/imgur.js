@@ -4,7 +4,6 @@ var Imgur = {
   currentAlbum: {},
   accessToken: "",
   currentUser: "",
-  tempPhoto: "",
   setup: function() {
     //set up imgur stuff
     var input = document.getElementById('picture');
@@ -26,12 +25,11 @@ var Imgur = {
   handleFiles: function(e) {
     var ctx = document.getElementById('canvas').getContext('2d');
     var img = new Image;
-    img.src = window.URL.createObjectURL(e.target.files[0]);
+    img.src = window.webkitURL.createObjectURL(e.target.files[0]);
     img.onload = function() {
-      console.log(img.width);
-      document.getElementById('canvas').width= img.width;
-      document.getElementById('canvas').height=img.height;
       ctx.drawImage(img, 0, 0, img.width, img.height);
+      document.getElementById("canvas").width = img.width;
+      document.getElementById("canvas").height = img.height;
       console.log('the image is drawn');
     }
   },
@@ -58,19 +56,30 @@ var Imgur = {
   },
   addImageToAlbumFromCanvas: function(title, description) {
     //Get the canvas image.
+    try {
+        var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+    } catch(e) {
+        var img = canvas.toDataURL().split(',')[1];
+    }
     $.ajax({
       url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
       type: 'POST',
       data: {
+          type: 'base64',
+          // get your key here, quick and fast http://imgur.com/register/api_anon
           key: Imgur.clientId,
-          ids: [Imgur.tempPhoto.id]
+          name: title + '.jpg',
+          title: title,
+          caption: description,
+          image: img
       },
       headers: {
         Authorization: "Bearer " + Imgur.accessToken
       },
       dataType: 'json'
     }).success(function(data) {
-        return data;
+        console.log(data);
+        return data.data;
         // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
         alert('Could not reach api.imgur.com. Sorry :(');
@@ -189,8 +198,7 @@ var Imgur = {
         },
         dataType: 'json'
     }).success(function(data) {
-        console.log(data);
-        Imgur.tempPhoto = data.data;
+        console.log(data)
         // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
         alert('Could not reach api.imgur.com. Sorry :(');
