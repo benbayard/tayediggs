@@ -67,13 +67,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 15, ../../sass/screen.scss */
-#canvas {
-  width: 100%;
-  height: auto;
-}
-
-/* line 20, ../../sass/screen.scss */
+/* line 16, ../../sass/screen.scss */
 body {
   width: 100%;
   height: 100%;
@@ -82,22 +76,22 @@ body {
   font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
 }
 
-/* line 29, ../../sass/screen.scss */
+/* line 25, ../../sass/screen.scss */
 a {
   color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
 }
-/* line 32, ../../sass/screen.scss */
+/* line 28, ../../sass/screen.scss */
 a:hover {
   color: #fff8f8;
 }
-/* line 35, ../../sass/screen.scss */
+/* line 31, ../../sass/screen.scss */
 a:visited {
   color: #fff8f8;
   text-decoration: underline;
 }
 
-/* line 41, ../../sass/screen.scss */
+/* line 37, ../../sass/screen.scss */
 #start-camera {
   display: block;
   background-image: url("../images/cameraLarge.png");
@@ -112,12 +106,12 @@ a:visited {
   height: 68px;
   z-index: 999;
 }
-/* line 54, ../../sass/screen.scss */
+/* line 50, ../../sass/screen.scss */
 #start-camera.hide {
   display: none;
 }
 
-/* line 58, ../../sass/screen.scss */
+/* line 54, ../../sass/screen.scss */
 #picture {
   display: block;
   position: absolute;
@@ -128,12 +122,12 @@ a:visited {
   opacity: 0;
   z-index: 1000;
 }
-/* line 67, ../../sass/screen.scss */
+/* line 63, ../../sass/screen.scss */
 #picture.hide {
   display: none;
 }
 
-/* line 72, ../../sass/screen.scss */
+/* line 68, ../../sass/screen.scss */
 #wrapper {
   position: absolute;
   top: 0;
@@ -142,16 +136,16 @@ a:visited {
   left: 0;
   overflow: hidden;
 }
-/* line 81, ../../sass/screen.scss */
+/* line 77, ../../sass/screen.scss */
 #wrapper:not([class]) > * {
   display: none;
 }
-/* line 86, ../../sass/screen.scss */
+/* line 82, ../../sass/screen.scss */
 #wrapper.start-screen {
   background-image: url("../images/dummy_map.png");
 }
 
-/* line 92, ../../sass/screen.scss */
+/* line 88, ../../sass/screen.scss */
 #start-screen-controls #start-logo {
   background-image: url("../images/logo.png");
   background-repeat: no-repeat;
@@ -166,7 +160,7 @@ a:visited {
   margin-left: -140px;
 }
 
-/* line 107, ../../sass/screen.scss */
+/* line 103, ../../sass/screen.scss */
 .camera-details-view {
   position: absolute;
   top: 0;
@@ -174,7 +168,7 @@ a:visited {
   bottom: 0;
   left: 0;
 }
-/* line 113, ../../sass/screen.scss */
+/* line 109, ../../sass/screen.scss */
 .camera-details-view .camera-overlay {
   position: absolute;
   bottom: 0px;
@@ -191,11 +185,11 @@ a:visited {
   -webkit-transition-duration: .4s;
   -webkit-transform: translateY(250px);
 }
-/* line 124, ../../sass/screen.scss */
+/* line 120, ../../sass/screen.scss */
 .camera-details-view .camera-overlay.animate {
   -webkit-transform: translateY(0px);
 }
-/* line 128, ../../sass/screen.scss */
+/* line 124, ../../sass/screen.scss */
 .camera-details-view .camera-caption {
   -webkit-appearance: none;
   box-sizing: border-box;
@@ -212,14 +206,14 @@ a:visited {
   height: 30px;
   margin-bottom: 2px;
 }
-/* line 140, ../../sass/screen.scss */
+/* line 136, ../../sass/screen.scss */
 .camera-details-view .camera-map {
   background-color: #999;
   height: 150px;
   width: 100%;
   margin-bottom: 5px;
 }
-/* line 146, ../../sass/screen.scss */
+/* line 142, ../../sass/screen.scss */
 .camera-details-view .camera-submit {
   display: block;
   width: 100%;
