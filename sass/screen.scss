@@ -4,12 +4,17 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+@import "compass";
 
 $tangerine: #FD996B;
 $grapefruit: #FB6363;
 
 #canvas, #picture {
   // display: none;
+}
+#canvas {
+  width: 100%;
+  height: auto;
 }
 
 body {
@@ -95,5 +100,49 @@ a {
     height: 62px;
     margin-top: -68px;
     margin-left: -140px;
+  }
+}
+
+.camera-details-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .camera-overlay {
+    position: absolute;
+    bottom: 0px;
+    height: 250px;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    @include background-image(linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)));
+  }
+  .camera-description {
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 0;
+    width: 100%;
+    font-size: 14px;
+    line-height: 26px;
+    height: 60px;
+    margin-bottom: 2px;
+  }
+  .camera-map {
+    background-color: #999;
+    height: 120px;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  .camera-submit {
+    display: block;
+    width: 100%;
+    font-size: 18px;
+    line-height: 20px;
+    padding: 15px 0;
+    color: #fff;
+    background-color: $grapefruit;
+    text-align: center;
   }
 }

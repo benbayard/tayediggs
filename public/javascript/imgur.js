@@ -26,7 +26,7 @@ var Imgur = {
   handleFiles: function(e) {
     var ctx = document.getElementById('canvas').getContext('2d');
     var img = new Image;
-    img.src = URL.createObjectURL(e.target.files[0]);
+    img.src = window.URL.createObjectURL(e.target.files[0]);
     img.onload = function() {
       console.log(img.width);
       document.getElementById('canvas').width= img.width;
