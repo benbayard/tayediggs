@@ -103,6 +103,7 @@ var Imgur = {
       }
       // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
+      console.log("Bearer " + Imgur.accessToken);
       alert('Could not reach api.imgur.com. Sorry :(');
     });
   },
