@@ -150,8 +150,9 @@ $(function() {
         var locations = new Locations();
         var fslocations = new FSLocations({collection: locations});
       });
-      $(".camera-pencil").on('click', function() {
-        
+      $(".camera-edit").on('click', function() {
+        var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+        launchEditor("canvas", img);
       });
     }
   });

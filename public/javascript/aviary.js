@@ -19,3 +19,17 @@ function launchEditor(id, src) {
   });
   return false;
 }
+
+/*
+var ctx = document.getElementById('canvas').getContext('2d');
+var img = new Image;
+img.src = window.webkitURL.createObjectURL(e.target.files[0]);
+img.onload = function() {
+  ctx.drawImage(img, 0, 0, img.width, img.height);
+  document.getElementById("canvas").width = img.width;
+  document.getElementById("canvas").height = img.height;
+  console.log('the image is drawn');
+}
+*/
+
+// var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
