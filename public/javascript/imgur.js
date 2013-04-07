@@ -1,7 +1,8 @@
 var Imgur = {
   clientId: "7a2fd82ffa89750",
   responseType: "token",
-  benTempAccessToken: "450d514735127363b60d32edebc61ff9948337b1",
+  currentAlbum: {},
+  accessToken: "",
   setup: function() {
     //set up imgur stuff
     var input = document.getElementById('picture');
@@ -13,6 +14,9 @@ var Imgur = {
             "client_id=" + this.clientId + "&" +
             "response_type=" + this.responseType
 
+  },
+  setAccessToken: function(token) {
+    this.accessToken = token;
   },
   authorize: function() {
     window.location = this.formImgurAuthUrl();
@@ -34,7 +38,7 @@ var Imgur = {
         key: Imgur.clientId
       },
       headers: {
-        Authorization: "Bearer " + Imgur.benTempAccessToken
+        Authorization: "Bearer " + Imgur.accessToken
       },
     dataType: 'json'
     }).success(function(data) {
@@ -47,45 +51,35 @@ var Imgur = {
       alert('Could not reach api.imgur.com. Sorry :(');
     });
   },
-  addImageToAlbumFromCanvas: function(albumId) {
+  addImageToAlbumFromCanvas: function(title, description) {
     //Get the canvas image.
     try {
         var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
     } catch(e) {
         var img = canvas.toDataURL().split(',')[1];
     }
-    console.log(img);
     $.ajax({
-      url: 'https://api.imgur.com/3/image',
+      url: 'https://api.imgur.com/3/album/'+currentAlbum.id+'/add',
       type: 'POST',
       data: {
           type: 'base64',
           // get your key here, quick and fast http://imgur.com/register/api_anon
           key: Imgur.clientId,
-          name: 'neon.jpg',
-          title: 'test title',
-          caption: 'test caption',
+          name: title + '.jpg',
+          title: title,
+          caption: description,
           image: img
       },
       headers: {
-        Authorization: "Bearer " + Imgur.benTempAccessToken
+        Authorization: "Bearer " + Imgur.accessToken
       },
       dataType: 'json'
     }).success(function(data) {
-        console.log(data)
+        console.log(data);
+        return data.data;
         // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
         alert('Could not reach api.imgur.com. Sorry :(');
-        w.close();
-        console.log({
-            type: 'base64',
-            // get your key here, quick and fast http://imgur.com/register/api_anon
-            key: Imgur.clientId,
-            name: 'img.jpg',
-            title: 'test title',
-            caption: 'test caption',
-            image: img
-        })
     });
   },
   fetchAlbums: function(success) {
@@ -96,7 +90,7 @@ var Imgur = {
         key: Imgur.clientId
       },
       headers: {
-        Authorization: "Bearer " + Imgur.benTempAccessToken
+        Authorization: "Bearer " + Imgur.accessToken
       },
     dataType: 'json'
     }).success(function(data) {
@@ -124,7 +118,7 @@ var Imgur = {
             description: 'test caption',
         },
         headers: {
-          Authorization: "Bearer " + Imgur.benTempAccessToken
+          Authorization: "Bearer " + Imgur.accessToken
         },
         dataType: 'json'
     }).success(function(data) {
@@ -154,11 +148,13 @@ var Imgur = {
           }
           if (specs.id == albums[albums.length - 1]) {
             if (album.id) {
-              console.log("AN ALBUM EXISTS!")
-              return album;
+              console.log("AN ALBUM EXISTS!");
+              // return album;
+              that.currentAlbum = album;
+              // websql.setAlbumId(album.id);
             } else {
-              console.log("AN ALBUM DOES NOT EXIST")
-              return that.createAlbum(success);
+              console.log("AN ALBUM DOES NOT EXIST");
+              // return that.createAlbum(success);
             }
           }
         });
@@ -190,7 +186,7 @@ var Imgur = {
             image: img
         },
         headers: {
-          Authorization: "Bearer " + Imgur.benTempAccessToken
+          Authorization: "Bearer " + Imgur.accessToken
         },
         dataType: 'json'
     }).success(function(data) {
