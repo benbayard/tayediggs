@@ -7,6 +7,9 @@ $(function() {
 
   Globals.authenticated = false;
   Globals.logging = true;
+
+  Globals.tempPhoto = [];
+
   Globals.hideStartScreen = function() {
     $("#start-camera").addClass("hide");
     $("#wrapper").attr('class', '');
@@ -61,6 +64,24 @@ $(function() {
       node.html(this.template());
 
       this.$el.html(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      $(".camera-submit").on('click', function() {
+        var caption = $(".camera-caption").val();
+        var coords =  "DUMMY DATA"; // TODO: get geolocation stuff from matt
+
+        var tempData = coords + "*" + caption;
+        // Save to WebSQL
+        Imgur.anonImg(tempData);
+
+        // Authenticate!
+        // Imgur.share(caption, coords, function() {
+        //   console.log("data");
+        // });
+      })
     }
   });
 
@@ -145,6 +166,11 @@ $(function() {
         websql.selectAlbum("elephoto");
 
         Imgur.setAccessToken(Globals.imgurCreds.access_token);
+
+        websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
+          console.log(urlArray);
+          Imgur.addImageToAlbumFromCanvas(urlArray[0]);
+        });
       });
     },
 
