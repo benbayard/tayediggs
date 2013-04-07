@@ -70,12 +70,14 @@ $(function() {
         var caption = $(".camera-caption").val();
         var coords =  "DUMMY DATA"; // TODO: get geolocation stuff from matt
 
+        var tempData = coords + "*" + caption;
         // Save to WebSQL
-        
+        Imgur.anonImg(tempData);
+
         // Authenticate!
-        Imgur.share(caption, coords, function() {
-          console.log("data");
-        });
+        // Imgur.share(caption, coords, function() {
+        //   console.log("data");
+        // });
       })
     }
   });
