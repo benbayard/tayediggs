@@ -67,11 +67,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 11, ../../sass/screen.scss */
-#canvas, #picture {
-  display: none;
-}
-
 /* line 15, ../../sass/screen.scss */
 body {
   width: 100%;
