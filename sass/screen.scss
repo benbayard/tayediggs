@@ -98,9 +98,18 @@ a {
     }
   }
 
+  // START SCREEN MAP VIEW STYLING
   &.start-screen {
-    background-image: url('../images/dummy_map.png');
+    #map {
+      width:100%;
+      position:absolute;
+      top:0;
+      bottom:0;
+      z-index: 5;
+    }
   }
+  // END SCREEN MAP VIEW STYLING
+  
   .gallery-view & {
     margin-top: 55px;
   }
@@ -119,6 +128,7 @@ a {
     height: 62px;
     margin-top: -68px;
     margin-left: -140px;
+    z-index: 10;
   }
 
   #start-gallery {
@@ -132,6 +142,7 @@ a {
     right: 5px;
     height: 47px;
     width: 47px;
+    z-index: 10;
   }
 }
 

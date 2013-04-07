@@ -312,6 +312,10 @@ $(function() {
       $("body").addClass('noscroll');
 
       // MAP VIEW
+      var map_node_selector = ".start-screen"
+      var map_node = $(map_node_selector)
+      MapboxPhd.setupMap(map_node_selector);
+      Coordinates.setCoordinates(MapboxPhd.init, null);
     },
 
     bind: function() {

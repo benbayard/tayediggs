@@ -164,16 +164,20 @@ a:visited {
 #wrapper:not([class]) > * {
   display: none;
 }
-/* line 101, ../../sass/screen.scss */
-#wrapper.start-screen {
-  background-image: url("../images/dummy_map.png");
+/* line 103, ../../sass/screen.scss */
+#wrapper.start-screen #map {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
 }
-/* line 104, ../../sass/screen.scss */
+/* line 113, ../../sass/screen.scss */
 .gallery-view #wrapper {
   margin-top: 55px;
 }
 
-/* line 110, ../../sass/screen.scss */
+/* line 119, ../../sass/screen.scss */
 #start-screen-controls #start-logo {
   background-image: url("../images/logo.png");
   background-repeat: no-repeat;
@@ -186,8 +190,9 @@ a:visited {
   height: 62px;
   margin-top: -68px;
   margin-left: -140px;
+  z-index: 10;
 }
-/* line 124, ../../sass/screen.scss */
+/* line 134, ../../sass/screen.scss */
 #start-screen-controls #start-gallery {
   background-image: url("../images/galleryicon.png");
   background-repeat: no-repeat;
@@ -199,9 +204,10 @@ a:visited {
   right: 5px;
   height: 47px;
   width: 47px;
+  z-index: 10;
 }
 
-/* line 140, ../../sass/screen.scss */
+/* line 151, ../../sass/screen.scss */
 .camera-details-view .camera-overlay {
   position: absolute;
   bottom: 0px;
@@ -218,11 +224,11 @@ a:visited {
   -webkit-transition-duration: .4s;
   -webkit-transform: translateY(220px);
 }
-/* line 151, ../../sass/screen.scss */
+/* line 162, ../../sass/screen.scss */
 .camera-details-view .camera-overlay.animate {
   -webkit-transform: translateY(0px);
 }
-/* line 155, ../../sass/screen.scss */
+/* line 166, ../../sass/screen.scss */
 .camera-details-view .camera-caption {
   -webkit-appearance: none;
   box-sizing: border-box;
@@ -239,21 +245,21 @@ a:visited {
   height: 30px;
   margin-bottom: 2px;
 }
-/* line 167, ../../sass/screen.scss */
+/* line 178, ../../sass/screen.scss */
 .camera-details-view .camera-map {
   height: 150px;
   width: 100%;
   margin-bottom: 5px;
   position: relative;
 }
-/* line 172, ../../sass/screen.scss */
+/* line 183, ../../sass/screen.scss */
 .camera-details-view .camera-map #map {
   width: 100%;
   position: absolute;
   top: 0;
   bottom: 0;
 }
-/* line 179, ../../sass/screen.scss */
+/* line 190, ../../sass/screen.scss */
 .camera-details-view .camera-submit {
   display: block;
   width: 100%;
@@ -265,14 +271,14 @@ a:visited {
   text-align: center;
 }
 
-/* line 191, ../../sass/screen.scss */
+/* line 202, ../../sass/screen.scss */
 .photo-stub-view {
   margin: 10px;
   border: 3px solid #fff;
   position: relative;
   box-sizing: border-box;
 }
-/* line 196, ../../sass/screen.scss */
+/* line 207, ../../sass/screen.scss */
 .photo-stub-view .photo-description {
   box-sizing: border-box;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, #000000));
@@ -286,12 +292,12 @@ a:visited {
   width: 100%;
   color: #fff;
 }
-/* line 205, ../../sass/screen.scss */
+/* line 216, ../../sass/screen.scss */
 .photo-stub-view img {
   max-width: 100%;
 }
 
-/* line 210, ../../sass/screen.scss */
+/* line 221, ../../sass/screen.scss */
 .photo-view {
   z-index: 1001;
   background-color: #000;
@@ -299,7 +305,7 @@ a:visited {
   background-size: cover;
   background-position: center 45px;
 }
-/* line 217, ../../sass/screen.scss */
+/* line 228, ../../sass/screen.scss */
 .photo-view .photo-nav {
   height: 45px;
   position: absolute;
@@ -307,27 +313,27 @@ a:visited {
   border-box: box-sizing;
   background-color: #fb6363;
 }
-/* line 224, ../../sass/screen.scss */
+/* line 235, ../../sass/screen.scss */
 .photo-view .photo-back, .photo-view .photo-pin {
   width: 45px;
   height: 45px;
   background-repeat: no-repeat;
 }
-/* line 229, ../../sass/screen.scss */
+/* line 240, ../../sass/screen.scss */
 .photo-view .photo-back {
   background-image: url("../images/arrow.png");
   background-size: 19px 19px;
   background-position: 13px 13px;
   float: left;
 }
-/* line 235, ../../sass/screen.scss */
+/* line 246, ../../sass/screen.scss */
 .photo-view .photo-pin {
   background-image: url("../images/pin.png");
   background-size: 15px 24px;
   background-position: 15px 10px;
   float: right;
 }
-/* line 241, ../../sass/screen.scss */
+/* line 252, ../../sass/screen.scss */
 .photo-view .photo-description {
   position: absolute;
   top: 45px;
