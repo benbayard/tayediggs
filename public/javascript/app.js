@@ -7,6 +7,9 @@ $(function() {
 
   Globals.authenticated = false;
   Globals.logging = true;
+
+  Globals.tempPhoto = "";
+
   Globals.hideStartScreen = function() {
     $("#start-camera").addClass("hide");
     $("#wrapper").attr('class', '');
@@ -153,6 +156,10 @@ $(function() {
       Imgur.accessToken = Globals.imgurCreds.access_token;
 
       console.log(Globals.imgurCreds);
+
+      var tempArray = [];
+      Globals.tempPhoto = websql.getAnonymousImageUrl(tempArray);
+      console.log(tempPhoto);
 
       Imgur.findAlbum(function() {
         var checkAlbums = [];
