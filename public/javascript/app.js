@@ -70,6 +70,8 @@ $(function() {
         var caption = $(".camera-caption").val();
         var coords =  "DUMMY DATA"; // TODO: get geolocation stuff from matt
 
+        // Save to WebSQL
+        
         // Authenticate!
         Imgur.share(caption, coords, function() {
           console.log("data");
