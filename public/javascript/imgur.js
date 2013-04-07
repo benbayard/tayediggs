@@ -118,12 +118,13 @@ var Imgur = {
         ctx.drawImage(img, 0, 0);
         console.log('the image is drawn');
         try {
-            var newImg = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+            var newImg = document.getElementById('canvas').toDataURL('image/jpeg', 0.9).split(',')[1];
         } catch(e) {
-            // var newImg = canvas.toDataURL().split(',')[1];
+            var newImg = document.getElementById('canvas').toDataURL().split(',')[1];
         }
+        console.log(newImg);
         $.ajax({
-          url: 'https://api.imgur.com/3/album/'+Imgur.currentAlbum.id+'/add',
+          url: "https://api.imgur.com/3/image",
           type: 'POST',
           data: {
               type: 'base64',
@@ -131,7 +132,7 @@ var Imgur = {
               key: Imgur.clientId,
               name: title + '.jpg',
               title: title,
-              caption: description,
+              album: Imgur.currentAlbum.id,
               image: newImg
           },
           headers: {
@@ -140,6 +141,7 @@ var Imgur = {
           dataType: 'json'
         }).success(function(data) {
             console.log(data);
+            var the_id = data.data.id;
             return data.data;
             // w.location.href = data['upload']['links']['imgur_page'];
         }).error(function() {
