@@ -7,6 +7,9 @@ $(function() {
 
   Globals.authenticated = false;
   Globals.logging = true;
+
+  Globals.tempPhoto = "";
+
   Globals.hideStartScreen = function() {
     $("#start-camera").addClass("hide");
     $("#wrapper").attr('class', '');
@@ -70,12 +73,14 @@ $(function() {
         var caption = $(".camera-caption").val();
         var coords =  "DUMMY DATA"; // TODO: get geolocation stuff from matt
 
+        var tempData = coords + "*" + caption;
         // Save to WebSQL
-        
+        Imgur.anonImg(tempData);
+
         // Authenticate!
-        Imgur.share(caption, coords, function() {
-          console.log("data");
-        });
+        // Imgur.share(caption, coords, function() {
+        //   console.log("data");
+        // });
       })
     }
   });
@@ -151,6 +156,10 @@ $(function() {
       Imgur.accessToken = Globals.imgurCreds.access_token;
 
       console.log(Globals.imgurCreds);
+
+      var tempArray = [];
+      Globals.tempPhoto = websql.getAnonymousImageURL(tempArray);
+      console.log(tempPhoto);
 
       Imgur.findAlbum(function() {
         var checkAlbums = [];

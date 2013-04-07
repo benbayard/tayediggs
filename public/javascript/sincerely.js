@@ -14,7 +14,7 @@ function SincerelyAdapter() {
     postdata.appkey = parent.appKey;
     postdata.photo = parent.replaceDataURLHeaders(dataURL);
     console.log("SincerelyAdapter dataURL: " + dataURL);
-    $.post(parent.postUrl, postdata, function(data) {
+    $.post(parent.postUrl, JSON.stringify(postdata), function(data) {
       console.log("$.post() success");
       console.log(data);
     }, "json")
@@ -48,9 +48,12 @@ function SincerelyAdapter() {
   };
   this.replaceDataURLHeaders = function(dataURL) {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    //return dataURL.replace(/^data:image\/(png|jpg);/, "");
   };
 }
 
 $(document).ready(function() {
-  s = new SincerelyAdapter();
+  z_s = new SincerelyAdapter();
+  z_canvas = document.getElementById("canvas");
+  z_dataURL = z_canvas.toDataURL();
 }); 
