@@ -20,7 +20,7 @@ $(function() {
 
   var Photo = Backbone.Model.extend({
     initialize: function() {
-      console.log("init photo");
+      console.log(this.attributes);
     }
   });
 
@@ -116,7 +116,21 @@ $(function() {
     template: _.template($('#photo-template').html()),
 
     initialize: function() {
-      
+      console.log(this.model);
+
+      this.render();
+    },
+
+    render: function() {
+      var node = $("<div>");
+      var photoBg = this.model[0].get("link");
+
+      node.attr('class', 'photo-view');
+      node.html(this.template(this.model[0].attributes));
+      node.attr('style', 'background-image: url("' + photoBg + '")');
+
+      $("body").addClass("noscroll");
+      $("#wrapper").after(node);
     }
   });
 
@@ -124,14 +138,20 @@ $(function() {
   var PhotoStubView = Backbone.View.extend({
     template: _.template($('#photo-stub-template').html()),
 
-    render: function() {
+    tagName: "article",
 
+    className: "photo-stub-view",
+
+    render: function() {
+      this.$el.html(this.template(this.model.attributes));
+      this.$el.attr('id', this.model.get('id'));
+      return this.$el;
     }
   });
 
   // View gallery of photos (this is a collection view!)
   var Gallery = Backbone.View.extend({
-    el: $("wrapper"),
+    el: $("#wrapper"),
 
     initialize: function() {
       // fetch photos
@@ -140,10 +160,30 @@ $(function() {
     },
 
     addAll: function() {
+      var node = $("<div>");
+
       this.collection.models.forEach(function(item) {
-        console.log("iterating?");
         var itemView = new PhotoStubView({model: item});
-        console.log(itemView);
+        node.append(itemView.render());
+      });
+
+      console.log(this.$el);
+
+      this.$el.addClass("gallery-view"); // set wrapper visible
+      this.$el.html(node);
+
+      this.bind();
+    },
+
+    bind: function() {
+      var that = this;
+
+      $(".photo-stub-view").on('click', function() {
+        var photoId = $(this).attr('id');
+        var model = that.collection.where({id: photoId});
+        console.log(model);
+
+        var photoView = new PhotoView({model: model});
       });
     }
   });
@@ -275,6 +315,8 @@ $(function() {
     initialize: function() {
       // if there's a hash, then it's an Imgur callback
       if(window.location.hash !== "") {
+        $("body").addClass("gallery-view");
+
         Globals.authenticated = true;
         var auth = new Authenticate();
         auth.catchToken();
