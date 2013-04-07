@@ -7,6 +7,10 @@ $(function() {
 
   Globals.authenticated = false;
   Globals.logging = true;
+  Globals.hideStartScreen = function() {
+    $("#start-camera").addClass("hide");
+    $("#wrapper").attr('class', '');
+  }
 
   // ******
   // MODELS
@@ -17,34 +21,71 @@ $(function() {
     }
   });
 
+  // ***********
+  // COLLECTIONS
+
+  var Photos = Backbone.Collection.extend({
+    model: Photo,
+
+    initialize: function() {
+
+    }
+  });
+
   // *****
   // VIEWS
 
   // Start camera API and control imgur uploading
   var Camera = Backbone.View.extend({
     initialize: function() {
-      console.log("--> initialized Camera");
-
-      $("#picture").click();
-    }
+      $("#picture").on('change', function() {
+        var details = new CameraDetails();
+        Globals.hideStartScreen();
+      });
+    },
   });
 
   // Edit new photo details
   var CameraDetails = Backbone.View.extend({
-    initialize: function() {
+    el: $("#wrapper"),
 
+    template: _.template($('#camera-details-template').html()),
+
+    initialize: function() {
+      this.render();
+    },
+
+    render: function() {
+      var node = $("<div>");
+
+      node.html(this.template());
+
+      this.$el.html(node);
     }
   });
 
   // View single photo details + share?
   var PhotoView = Backbone.View.extend({
-    initiailize: function() {
+    template: _.template($('#photo-template').html()),
+
+    initialize: function() {
       
     }
   });
 
-  // View gallery of photos
+  // View single photo stub within gallery
+  var PhotoStubView = Backbone.View.extend({
+    template: _.template($('#photo-stub-template').html()),
+
+    intitialize: function() {
+
+    }
+  });
+
+  // View gallery of photos (this is a collection view!)
   var Gallery = Backbone.View.extend({
+    el: $("wrapper"),
+
     initialize: function() {
       // fetch photos
     }
@@ -81,13 +122,30 @@ $(function() {
     catchToken: function() {
       console.log("--> catching token in Authenticate");
       Globals.imgurCreds = {};
+
       // store all of the things (where things are imgur creds)
       Globals.imgurCreds.access_token = this.getQueryVariable("access_token");
       Globals.imgurCreds.expires_in = this.getQueryVariable("expires_in");
       Globals.imgurCreds.token_type = this.getQueryVariable("token_type");
       Globals.imgurCreds.refresh_token = this.getQueryVariable("refresh_token");
       Globals.imgurCreds.account_username = this.getQueryVariable("account_username");
+
+      websql.setUsername(Globals.imgurCreds.account_username);
+      Imgur.currentUser = Globals.imgurCreds.account_username;
+      Imgur.accessToken = Globals.imgurCreds.access_token;
+
       console.log(Globals.imgurCreds);
+
+      Imgur.findAlbum(function() {
+        var checkAlbums = [];
+        websql.getAlbums(checkAlbums);
+        if (checkAlbums.length === 0) {
+          websql.createNewAlbum("elephoto", Globals.imgurCreds.access_token);
+        }
+        websql.selectAlbum("elephoto");
+
+        Imgur.setAccessToken(Globals.imgurCreds.access_token);
+      });
     },
 
     getQueryVariable: function(variable) {
@@ -137,9 +195,9 @@ $(function() {
       });
 
       // make sure you can't scroll the webapp
-      document.ontouchstart = function(e){ 
-        e.preventDefault(); 
-      }
+      // $("#wrapper").on('touchstart', function(e) { 
+      //   e.preventDefault(); 
+      // });
     }
   });
 
@@ -147,13 +205,6 @@ $(function() {
   // ROUTER
 
   var Router = Backbone.Router.extend({
-    routes: {
-      "": "index",
-      "photo/review": "reviewNewPhoto",
-      "photo/edit": "editNewPhoto",
-      "photo/caption": "captionNewPhoto",
-    },
-
     initialize: function() {
       // if there's a hash, then it's an Imgur callback
       if(window.location.hash !== "") {
@@ -164,13 +215,7 @@ $(function() {
 
       // TODO: check for prior authentication
 
-      console.log(Backbone.history.fragment);
-      console.log(this.routes[Backbone.history.fragment]);
       var appView = new AppView();
-    },
-
-    reviewNewPhoto: function() {
-      console.log("--> routed to reviewNewPhoto");
     }
   });
 

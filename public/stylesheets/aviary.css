@@ -1,0 +1,131 @@
+/* line 4, ../../sass/aviary.scss */
+body #avpw_controls {
+  min-width: 0 !important;
+  width: 300px !important;
+  position: absolute;
+  top: 50px !important;
+  left: 50% !important;
+  margin-left: -150px;
+}
+/* line 12, ../../sass/aviary.scss */
+body #avpw_canvas_embed {
+  position: absolute;
+  left: 0 !important;
+}
+/* line 16, ../../sass/aviary.scss */
+body #avpw_canvas_embed canvas {
+  -webkit-transform: none !important;
+}
+/* line 19, ../../sass/aviary.scss */
+body #avpw_zoom_container {
+  display: none !important;
+}
+/* line 23, ../../sass/aviary.scss */
+body .avpw_slider_container {
+  width: 300px !important;
+  margin-left: 86px !important;
+}
+/* line 28, ../../sass/aviary.scss */
+body #avpw_control_main_scroll_panel {
+  overflow: visible !important;
+  width: 100px !important;
+}
+/* line 33, ../../sass/aviary.scss */
+body #avpw_tools_pager {
+  display: none !important;
+}
+/* line 37, ../../sass/aviary.scss */
+body .avpw_info {
+  display: none !important;
+}
+/* line 41, ../../sass/aviary.scss */
+body #avpw_control_main_scrolling_region {
+  margin-left: -40px !important;
+}
+/* line 45, ../../sass/aviary.scss */
+body #avpw_tool_main_container .avpw_mode_action_right {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  width: 90px;
+  height: 40px;
+}
+/* line 52, ../../sass/aviary.scss */
+body #avpw_tool_main_container .avpw_mode_action_right:before, body #avpw_tool_main_container .avpw_mode_action_right:after {
+  border: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+/* line 59, ../../sass/aviary.scss */
+body #avpw_controls {
+  overflow: visible !important;
+}
+/* line 63, ../../sass/aviary.scss */
+body #avpw_lftArrow {
+  display: none !important;
+}
+/* line 66, ../../sass/aviary.scss */
+body #avpw_rghtArrow {
+  right: 0 !important;
+  display: none !important;
+}
+/* line 72, ../../sass/aviary.scss */
+body #avpw_controlpanel_enhance .avpw_tool_cutout_centered_enhance, body #avpw_controlpanel_enhance .avpw_inset_button_group {
+  width: 246px !important;
+}
+/* line 75, ../../sass/aviary.scss */
+body #avpw_controlpanel_enhance .avpw_tool_cutout_centered_enhance .avpw_inset_button, body #avpw_controlpanel_enhance .avpw_inset_button_group .avpw_inset_button {
+  width: 60px !important;
+}
+/* line 80, ../../sass/aviary.scss */
+body #avpw_controlpanel_enhance .avpw_inset_button_group {
+  margin-left: 77px !important;
+}
+/* line 84, ../../sass/aviary.scss */
+body #avpw_controlpanel_enhance .avpw_inset_button_label {
+  width: 63px !important;
+}
+/* line 87, ../../sass/aviary.scss */
+body #avpw_controlpanel_enhance .avpw_inset_group .avpw_inset_button_label:first-child {
+  margin-left: 75px !important;
+}
+/* line 91, ../../sass/aviary.scss */
+body .avpw_tool_cutout_inner {
+  background: none !important;
+  background-color: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+/* line 99, ../../sass/aviary.scss */
+body .avpw_canvas_controls {
+  margin-left: -125px !important;
+  left: 0;
+}
+/* line 103, ../../sass/aviary.scss */
+body .avpw_canvas_controls > div {
+  left: 0;
+  margin-left: -125px !important;
+}
+/* line 110, ../../sass/aviary.scss */
+body #avpw_tool_options_container .avpw_mode_action_left {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 90px;
+  height: 40px;
+}
+/* line 117, ../../sass/aviary.scss */
+body #avpw_tool_options_container .avpw_mode_action_right {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  width: 90px;
+  height: 40px;
+}
+/* line 124, ../../sass/aviary.scss */
+body #avpw_tool_options_container .avpw_mode_action:before, body #avpw_tool_options_container .avpw_mode_action:after {
+  border: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+}
