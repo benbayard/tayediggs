@@ -20,7 +20,7 @@ $(function() {
 
   var Photo = Backbone.Model.extend({
     initialize: function() {
-      // set attributes if necessary
+      console.log("init photo");
     }
   });
 
@@ -32,6 +32,17 @@ $(function() {
 
     initialize: function() {
 
+    },
+
+    fetch: function() {
+      console.log("setting collection");
+
+      Imgur.findAlbum();
+      this.set(Imgur.currentAlbum.images);
+
+      console.log(this);
+
+      this.view.addAll();
     }
   });
 
@@ -70,6 +81,8 @@ $(function() {
         $(".camera-overlay").addClass('animate');
       }, 1500);
 
+      // MAP DETAILS .camera-map
+
       this.bind();
     },
 
@@ -80,7 +93,15 @@ $(function() {
 
         var tempData = coords + "*" + caption;
         // Save to WebSQL
-        Imgur.anonImg(tempData);
+        // Imgur.anonImg(tempData);
+        try {
+          var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+        } catch(e) {
+          var img = canvas.toDataURL().split(',')[1];
+        }
+        websql.setAnonymousImageURL(img);
+
+        // Imgur.authorize();
 
         // Authenticate!
         // Imgur.share(caption, coords, function() {
@@ -103,7 +124,7 @@ $(function() {
   var PhotoStubView = Backbone.View.extend({
     template: _.template($('#photo-stub-template').html()),
 
-    intitialize: function() {
+    render: function() {
 
     }
   });
@@ -114,6 +135,16 @@ $(function() {
 
     initialize: function() {
       // fetch photos
+      this.collection.view = this;
+      this.collection.fetch();
+    },
+
+    addAll: function() {
+      this.collection.models.forEach(function(item) {
+        console.log("iterating?");
+        var itemView = new PhotoStubView({model: item});
+        console.log(itemView);
+      });
     }
   });
 
@@ -174,7 +205,10 @@ $(function() {
 
         websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
           console.log(urlArray);
-          Imgur.addImageToAlbumFromCanvas(urlArray[0]);
+          Imgur.addImageToAlbumFromCanvas(urlArray[0], "", "", function() {
+            var photos = new Photos();
+            var gallery = new Gallery({collection: photos});
+          });
         });
       });
     },
@@ -214,15 +248,17 @@ $(function() {
 
         this.bind();
       }
+
+      // MAP VIEW
     },
 
     bind: function() {
       $("#start-camera").on('click', function() {
         var camera =  new Camera();
       });
-      $("#start-auth").on('click', function() {
-        var auth = new Authenticate();
-        auth.render();
+      $("#start-gallery").on('click', function() {
+        var photos = new Photos();
+        var gallery = new Gallery({collection: photos});
       });
 
       // make sure you can't scroll the webapp

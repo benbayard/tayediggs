@@ -12,9 +12,11 @@ var Foursquare = {
     
   },
   
-  setVenueResponse: function(latitude, longitude) {
+  setVenueResponse: function(coords, callback) {
     var mattTempAccessToken = "XL5FDDKXVEM2PXJH2GJ2LG0J00M4I50FXB55RRZGHYMHNCU5";
     var oauthversion = "20130406";
+    var latitude = coords.lat;
+    var longitude = coords.lon;
     $.ajax({
       url: "https://api.foursquare.com/v2/venues/search?ll=" + latitude + "," + longitude
       + "&oauth_token=" + mattTempAccessToken 
@@ -26,6 +28,9 @@ var Foursquare = {
       + "&oauth_token=" + mattTempAccessToken 
       + "&v=" + oauthversion)
       Foursquare.venueResponse = data.response;
+      if (callback != null) {
+        callback();
+      }
     }).error(function() {
       alert('setVenueResponse: FAIL!!!! damn you foursquare!');
     });
@@ -44,19 +49,19 @@ var Foursquare = {
   //   state: "CA"
   
   getVenues: function() {
+    var venues = [];
     if (Foursquare.venueResponse !== null) {
-      var venues = [];
       var i = 0;
       Foursquare.venueResponse.venues.forEach( function(el) {
         venues[i] = new Venue(el.name, el.location);
       });
     }
+    window.myVenues = venues;
   }
   
 }
 
 $(document).ready(function() {
   // test_coords = [latitude, longitude];
-  Coordinates.setCoordinates(Foursquare.setVenueResponse);
-  Foursquare.getVenues();
+  Coordinates.setCoordinates(Foursquare.setVenueResponse, Foursquare.getVenues);
 });
