@@ -317,7 +317,7 @@ var websql = {
   * result; // => ["foo"]
   * ------------------------------------
   */
-  getAnonymousImageURL: function(urlArray) {
+  getAnonymousImageURL: function(urlArray, success=function()) {
     var that = this;
     that.db.transaction(function(tx) {
       tx.executeSql('SELECT value FROM map WHERE key = "anonymousImageURL"', [], function(tx, results) {
@@ -325,6 +325,7 @@ var websql = {
         for (var i = 0; i < results.rows.length; i++) {
           urlArray[i] = results.rows.item(i).value;
         }
+        success(urlArray);
       }, function(tx) {
         console.error("websql: getAnonymousImageURL() FAILURE");
       });

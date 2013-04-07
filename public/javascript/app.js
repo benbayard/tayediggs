@@ -8,7 +8,7 @@ $(function() {
   Globals.authenticated = false;
   Globals.logging = true;
 
-  Globals.tempPhoto = "";
+  Globals.tempPhoto = [];
 
   Globals.hideStartScreen = function() {
     $("#start-camera").addClass("hide");
@@ -157,10 +157,6 @@ $(function() {
 
       console.log(Globals.imgurCreds);
 
-      var tempArray = [];
-      websql.getAnonymousImageURL(tempArray);
-      console.log(tempArray);
-
       Imgur.findAlbum(function() {
         var checkAlbums = [];
         websql.getAlbums(checkAlbums);
@@ -170,6 +166,11 @@ $(function() {
         websql.selectAlbum("elephoto");
 
         Imgur.setAccessToken(Globals.imgurCreds.access_token);
+
+        websql.getAnonymousImageURL(Globals.tempPhoto, function(urlArray) {
+          console.log(urlArray);
+          Imgur.addImageToAlbumFromCanvas(urlArray[0]);
+        });
       });
     },
 
