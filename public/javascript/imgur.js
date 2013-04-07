@@ -1,7 +1,7 @@
 var Imgur = {
   clientId: "7a2fd82ffa89750",
   responseType: "token",
-  benTempAccessToken: "e7084a45199424e01c2a1b307e64330fcf30379b",
+  benTempAccessToken: "450d514735127363b60d32edebc61ff9948337b1",
   setup: function() {
     //set up imgur stuff
     var input = document.getElementById('picture');
@@ -26,7 +26,7 @@ var Imgur = {
         console.log('the image is drawn');
     }
   },
-  fetchAlbum: function(id) {
+  fetchAlbum: function(id, success) {
     $.ajax({
       url: 'https://api.imgur.com/3/album/' + id,
       type: 'GET',
@@ -38,7 +38,10 @@ var Imgur = {
       },
     dataType: 'json'
     }).success(function(data) {
-      console.log(data)
+      // console.log(data);
+      if(success) {
+        success(data.data);
+      }
       // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
       alert('Could not reach api.imgur.com. Sorry :(');
@@ -85,7 +88,7 @@ var Imgur = {
         })
     });
   },
-  getAllAlbums: function() {
+  fetchAlbums: function(success) {
     $.ajax({
       url: "https://api.imgur.com/3/account/benbayard/albums/ids",
       type: 'GET',
@@ -97,10 +100,70 @@ var Imgur = {
       },
     dataType: 'json'
     }).success(function(data) {
-      console.log(data)
+      console.log(data.data);
+      //return the list of ids
+      // return data.data;
+      if (success) {
+        success(data.data)
+      }
       // w.location.href = data['upload']['links']['imgur_page'];
     }).error(function() {
       alert('Could not reach api.imgur.com. Sorry :(');
+    });
+  },
+  createAlbum: function(success) {
+    // API EndPoint: https://api.imgur.com/3/album/
+    $.ajax({
+        url: 'https://api.imgur.com/3/album/',
+        type: 'POST',
+        data: {
+            type: 'base64',
+            // get your key here, quick and fast http://imgur.com/register/api_anon
+            key: Imgur.clientId,
+            title: 'elephoto',
+            description: 'test caption',
+        },
+        headers: {
+          Authorization: "Bearer " + Imgur.benTempAccessToken
+        },
+        dataType: 'json'
+    }).success(function(data) {
+        console.log(data);
+        if(success) {
+          success(data);
+        }
+        return data.id;
+
+        // w.location.href = data['upload']['links']['imgur_page'];
+    }).error(function() {
+      alert('Could not reach api.imgur.com. Sorry :(');
+    });
+  },
+  findAlbum: function(success) {
+    var that = this;
+    var album = {};
+    this.fetchAlbums(function(albums) {
+      for(var i = 0; i < albums.length; i++) {
+        var album = albums[i];
+        // console.log(album);
+        that.fetchAlbum(album, function(specs) {
+          console.log(specs);
+          if(specs.title === "elephoto") {
+            // console.log("THIS IS THE IMGUR ALBUM YALL" + specs.id);
+            album = specs;
+          }
+          if (specs.id == albums[albums.length - 1]) {
+            if (album.id) {
+              console.log("AN ALBUM EXISTS!")
+              return album;
+            } else {
+              console.log("AN ALBUM DOES NOT EXIST")
+              return that.createAlbum(success);
+            }
+          }
+        });
+      }
+
     });
   },
   share: function() {
