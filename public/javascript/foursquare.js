@@ -65,4 +65,4 @@ $(document).ready(function() {
   var test_coords = new coordinates(37.756144, -122.432568);
   Foursquare.setVenueResponse(test_coords.lat, test_coords.lon);
   Foursquare.getVenues();
-}
+});
