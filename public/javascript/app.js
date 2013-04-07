@@ -176,7 +176,7 @@ $(function() {
       });
 
       // make sure you can't scroll the webapp
-      document.ontouchstart = function(e){ 
+      $("#wrapper").ontouchstart = function(e){ 
         e.preventDefault(); 
       }
     }
