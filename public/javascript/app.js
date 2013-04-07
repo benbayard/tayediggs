@@ -157,7 +157,7 @@ $(function() {
         featherEditor.getImagerData(function(data){
           //data
         })*/
-        debugger;
+        // debugger;
         document.getElementById('test').src = dataUrl;
         launchEditor("test", null);
       });
